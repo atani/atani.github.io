@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simple blog @atani">
+<meta property="og:url" content="http://atani.github.io/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simple blog @atani">
+<meta name="twitter:description">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux-command-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/11/linux-command-3/">現場で必須！超基本Linuxコマンド Vol.3</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-11-05T17:02:11.000Z" itemprop="datePublished">11-06-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今回はファイルの中身を見たり検索したりしてみよう。</p>
+<p>まず事前に中身のあるファイルを用意する。</p>
+<p>全て見知らぬコマンドを利用しているが今回はこの説明は割愛する。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># seq -w <span class="number">1</span> <span class="number">10</span> &gt;sample1.txt</span></span><br><span class="line"><span class="preprocessor"># cat sample1.txt</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">02</span></span><br><span class="line"><span class="number">03</span></span><br><span class="line"><span class="number">04</span></span><br><span class="line"><span class="number">05</span></span><br><span class="line"><span class="number">06</span></span><br><span class="line"><span class="number">07</span></span><br><span class="line"><span class="number">08</span></span><br><span class="line"><span class="number">09</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/linux-command-3/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cigmhbp9z000irdwggn9y5q48" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/11/linux-command-3/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hacker-watch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/11/hacker-watch/">SSH不正侵入、観察日記 Vol.4</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-11-04T23:52:27.000Z" itemprop="datePublished">11-05-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>しばらく寝かせておいたhoneypotのcowrieに久々アクセスしたところ、ログ消し魔が現れたのでご紹介。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/11/hacker-watch/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/11/hacker-watch/" data-id="cigmhbp930005rdwgu9tdgw74" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/11/hacker-watch/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux-command-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/09/linux-command-4/">現場で必須！超基本Linuxコマンド Vol.4</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-09-10T10:04:07.000Z" itemprop="datePublished">09-10-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、ファイルの操作や検索について紹介した。<br>今回は、目的のファイルを探したり、もう少し実践で使う処理について紹介する。</p>
+<p>以下の構成を用いる。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── sample1<span class="class">.txt</span></span><br><span class="line">├── sample2<span class="class">.txt</span></span><br><span class="line">└── temp1</span><br><span class="line">    ├── depthfile1<span class="class">.txt</span></span><br><span class="line">    └── depthfile2.txt</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2015/09/linux-command-4/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cigmhbp9r000frdwg964rux1s" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/09/linux-command-4/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tutorial/">tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux-command-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/09/linux-command-2/">現場で必須！超基本Linuxコマンド Vol.2</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-09-07T13:16:16.000Z" itemprop="datePublished">09-07-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、<a href="http://atani.github.io/2015/09/linux-command">現場で必須！超基本Linuxコマンド Vol.1</a>の続き。<br>今回は、ファイルやディレクトリの操作をしてみよう。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/09/linux-command-2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/09/linux-command-2/" data-id="cigmhbpa4000jrdwgdw0wcmv9" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/09/linux-command-2/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tutorial/">tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/09/linux-command/">現場で必須！超基本Linuxコマンド Vol.1</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-09-05T11:18:29.000Z" itemprop="datePublished">09-05-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>社内でたびたびLinuxを学びたいという志高い人についてLinuxコマンド勉強会を開催しているが、<br>いつも大学の授業形式でホワイトボードに説明を書いては消し、書いては消しの繰り返しなので、ブログに残しておく。</p>
+<p>普段使われている、マウスでぽちぽちするGUI環境と違い、CUI環境はコマンドやスクリプトを全てキーボードで文字を入力して実行する。</p>
+<p>コマンドをたくさん覚えると一つの画面でいろんなことができる。<br>ファイルを開いたり、特定の名前だけのファイルを削除したり、PCシャットダウンしたり。<br>はたまた、これまでやってた一連の作業をスクリプト化して実行すれば、これまで１時間かけてやってた処理は3分で終わるかもしれない。できることは無限大。</p>
+<p>そのためにはまず少しづつコマンドを覚え、それぞれが出来ること覚える必要がある。</p>
+<p>そこで、基本中の基本のコマンドを中心にご紹介していく。どんな優秀なエンジニアでも使うことが多いコマンドたちなので安心して覚えてもらいたい。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/09/linux-command/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/09/linux-command/" data-id="cigmhbp9h000crdwgml6ixhyy" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/09/linux-command/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tutorial/">tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MacbookAir-repair" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/08/MacbookAir-repair/">保証期間外のMacbookAir、１２万円の修理が無償で返ってきた！</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-08-19T22:14:20.000Z" itemprop="datePublished">08-20-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不調だった、MacbookAirが修理から戻ってきた。<br>保証期間も過ぎていたので、有償での修理を覚悟していたが１２万円かかった修理がなんと<b>無償</b>で返って来たのでその記録。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/08/MacbookAir-repair/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/08/MacbookAir-repair/" data-id="cigmhbpbl0010rdwggenh7me0" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/08/MacbookAir-repair/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macbookair/">macbookair</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-SSH不正侵入、観察日記-Vol-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/08/SSH不正侵入、観察日記-Vol-3/">SSH不正侵入、観察日記 Vol.3</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-08-10T09:48:37.000Z" itemprop="datePublished">08-10-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>スペインから不正アクセスを記録した。</p>
+<p>まずは、いつも通り動画をご覧いただこう。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/08/SSH不正侵入、観察日記-Vol-3/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/08/SSH不正侵入、観察日記-Vol-3/" data-id="cigmhbpbc000wrdwghr2bw8gg" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/08/SSH不正侵入、観察日記-Vol-3/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-cowrie-td-agent-elasticsearch-kibana4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/08/cowrie-td-agent-elasticsearch-kibana4/">地理情報を取得して、どこから不正アクセスがあったのか分布図を出す。</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-08-03T12:26:53.000Z" itemprop="datePublished">08-03-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数回に分けて、cowrieでsshの不正アクセスの実態を取得するようにしてきた。</p>
+<ol>
+<li><a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう%E3%80%82/">ハニーポットcowrieのログを、mariaDBで管理しよう</a></li>
+<li><a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/">cowrieの不正侵入ログをelasticsearchにデータを入れる</a></li>
+<li><a href="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/">td-agent2-2-1ではfilterが使えるように</a></li>
+</ol>
+<p>構成としてはこのような感じ。</p>
+<img src="/2015/08/cowrie-td-agent-elasticsearch-kibana4/image.jpg" alt="[image.jpg]" title="[image.jpg]">
+<p>今回は不正アクセスIPを利用し、地理情報を得て、どの国からのアクセスが多いのかをkibana4を使って出してみた。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/08/cowrie-td-agent-elasticsearch-kibana4/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/" data-id="cigmhbpaq000mrdwgbroxlvjl" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geoip/">geoip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kibana4/">kibana4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/td-agent/">td-agent</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-td-agent2-2-1ではfilterが使えるように" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/07/td-agent2-2-1ではfilterが使えるように/">td-agent2.2.1ではfilterが使えるように 備忘録</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-31T13:58:00.000Z" itemprop="datePublished">07-31-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、以下のような記事を書いた。 </p>
+<p><a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/">cowrieの不正侵入ログをelasticsearchにデータを入れる</a></p>
+<p>すると、Masahiro Nakagawaさんから以下のようなコメントいただいた(ありがとうございます!!)</p>
+<blockquote>
+<p>最新版のtd-agent 2を使っているのであれば，stdout filterが入っているので，今ではcopyとstdoutを組み合わせる必要はなくて，<filter replicator.**="">type stdout</filter>で簡単にログに吐けるようになっています．今後はこちらもお試しください :)” — Masahiro Nakagawa<br>ref: <a href="http://disq.us/8o5gpu">http://disq.us/8o5gpu</a></p>
+</blockquote>
+<p>そこで、<code>td-agent.conf</code> を以下のように書き換えてみた。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/07/td-agent2-2-1ではfilterが使えるように/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/" data-id="cigmhbpcw001irdwgotz3ynq2" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/td-agent2/">td-agent2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-cowrieの不正侵入ログをelasticsearchにデータを入れる" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/">cowrieの不正侵入ログをelasticsearchにデータを入れる</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-25T14:16:26.000Z" itemprop="datePublished">07-25-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回の記事( <a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう%E3%80%82/">ハニーポットcowrieのログを、mariaDBで管理しよう。</a> )でcowrieのログをmariaDBに出力するようにした。<br>今回は、そのデータをfluentd(td-agent2)を利用して、elasticsearchにデータを入れる手順をご紹介。</p>
+<p>fluentdとは…ログを収集して様々な形式で格納できるソフトウェア<br>td-agent2とは…fluentdのラッパープログラム<br>elasticsearchとは…全文検索を提供するソフトウェア(サーチエンジン)</p>
+<p>これらを入れることで次回ご紹介する解析に非常に有用になってくる。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/" data-id="cigmhbpdw001xrdwgh85mjkxu" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fluentd/">fluentd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/td-agent2/">td-agent2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

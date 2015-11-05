@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ハニーポットcowrieのログを、mariaDBで管理しよう。 | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前回、構築手順を書いたkippo。ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。
+12015-07-21 00:41:42+0900 [-] Unable to format event &amp;#123;&apos;log_namespace&apos;: &apos;twisted.logger._global&apos;, &apos;log_level&apos;: &amp;lt;LogL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ハニーポットcowrieのログを、mariaDBで管理しよう。">
+<meta property="og:url" content="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="前回、構築手順を書いたkippo。ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。
+12015-07-21 00:41:42+0900 [-] Unable to format event &amp;#123;&apos;log_namespace&apos;: &apos;twisted.logger._global&apos;, &apos;log_level&apos;: &amp;lt;LogL">
+<meta property="og:image" content="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/kippo_log.gif">
+<meta property="og:updated_time" content="2015-07-22T13:33:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ハニーポットcowrieのログを、mariaDBで管理しよう。">
+<meta name="twitter:description" content="前回、構築手順を書いたkippo。ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。
+12015-07-21 00:41:42+0900 [-] Unable to format event &amp;#123;&apos;log_namespace&apos;: &apos;twisted.logger._global&apos;, &apos;log_level&apos;: &amp;lt;LogL">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ハニーポットcowrieのログを、mariaDBで管理しよう。" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ハニーポットcowrieのログを、mariaDBで管理しよう。
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-22T14:00:26.000Z" itemprop="datePublished">07-22-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、<a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">構築手順を書いたkippo</a>。<br>ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">21</span> <span class="number">00</span>:<span class="number">41</span>:<span class="number">42</span>+<span class="number">0900</span> [-] Unable <span class="built_in">to</span> <span class="built_in">format</span> event &#123;<span class="string">'log_namespace'</span>: <span class="string">'twisted.logger._global'</span>, <span class="string">'log_level'</span>: &lt;LogLevel=warn&gt;, <span class="string">'fileNow'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'format'</span>: <span class="string">'%(log_legacy)s'</span>, <span class="string">'lineNow'</span>: <span class="number">210</span>, <span class="string">'fileThen'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'log_source'</span>: None, <span class="string">'system'</span>: <span class="string">'-'</span>, <span class="string">'lineThen'</span>: <span class="number">210</span>, <span class="string">'log_logger'</span>: &lt;Logger <span class="string">'twisted.logger._global'</span>&gt;, <span class="string">'time'</span>: <span class="number">1437406902.593759</span>, <span class="string">'log_format'</span>: <span class="string">'Warning: primary log target selected twice at &lt;&#123;fileNow&#125;:&#123;lineNow&#125;&gt; - previously selected at &lt;&#123;fileThen:logThen&#125;&gt;.  Remove one of the calls to beginLoggingTo.'</span>, <span class="string">'message'</span>: (), <span class="string">'log_time'</span>: <span class="number">1437406902.593759</span>&#125;: Invalid conversion specification</span><br></pre></td></tr></table></figure>
+<p>調べてみると、Twistedのインターフェースが変わったようで、MySQL(mariaDB)にデータが入らなかった。</p>
+<p>そこで、kippoをベースに作られた <code>cowrie</code>(タカラガイ) を発見。<br>こちらを利用することにした。</p>
+<p>cowrieでは、先ほどの問題は解消していた。<br><a href="https://github.com/micheloosterhof/cowrie/issues/8" target="_blank" rel="external">Logging issue with Twisted 15</a></p>
+<a id="more"></a>
+<p>必要モジュールはkippoと同じなので割愛する。<br><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">こちら</a>を参照されたし。</p>
+<h2 id="mariaDBをインストール">mariaDBをインストール</h2><p>mariaDBをインストールする。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">yum</span> -y install <span class="keyword">mariadb-server </span><span class="keyword">mariadb-libs </span><span class="keyword">mariadb</span></span><br></pre></td></tr></table></figure>
+<p>madiaDBを起動する。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> mariadb.service</span><br></pre></td></tr></table></figure>
+<p>mariaDBを自動起動するように設定する。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb.service</span><br></pre></td></tr></table></figure>
+<p>cowrieのログをmariaDBに入れるためデータベースを作成し、ログイン権限を設定する。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line"><span class="operator"><span class="keyword">use</span> mysql</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'cowrie'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'your password'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> cowrie@localhost <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'your password'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> cowrie;</span></span><br></pre></td></tr></table></figure>
+<p>mariaDBの設定はこれでおしまい。</p>
+<p>次にcowrieを使えるようにしていく。<br>必要パッケージをインストールする。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> MySQL-python</span><br></pre></td></tr></table></figure>
+<p>cowrieを使えるようにする。<code>root</code>ユーザー以外で作業をしよう。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/micheloosterhof/cowrie.git</span><br><span class="line">cd cowrie</span><br></pre></td></tr></table></figure>
+<p><code>cowrie.cfg</code> を修正。最小限の項目について説明する。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">listen_port = <span class="value"><span class="number">22222</span> ## 好きなポートを指定する。デフォルトは<span class="number">2222</span></span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[database_mysql]</span>  <span class="comment">## データベースの接続設定を行う。</span></span><br><span class="line"><span class="setting">host = <span class="value">localhost</span></span></span><br><span class="line"><span class="setting">database = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">username = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">password = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">port = <span class="value"><span class="number">3306</span></span></span></span><br></pre></td></tr></table></figure>
+<p>cowrieで使うテーブルを、先ほど作成したデータベース<code>cowrie</code>の中に作成していく。<code>cowrie/doc/sql</code>の中にsqlファイルがあるので、こちらを使う。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> cowrie/doc/sql</span><br><span class="line"><span class="keyword">cat</span> mysql.sql | mysql -<span class="keyword">u</span> cowrie  -p cowrie</span><br><span class="line"><span class="keyword">cat</span> <span class="keyword">update</span>*.sql | mysql -<span class="keyword">u</span> cowrie  -p cowrie</span><br></pre></td></tr></table></figure>
+<p>mariadbにログインしてテーブルができていることを確認する。</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [cowrie]&gt; show tables;</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line"><span class="header">| Tables_in_cowrie |</span><br><span class="line">+------------------+</span></span><br><span class="line">| auth             |</span><br><span class="line">| clients          |</span><br><span class="line">| downloads        |</span><br><span class="line">| input            |</span><br><span class="line">| sensors          |</span><br><span class="line">| sessions         |</span><br><span class="line"><span class="header">| ttylog           |</span><br><span class="line">+------------------+</span></span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>ここまで出来れば後は、cowrieを起動する。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sh</span> start.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<p>必要あれば、22ポートのアクセスを、cowrieのlistenしているポートに転送してあげれば、あとは不正アクセスを待つだけ(自身でアクセスしてmariaDBにデータが入っていることを確認しよう)。</p>
+<h1 id="最後に、恒例の観察日記">最後に、恒例の観察日記</h1><p>クラッカーの行動を今回も観察してみよう。<br>サーバを停止しようと試みたが出来ず、rebootで我慢したようだ。<br>クラッカーのうちの多くは動画のように愉快犯である。</p>
+<img src="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/kippo_log.gif" alt="[kippo_log.gif]" title="[kippo_log.gif]">
+<hr>
+<h2 id="参考">参考</h2><ul>
+<li><a href="https://github.com/micheloosterhof/cowrie" target="_blank" rel="external">cowrie</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cigmhbpcj0018rdwgb7lelihj" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" class="hatena-bookmark-button" data-hatena-bookmark-title="ハニーポットcowrieのログを、mariaDBで管理しよう。" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/secutiry/">secutiry</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/SSH不正侵入、観察日記-Vol-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          夏休みの宿題？SSH不正侵入、観察日記 Vol.2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">wordpress利用サイトのセキュリティ診断書を作成するPart2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

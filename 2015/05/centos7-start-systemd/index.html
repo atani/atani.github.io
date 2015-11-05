@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>systemdのメモ(サービス編) | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CentOS7の systemd についてメモ。今回は systemd を用いてサービスの状態について表示したり、操作したり行いましょう。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="systemdのメモ(サービス編)">
+<meta property="og:url" content="http://atani.github.io/2015/05/centos7-start-systemd/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="CentOS7の systemd についてメモ。今回は systemd を用いてサービスの状態について表示したり、操作したり行いましょう。">
+<meta property="og:updated_time" content="2015-06-02T22:31:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="systemdのメモ(サービス編)">
+<meta name="twitter:description" content="CentOS7の systemd についてメモ。今回は systemd を用いてサービスの状態について表示したり、操作したり行いましょう。">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-centos7-start-systemd" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      systemdのメモ(サービス編)
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-05-18T13:01:39.000Z" itemprop="datePublished">05-18-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CentOS7の <code>systemd</code> についてメモ。今回は <code>systemd</code> を用いてサービスの状態について表示したり、操作したり行いましょう。</p>
+<a id="more"></a>
+<h2 id="システムコマンドで起動確認。">システムコマンドで起動確認。</h2><ul>
+<li><code>systemctl -t service</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]# systemctl -t service</span><br><span class="line">UNIT                               <span class="operator"><span class="keyword">LOAD</span>   ACTIVE SUB     DESCRIPTION</span><br><span class="line">auditd.service                     loaded active running <span class="keyword">Security</span> Auditing Service</span><br><span class="line">crond.service                      loaded active running Command Scheduler</span><br><span class="line">dbus.service                       loaded active running <span class="keyword">D</span>-Bus <span class="keyword">System</span> Message Bus</span><br><span class="line">firewalld.service                  loaded active running firewalld - dynamic firewall daemon</span><br><span class="line">getty@tty1.service                 loaded active running Getty <span class="keyword">on</span> tty1</span><br><span class="line">kmod-<span class="keyword">static</span>-nodes.service          loaded active exited  <span class="keyword">Create</span> <span class="keyword">list</span> <span class="keyword">of</span> <span class="keyword">required</span> <span class="keyword">static</span> device nodes <span class="keyword">for</span> the <span class="keyword">current</span> kernel</span><br><span class="line">lvm2-lvmetad.service               loaded active running LVM2 metadata daemon</span><br><span class="line">lvm2-monitor.service               loaded active exited  <span class="keyword">Monitoring</span> <span class="keyword">of</span> LVM2 mirrors, snapshots etc. <span class="keyword">using</span> dmeventd <span class="keyword">or</span> progress polling</span><br><span class="line">lvm2-pvscan@<span class="number">8</span>:<span class="number">2.</span>service            loaded active exited  LVM2 PV <span class="keyword">scan</span> <span class="keyword">on</span> device <span class="number">8</span>:<span class="number">2</span></span><br><span class="line">network.service                    loaded <span class="keyword">failed</span> <span class="keyword">failed</span>  LSB: Bring up/down networking</span><br><span class="line">(省略)</span><br><span class="line">systemd-udev-<span class="keyword">trigger</span>.service       loaded active exited  udev Coldplug all Devices</span><br><span class="line">systemd-udevd.service              loaded active running udev Kernel Device Manager</span><br><span class="line">systemd-<span class="keyword">update</span>-utmp.service        loaded active exited  <span class="keyword">Update</span> UTMP about <span class="keyword">System</span> Reboot/<span class="keyword">Shutdown</span></span><br><span class="line">systemd-<span class="keyword">user</span>-sessions.service      loaded active exited  Permit <span class="keyword">User</span> Sessions</span><br><span class="line">systemd-vconsole-setup.service     loaded active exited  Setup <span class="keyword">Virtual</span> Console</span><br><span class="line">tuned.service                      loaded active running Dynamic <span class="keyword">System</span> Tuning Daemon</span><br><span class="line">vboxadd-service.service            loaded active running LSB: VirtualBox Additions service</span><br><span class="line">vboxadd-x11.service                loaded active exited  LSB: VirtualBox Linux Additions kernel modules</span><br><span class="line">vboxadd.service                    loaded active exited  LSB: VirtualBox Linux Additions kernel modules</span><br><span class="line"></span><br><span class="line"><span class="keyword">LOAD</span>   = Reflects whether the unit definition was properly loaded.</span><br><span class="line">ACTIVE = The <span class="keyword">high</span>-<span class="keyword">level</span> unit activation state, <span class="keyword">i</span>.<span class="keyword">e</span>. generalization <span class="keyword">of</span> SUB.</span><br><span class="line">SUB    = The <span class="keyword">low</span>-<span class="keyword">level</span> unit activation state, <span class="keyword">values</span> depend <span class="keyword">on</span> unit <span class="keyword">type</span>.</span><br><span class="line"></span><br><span class="line"><span class="number">32</span> loaded units listed. Pass <span class="comment">--all to see loaded but inactive units, too.</span></span><br><span class="line"><span class="keyword">To</span> <span class="keyword">show</span> all installed unit files <span class="keyword">use</span> <span class="string">'systemctl list-unit-files'</span>.</span></span><br></pre></td></tr></table></figure>
+<h2 id="起動していないサービスも表示">起動していないサービスも表示</h2><ul>
+<li><code>systemctl -t service -all</code></li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">[</span>root@localhost vagrant]<span class="comment"># systemctl -t service -all</span></span><br><span class="line">UNIT                                 LOAD   ACTIVE   SUB     DESCRIPTION</span><br><span class="line">auditd.service                       loaded active   running Security Auditing Service</span><br><span class="line">brandbot.service                     loaded inactive dead    Flexible Branding Service</span><br><span class="line">cpupower.service                     loaded inactive dead    Configure CPU power related settings</span><br><span class="line">crond.service                        loaded active   running Command Scheduler</span><br><span class="line">dbus.service                         loaded active   running D-Bus System Message Bus</span><br><span class="line">display-manager.service             <span class="instruction"> not-found </span>inactive dead    display-manager.service</span><br><span class="line">dm-event.service                     loaded inactive dead    Device-mapper event daemon</span><br><span class="line">dracut-shutdown.service              loaded inactive dead    Restore /run/initramfs</span><br><span class="line">ebtables.service                     loaded inactive dead    Ethernet Bridge Filtering tables</span><br><span class="line">emergency.service                    loaded inactive dead    Emergency Shell</span><br><span class="line">exim.service                        <span class="instruction"> not-found </span>inactive dead    exim.service</span><br><span class="line">firewalld.service                    loaded active   running firewalld - dynamic firewall daemon</span><br><span class="line">(省略<span class="function">)</span></span><br><span class="line">sshd.service                         loaded active   running OpenSSH server daemon</span><br><span class="line">syslog.service                      <span class="instruction"> not-found </span>inactive dead    syslog.service<span class="keyword"></span><br><span class="line">system</span>d-ask-password-console.service loaded inactive dead    Dispatch Password Requests to Console<span class="keyword"></span><br><span class="line">system</span>d-ask-password-wall.service    loaded inactive dead    Forward Password Requests to Wall<span class="keyword"></span><br><span class="line">system</span>d-binfmt.service               loaded inactive dead    Set Up Additional Binary Formats<span class="keyword"></span><br><span class="line">system</span>d-fsck-root.service            loaded inactive dead    File System Check on Root Device<span class="keyword"></span><br><span class="line">system</span>d-initctl.service              loaded inactive dead    /dev/initctl Compatibility Daemon<span class="keyword"></span><br><span class="line">system</span>d-journal-flush.service        loaded inactive dead    Trigger Flushing of Journal to Persistent Storage</span><br></pre></td></tr></table></figure>
+<h2 id="定義されているUNITの設定を確認することができる。">定義されているUNITの設定を確認することができる。</h2><ul>
+<li><code>systemctl list-unit-files --type=service</code></li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]# systemctl list-<span class="keyword">unit</span>-files --<span class="keyword">type</span>=service</span><br><span class="line"><span class="keyword">UNIT</span> <span class="keyword">FILE</span>                                   STATE</span><br><span class="line">auditd.service                              enabled</span><br><span class="line">auth-rpcgss-module.service                  <span class="keyword">static</span></span><br><span class="line">autovt@.service                             disabled</span><br><span class="line">blk-availability.service                    disabled</span><br><span class="line">brandbot.service                            <span class="keyword">static</span></span><br><span class="line">console-getty.service                       disabled</span><br><span class="line">console-shell.service                       disabled</span><br><span class="line">cpupower.service                            disabled</span><br><span class="line">crond.service                               enabled</span><br></pre></td></tr></table></figure>
+<ul>
+<li>enable - 有効</li>
+<li>disabled - 無効</li>
+<li>static - 自動起動設定を持たない</li>
+</ul>
+<h2 id="UNITを有効化・無効化する。">UNITを有効化・無効化する。</h2><ul>
+<li><p>無効化 <code>systemctl disable UNIT-name</code></p>
+ <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]# systemctl <span class="keyword">list</span>-unit-<span class="keyword">files</span> --<span class="built_in">type</span>=service | <span class="keyword">grep</span> send</span><br><span class="line">sendmail.service                            enabled</span><br><span class="line">[root@localhost vagrant]# systemctl disable sendmail</span><br><span class="line">rm <span class="string">'/etc/systemd/system/multi-user.target.wants/sendmail.service'</span></span><br><span class="line">rm <span class="string">'/etc/systemd/system/multi-user.target.wants/sm-client.service'</span></span><br><span class="line">[root@localhost vagrant]# systemctl <span class="keyword">list</span>-unit-<span class="keyword">files</span> --<span class="built_in">type</span>=service | <span class="keyword">grep</span> sendmail</span><br><span class="line">sendmail.service                            disabled</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有効化 <code>systemctl enable UNIT-name</code></p>
+ <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ot@localhost vagrant]# systemctl <span class="keyword">list</span>-unit-<span class="keyword">files</span> --<span class="built_in">type</span>=service | <span class="keyword">grep</span> sendmail</span><br><span class="line">sendmail.service                            disabled</span><br><span class="line">[root@localhost vagrant]# systemctl enable sendmail</span><br><span class="line"><span class="keyword">ln</span> -<span class="keyword">s</span> <span class="string">'/usr/lib/systemd/system/sendmail.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/sendmail.service'</span></span><br><span class="line"><span class="keyword">ln</span> -<span class="keyword">s</span> <span class="string">'/usr/lib/systemd/system/sm-client.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/sm-client.service'</span></span><br><span class="line">[root@localhost vagrant]# systemctl <span class="keyword">list</span>-unit-<span class="keyword">files</span> --<span class="built_in">type</span>=service | <span class="keyword">grep</span> sendmail</span><br><span class="line">sendmail.service                            enabled</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="サービスの操作(起動・停止など)">サービスの操作(起動・停止など)</h2><ul>
+<li><p>サービス起動 <code>systemctl start Unit-name</code></p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]<span class="preprocessor"># ps auxfw | grep -i [s]endmai</span></span><br><span class="line">[root@localhost vagrant]<span class="preprocessor"># systemctl start sendmail</span></span><br><span class="line">[root@localhost vagrant]<span class="preprocessor"># ps auxfw | grep -i [s]endmai</span></span><br><span class="line">root      <span class="number">1333</span>  <span class="number">0.0</span>  <span class="number">0.4</span>  <span class="number">90208</span>  <span class="number">2264</span> ?        Ss   <span class="number">12</span>:<span class="number">57</span>   <span class="number">0</span>:<span class="number">00</span> sendmail: accepting connections</span><br><span class="line">smmsp     <span class="number">1345</span>  <span class="number">0.0</span>  <span class="number">0.4</span>  <span class="number">85648</span>  <span class="number">1900</span> ?        Ss   <span class="number">12</span>:<span class="number">57</span>   <span class="number">0</span>:<span class="number">00</span> sendmail: Queue runner@<span class="number">01</span>:<span class="number">00</span>:<span class="number">00</span> <span class="keyword">for</span> /var/spool/clientmqueue</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>サービス停止 <code>systemctl stop Unit-name</code></p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]<span class="preprocessor"># ps auxfw | grep -i [s]endmai</span></span><br><span class="line">root      <span class="number">1333</span>  <span class="number">0.0</span>  <span class="number">0.4</span>  <span class="number">90208</span>  <span class="number">2264</span> ?        Ss   <span class="number">12</span>:<span class="number">57</span>   <span class="number">0</span>:<span class="number">00</span> sendmail: accepting connections</span><br><span class="line">smmsp     <span class="number">1345</span>  <span class="number">0.0</span>  <span class="number">0.4</span>  <span class="number">85648</span>  <span class="number">1900</span> ?        Ss   <span class="number">12</span>:<span class="number">57</span>   <span class="number">0</span>:<span class="number">00</span> sendmail: Queue runner@<span class="number">01</span>:<span class="number">00</span>:<span class="number">00</span> <span class="keyword">for</span> /var/spool/clientmqueue</span><br><span class="line">[root@localhost vagrant]<span class="preprocessor"># systemctl stop sendmail</span></span><br><span class="line">[root@localhost vagrant]<span class="preprocessor"># ps auxfw | grep -i [s]endmai</span></span><br><span class="line">[root@localhost vagrant]<span class="preprocessor">#</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>サービス再起動 <code>systemctl restart Unit-name</code></p>
+</li>
+<li><p>サービス再読込 <code>systemctl reload Unit-name</code></p>
+<ul>
+<li><p><code>reload</code> 設定がない場合はエラーになる。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost vagrant]# systemctl reload sendmail</span><br><span class="line">Failed <span class="keyword">to</span> issue <span class="function"><span class="keyword">method</span> <span class="title">call</span>:</span> Job <span class="keyword">type</span> reload <span class="keyword">is</span> <span class="keyword">not</span> applicable <span class="keyword">for</span> <span class="keyword">unit</span> sendmail.service.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="追記(2015/05/20)">追記(2015/05/20)</h2><p>UNITってなんですか？と<a href="http://harasou.github.io" target="_blank" rel="external">@harasou</a> さんにご質問を頂いたので回答。</p>
+<h3 id="UNITとは？">UNITとは？</h3><p>systemdが操作することができるサービス名のこと。<br>タイプとして、target, mount, service, device の４種類分かれている。</p>
+<p>運用で主に、使うことになるのはserviceであろう。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/05/centos7-start-systemd/" data-id="cigmhbpgs003hrdwge7mtx71i" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/05/centos7-start-systemd/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/05/centos7-start-systemd/" class="hatena-bookmark-button" data-hatena-bookmark-title="systemdのメモ(サービス編)" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemd/">systemd</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/Start-haraka/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          harakaでsmtpサーバを立てよう！
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/Start-ssh-copy-id/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ssh-copy-idでよりセキュアにより簡単にSSHログイン</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/05/centos7-start-systemd/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

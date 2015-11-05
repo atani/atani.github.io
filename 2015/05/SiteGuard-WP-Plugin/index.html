@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Wordpress導入時に最低限入れておきたいセキュリティプラグイン『SiteGuard WP Plugin』 | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="近年、Wordpress本体、もしくはそのプラグインの脆弱性をついて、WEBサイトの改竄があとを絶たない。特にプラグインは脆弱性が発見されても開発元が開発終了してて、放置されているものも多い。
+サイトのデザインがいかにすぐれたものでも改竄されていては話にならない。かといって導入時にセキュリティってどうしたらいいのかぱっとわからない。
+すぐにできる対策をやろう！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wordpress導入時に最低限入れておきたいセキュリティプラグイン『SiteGuard WP Plugin』">
+<meta property="og:url" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="近年、Wordpress本体、もしくはそのプラグインの脆弱性をついて、WEBサイトの改竄があとを絶たない。特にプラグインは脆弱性が発見されても開発元が開発終了してて、放置されているものも多い。
+サイトのデザインがいかにすぐれたものでも改竄されていては話にならない。かといって導入時にセキュリティってどうしたらいいのかぱっとわからない。
+すぐにできる対策をやろう！">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/siteguard_wp_plugin.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen1.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen2.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen3.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen4.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen5.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen6.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen7.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen8.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen9.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen10.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen11.png">
+<meta property="og:image" content="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/screen12.png">
+<meta property="og:updated_time" content="2015-06-02T22:30:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Wordpress導入時に最低限入れておきたいセキュリティプラグイン『SiteGuard WP Plugin』">
+<meta name="twitter:description" content="近年、Wordpress本体、もしくはそのプラグインの脆弱性をついて、WEBサイトの改竄があとを絶たない。特にプラグインは脆弱性が発見されても開発元が開発終了してて、放置されているものも多い。
+サイトのデザインがいかにすぐれたものでも改竄されていては話にならない。かといって導入時にセキュリティってどうしたらいいのかぱっとわからない。
+すぐにできる対策をやろう！">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SiteGuard-WP-Plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Wordpress導入時に最低限入れておきたいセキュリティプラグイン『SiteGuard WP Plugin』
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-05-28T11:01:55.000Z" itemprop="datePublished">05-28-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2015/05/SiteGuard-WP-Plugin/siteguard_wp_plugin.png" alt="[siteguard_wp_plugin.png]" title="[siteguard_wp_plugin.png]">
+<p>近年、Wordpress本体、もしくはそのプラグインの脆弱性をついて、WEBサイトの改竄があとを絶たない。<br>特にプラグインは脆弱性が発見されても開発元が開発終了してて、放置されているものも多い。</p>
+<p>サイトのデザインがいかにすぐれたものでも改竄されていては話にならない。<br>かといって導入時にセキュリティってどうしたらいいのかぱっとわからない。</p>
+<p>すぐにできる対策をやろう！</p>
+<a id="more"></a>
+<ol>
+<li>ユーザー名「admin」 など一般的な名前のアカウントは使用しない。</li>
+<li>ログインパスワードは10桁以上の英数字（大文字）記号を含めたものにする。</li>
+<li><a href="https://wordpress.org/plugins/siteguard/" target="_blank" rel="external">SiteGuard WP Plugin</a> を導入する</li>
+</ol>
+<p>「<a href="https://wordpress.org/plugins/siteguard/" target="_blank" rel="external">SiteGuard WP Plugin</a>」は、国産、無料、簡単、三拍子そろったセキュリティを飛躍的に高めてくれるプラグイン。<br>さっと導入して枕を高くして寝よう！</p>
+<h2 id="まずはインストール">まずはインストール</h2><p>wordpressの管理画面から [プラグイン] - [新規追加]<br>[プラグインの検索] のフォームに [siteguard] と入力して <code>Enter</code> を押すと一番最初に出てくるのでインストールする。</p>
+<img src="/2015/05/SiteGuard-WP-Plugin/screen1.png" alt="[screen1.png]" title="[screen1.png]">
+<h2 id="ダッシュボードと機能の説明">ダッシュボードと機能の説明</h2><p>ダッシュボードは以下画像になる。</p>
+<img src="/2015/05/SiteGuard-WP-Plugin/screen2.png" alt="[screen2.png]" title="[screen2.png]">
+<p>設定できる項目は全部で１０個。</p>
+<ul>
+<li>管理ページアクセス制限</li>
+<li>ログインページ変更</li>
+<li>画像認証</li>
+<li>ログイン詳細エラーメッセージの無効化</li>
+<li>ログインロック</li>
+<li>ログインアラート</li>
+<li>フェールワンス</li>
+<li>ピンバック無効化</li>
+<li>更新通知</li>
+<li>AFチューニングサポート</li>
+</ul>
+<p>一つ一つ見ていこう。</p>
+<h3 id="管理ページアクセス制限">管理ページアクセス制限</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen3.png" alt="[screen3.png]" title="[screen3.png]">
+<p>有効にすると、ログインしていないアカウントが管理画面にアクセスしようとするとエラーにしてくれる。<br>有効にしておこう！</p>
+<h3 id="ログインページ変更">ログインページ変更</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen4.png" alt="[screen4.png]" title="[screen4.png]">
+<p>初期状態のログインページ名はどのユーザーも同じ(ファイル名はwp-login.php)なので、悪者は「<a href="http://hoge.com/wp-login.php」に大量にアクセスをしてパスワードを引っこ抜こうと試みる。" target="_blank" rel="external">http://hoge.com/wp-login.php」に大量にアクセスをしてパスワードを引っこ抜こうと試みる。</a><br>そこで、ログインページ名を変更してしまうことで、パスワードを引っこ抜かれる確率がグンと減る！すぐに変えよう（ログインページはブックマークして忘れないように！）</p>
+<h3 id="画像認証">画像認証</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen5.png" alt="[screen5.png]" title="[screen5.png]">
+<p>管理ページにログイン時の画像に書かれた文字も答えるようにする。英語の画像認証はよくあるが、本プラグインはなんと「ひらがなの画像認証」の設定ができる！<br>これで、海外からのログイン試行はかなりの確率で防げるはず！すぐに設定しよう。<br>本設定の有効/無効を「ON」にし、「ログインページ」 - 「ひらがな」 にチェック入れて変更を保存するだけ！</p>
+<h3 id="ログイン詳細エラーメッセージの無効化">ログイン詳細エラーメッセージの無効化</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen6.png" alt="[screen6.png]" title="[screen6.png]">
+<p>通常、認証に失敗したとき、何が間違っているのかそれとなくメッセージが出る。<br>悪者はそれを理解し、攻撃パターンを変えてくる事がある。しかし、本設定を「ON」にすると、ログインのエラーメッセージが全て同じになり、何が間違っているのかわかりにくくなる。</p>
+<h3 id="ログインロック">ログインロック</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen7.png" alt="[screen7.png]" title="[screen7.png]">
+<p>パスワードを少しずつ変え、短時間に何度も何度もログインを試みれば、パスワードを破られるかもしれない。そんなとき、指定した回数ログイン失敗すると一定期間ログインをできないように制御が出来る。これでパスワードを破られるまでにかなりの時間を稼ぐ事が出来る（悪者は諦めるかもしれない）。</p>
+<h3 id="ログインアラート">ログインアラート</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen8.png" alt="[screen8.png]" title="[screen8.png]">
+<p>もし、悪者にログインされてしまったら？少しでも早く検知して対策を施したい。<br>本設定はログインが行われたらログインユーザーにメールが飛ぶように出来る。</p>
+<h3 id="フェールワンス">フェールワンス</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen9.png" alt="[screen9.png]" title="[screen9.png]">
+<p>アカウント/リストの組み合わせを持っている悪者はそれを使ってそれぞれ１回ずつログインを試みる。本機能は、正しいログイン情報を入力しても一度は必ず失敗するように出来る。</p>
+<h3 id="ピンバック無効化">ピンバック無効化</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen10.png" alt="[screen10.png]" title="[screen10.png]">
+<p>去年<a href="http://www.atmarkit.co.jp/ait/articles/1403/13/news133.html" target="_blank" rel="external">ピンバックによるDDoS攻撃</a>が流行った。ピンバックを利用しない場合は、本機能を使って無効化したほうが良い。</p>
+<h3 id="更新通知">更新通知</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen11.png" alt="[screen11.png]" title="[screen11.png]">
+<p>WordPress、プラグイン、テーマのバージョンアップを知らせてくれる。セキィリティアップデートの場合も多数あるので、是非とも本機能を有効にする事をおすすめする。</p>
+<h3 id="WAFチューニングサポート">WAFチューニングサポート</h3><img src="/2015/05/SiteGuard-WP-Plugin/screen12.png" alt="[screen12.png]" title="[screen12.png]">
+<p>WebサーバーにWAF( SiteGuard Lite )が導入されている場合(<a href="http://lolipop.jp/" target="_blank" rel="external">ロリポップ</a>、<a href="http://heteml.jp" target="_blank" rel="external">ヘテムル</a>は導入済)、WordPress内での誤検知をしまうことがある。その場合、本設定で除外ルールを作成する事が出来る。</p>
+<hr>
+<ul>
+<li>改竄速報<ul>
+<li><a href="http://izumino.jp/Security/def_jp.html" target="_blank" rel="external">JPドメイン Web改竄速報</a></li>
+</ul>
+</li>
+<li>プラグインの脆弱性<ul>
+<li><a href="http://atani.github.io/2015/04/Slider-Revolution-Vulnerability/">Slider-Revolution 脆弱性</a></li>
+<li><a href="http://atani.github.io/2015/04/Gravityforms-Vulnerability/">Gravityforms 脆弱性</a></li>
+<li><a href="http://www.itmedia.co.jp/enterprise/articles/1502/06/news057.html" target="_blank" rel="external">fancybox for wordpress 脆弱性</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/" data-id="cigmhbpgy003nrdwghmbnq8yb" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/05/SiteGuard-WP-Plugin/" class="hatena-bookmark-button" data-hatena-bookmark-title="Wordpress導入時に最低限入れておきたいセキュリティプラグイン『SiteGuard WP Plugin』" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/swaksで快適なメール送信テスト/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          swaksで快適なメール送信テスト
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/localeの設定を変更しよう！/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">localeの設定を変更しよう！</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/05/SiteGuard-WP-Plugin/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

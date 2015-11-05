@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CentOS7にKippoをインストールする | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前回の記事 ssh専用ハニーポットKippo でKippoのインストール方法を端折ったので、今回はインストール方法を書く。
+Kippoインストールには、Python2.5以上が必要なので、もし入っていなければインストールしておく。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7にKippoをインストールする">
+<meta property="og:url" content="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="前回の記事 ssh専用ハニーポットKippo でKippoのインストール方法を端折ったので、今回はインストール方法を書く。
+Kippoインストールには、Python2.5以上が必要なので、もし入っていなければインストールしておく。">
+<meta property="og:updated_time" content="2015-07-08T04:45:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS7にKippoをインストールする">
+<meta name="twitter:description" content="前回の記事 ssh専用ハニーポットKippo でKippoのインストール方法を端折ったので、今回はインストール方法を書く。
+Kippoインストールには、Python2.5以上が必要なので、もし入っていなければインストールしておく。">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CentOS7にKippoをインストールする" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS7にKippoをインストールする
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-06T13:16:26.000Z" itemprop="datePublished">07-06-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回の記事 <a href="https://atani.github.io/2015/07/ssh%E5%B0%82%E7%94%A8%E3%83%8F%E3%83%8B%E3%83%BC%E3%83%9D%E3%83%83%E3%83%88Kippo/">ssh専用ハニーポットKippo</a> でKippoのインストール方法を端折ったので、<br>今回はインストール方法を書く。</p>
+<p>Kippoインストールには、Python2.5以上が必要なので、もし入っていなければインストールしておく。</p>
+<a id="more"></a>
+<h3 id="必要なパッケージを入れていく。">必要なパッケージを入れていく。</h3><p>easy_install 時に必要なので、<code>python-devel</code>を入れる。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> python-devel</span><br></pre></td></tr></table></figure>
+<p>kippoに必須のモジュールを入れる</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">easy_install PyCrypto pyasn1</span><br><span class="line">easy_install pip</span><br><span class="line">pip <span class="keyword">install</span> twisted service_identity</span><br></pre></td></tr></table></figure>
+<h2 id="kippo_をインストール">kippo をインストール</h2><p>Kippoはrootユーザーでは実行出来ないようになっているため、一般ユーザーを作成する。</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">useradd kippo</span><br><span class="line">su kippo</span><br><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/desaster/kippo.git</span><br><span class="line">cd kippo</span><br></pre></td></tr></table></figure>
+<h3 id="Kiippoの設定">Kiippoの設定</h3><p>設定ファイルを作成する。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -<span class="tag">p</span> kippo<span class="class">.cfg</span><span class="class">.dist</span> kippo.cfg</span><br></pre></td></tr></table></figure>
+<p><code>Port</code>の部分を<code>22222</code>に設定した。</p>
+<h3 id="Kippo起動。">Kippo起動。</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="literal">start</span>.sh</span><br></pre></td></tr></table></figure>
+<h3 id="SSH(ポート22)の接続を転送させる。">SSH(ポート22)の接続を転送させる。</h3><p>Kippo は <code>22222</code> でListenしているので、22ポートへ来たアクセスを22222に転送するようにfirewalldで設定する。</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">firewall</span><span class="literal">-</span><span class="comment">cmd</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">permanent</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">zone=public</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">add</span><span class="literal">-</span><span class="comment">forward</span><span class="literal">-</span><span class="comment">port=port=22:proto=tcp:toport=22222</span></span><br><span class="line"><span class="comment">systemctl</span> <span class="comment">restart</span> <span class="comment">firewalld</span><span class="string">.</span><span class="comment">service</span></span><br></pre></td></tr></table></figure>
+<h3 id="ダミーアカウントを作成したい場合は、data/userdb-txtにユーザーを追加する。">ダミーアカウントを作成したい場合は、<code>data/userdb.txt</code>にユーザーを追加する。</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># <span class="tag">cat</span> <span class="tag">data</span>/<span class="tag">userdb</span><span class="class">.txt</span></span><br><span class="line"><span class="tag">root</span><span class="pseudo">:0</span><span class="pseudo">:123456</span></span><br><span class="line"><span class="tag">adm</span><span class="pseudo">:10001</span><span class="pseudo">:adm</span></span><br><span class="line"><span class="tag">ruth</span><span class="pseudo">:10002</span><span class="pseudo">:ruth</span></span><br><span class="line"><span class="tag">dragon</span><span class="pseudo">:10003</span><span class="pseudo">:abc123</span></span><br><span class="line"><span class="tag">public</span><span class="pseudo">:10004</span><span class="pseudo">:public</span></span><br><span class="line"><span class="tag">test</span><span class="pseudo">:10005</span><span class="pseudo">:test</span></span><br><span class="line"><span class="tag">administrator</span><span class="pseudo">:10006</span><span class="pseudo">:password</span></span><br><span class="line"><span class="tag">guest</span><span class="pseudo">:10007</span><span class="pseudo">:guest</span></span><br></pre></td></tr></table></figure>
+<p>左から、 <code>アカウント名:UID:パスワード</code> となっている。</p>
+<p>設定は以上になる。ハニーポットライフをお楽しみにください！</p>
+<h2 id="備考">備考</h2><h3 id="python-develが入ってないのとeasy_install実行時に以下エラーとなる。">python-develが入ってないのとeasy_install実行時に以下エラーとなる。</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/MD2<span class="class">.c</span>:<span class="number">31</span>:<span class="number">20</span>: 致命的エラー: Python<span class="class">.h</span>: そのようなファイルやディレクトリはありません</span><br><span class="line"> <span class="id">#include</span> <span class="string">"Python.h"</span></span><br><span class="line">                    ^</span><br><span class="line">コンパイルを停止しました。</span><br></pre></td></tr></table></figure>
+<h3 id="twistdのパスが通ってない場合は、以下エラーとなる。">twistdのパスが通ってない場合は、以下エラーとなる。</h3><p>yum で<code>python-twisted-core</code> をインストールだと以下エラーだった。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  File <span class="string">"kippo.tac"</span>, line <span class="number">15</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from twisted<span class="class">.conch</span><span class="class">.ssh</span> import factory, keys</span><br><span class="line">exceptions<span class="class">.ImportError</span>: No module named conch<span class="class">.ssh</span></span><br><span class="line"></span><br><span class="line">Failed to load application: No module named conch.ssh</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="参照URL">参照URL</h2><ul>
+<li><a href="http://d.hatena.ne.jp/ozuma/20130829/1377703104" target="_blank" rel="external">sshハニーポットをkippoで作ってみる</a></li>
+<li><a href="http://d.hatena.ne.jp/akishin999/20140210/1391983700" target="_blank" rel="external">CentOS 6.5 に kippo をインストールしてみる</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/" data-id="cigmhbpff002grdwg898r8ceg" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/07/CentOS7にKippoをインストールする/" class="hatena-bookmark-button" data-hatena-bookmark-title="CentOS7にKippoをインストールする" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/２週間でここまで出来た２週間チャレンジ/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ２週間でここまで出来た!!２週間チャレンジ
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/sshのポート番号を変更してセキュリティ対策/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">sshのポート番号を変更してセキュリティ対策</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/07/CentOS7にKippoをインストールする/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

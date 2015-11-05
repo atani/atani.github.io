@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SSHの不正侵入で多いパスワードランキング | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。
+本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。
+また、kippoの導入方法は既に以下に記載済みなので参考にされたし。
+
+CentOS7にKipp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSHの不正侵入で多いパスワードランキング">
+<meta property="og:url" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。
+本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。
+また、kippoの導入方法は既に以下に記載済みなので参考にされたし。
+
+CentOS7にKipp">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_length.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_1.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_2.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_3.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_4.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_5.png">
+<meta property="og:image" content="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/pass_6.png">
+<meta property="og:updated_time" content="2015-07-22T13:32:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSHの不正侵入で多いパスワードランキング">
+<meta name="twitter:description" content="サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。
+本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。
+また、kippoの導入方法は既に以下に記載済みなので参考にされたし。
+
+CentOS7にKipp">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SSHの不正侵入で多いパスワードランキング" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSHの不正侵入で多いパスワードランキング
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-13T01:00:26.000Z" itemprop="datePublished">07-13-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。</p>
+<p>本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。</p>
+<p>また、kippoの導入方法は既に以下に記載済みなので参考にされたし。</p>
+<ul>
+<li><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">CentOS7にKippoをインストールする</a></li>
+</ul>
+<h1 id="抽出条件">抽出条件</h1><p>kippo の以下のログインを試みたが失敗しているログから、アカウントとパスワードを取得。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login attempt <span class="string">[shoutcast/123456]</span> failed</span><br></pre></td></tr></table></figure>
+<p>ランキング化をしたものは大きく以下の２パターン。</p>
+<ul>
+<li>最も試行の多いパスワードの文字数</li>
+<li>６列目までのそれぞれ使用される頻度が多い文字数</li>
+</ul>
+<p>取得期間: <code>2015/06/28 - 2015/07/04</code></p>
+<p>では、ランキングスタート!!</p>
+<a id="more"></a>
+<h1 id="ランキング">ランキング</h1><p>パスワードを使った文字数ランキングを出してみた。</p>
+<h2 id="文字数ランキング">文字数ランキング</h2><p>1位は8文字！続いて7文字、6文字と続いている。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_length.png" alt="[pass_length.png]" title="[pass_length.png]">
+<h2 id="各列で最も使用頻度が高い文字数ランキング">各列で最も使用頻度が高い文字数ランキング</h2><h3 id="1文字目">1文字目</h3><p><code>a</code> が1位。<code>s</code>, <code>1</code> と続いた。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_1.png" alt="[pass_1.png]" title="[pass_1.png]">
+<h3 id="2文字目">2文字目</h3><p><code>a</code> が独走。 <code>o</code> と <code>e</code> が僅差で2,3位。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_2.png" alt="[pass_2.png]" title="[pass_2.png]">
+<h3 id="3文字目">3文字目</h3><p>ここでも <code>a</code> が1位。 続いて、<code>n</code>、<code>s</code></p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_3.png" alt="[pass_3.png]" title="[pass_3.png]">
+<h3 id="4文字目">4文字目</h3><p><code>a</code> ４冠目。もはや敵なし。<code>i</code>、<code>e</code> と続く。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_4.png" alt="[pass_4.png]" title="[pass_4.png]">
+<h3 id="5文字目">5文字目</h3><p><code>a</code>がついに首位陥落。 <code>e</code> が1位となった。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_5.png" alt="[pass_5.png]" title="[pass_5.png]">
+<h3 id="6文字目">6文字目</h3><p><code>e</code> が1位。 <code>1</code> が2位、<code>a</code>は3位となった。</p>
+<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_6.png" alt="[pass_6.png]" title="[pass_6.png]">
+<h2 id="結果一番脆弱なパスワード">結果一番脆弱なパスワード</h2><p>1位… aaaaee<br>2位… sonia1<br>3位… 1eseia</p>
+<p>参考にされてみてはいかが?</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" data-id="cigmhbpek002crdwghtpge2f7" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" class="hatena-bookmark-button" data-hatena-bookmark-title="SSHの不正侵入で多いパスワードランキング" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kippo/">kippo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/SSH不正侵入、観察日記/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SSH不正侵入、観察日記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/２週間でここまで出来た２週間チャレンジ/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">２週間でここまで出来た!!２週間チャレンジ</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

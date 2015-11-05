@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ssh-copy-idでよりセキュアにより簡単にSSHログイン | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ssh-copy-id でリモートサーバに鍵登録してよりセキュアにそして、より簡単にSSHログインしましょう。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh-copy-idでよりセキュアにより簡単にSSHログイン">
+<meta property="og:url" content="http://atani.github.io/2015/04/Start-ssh-copy-id/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="ssh-copy-id でリモートサーバに鍵登録してよりセキュアにそして、より簡単にSSHログインしましょう。">
+<meta property="og:image" content="http://atani.github.io/2015/04/Start-ssh-copy-id/ssh.jpg">
+<meta property="og:updated_time" content="2015-07-13T12:01:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssh-copy-idでよりセキュアにより簡単にSSHログイン">
+<meta name="twitter:description" content="ssh-copy-id でリモートサーバに鍵登録してよりセキュアにそして、より簡単にSSHログインしましょう。">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Start-ssh-copy-id" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ssh-copy-idでよりセキュアにより簡単にSSHログイン
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-04-21T15:38:01.000Z" itemprop="datePublished">04-22-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2015/04/Start-ssh-copy-id/ssh.jpg" alt="[ssh.jpg]" title="[ssh.jpg]">
+<p><code>ssh-copy-id</code> でリモートサーバに鍵登録してよりセキュアにそして、より簡単にSSHログインしましょう。</p>
+<a id="more"></a>
+<h2 id="macの方はbrewでインストールしちゃいましょう。">macの方はbrewでインストールしちゃいましょう。</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ssh-<span class="keyword">copy</span>-<span class="property">id</span></span><br></pre></td></tr></table></figure>
+<h2 id="鍵をお持ちでない方は作成しましょう。">鍵をお持ちでない方は作成しましょう。</h2><p>鍵をすでにお持ちの方は飛ばしましょう。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t dsa</span><br></pre></td></tr></table></figure>
+<h2 id="公開鍵を接続したいサーバにコピーしましょう。">公開鍵を接続したいサーバにコピーしましょう。</h2><p>最初にログインパスワード聞かれるのでパスワード入力しましょう。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -<span class="tag">i</span> .ssh/id_dsa<span class="class">.pub</span> sub.jp-example@ssh000<span class="class">.lolipop</span><span class="class">.jp</span></span><br></pre></td></tr></table></figure>
+<h2 id="ロリポップ(チカッパプラン)のsshで接続する場合のログです。">ロリポップ(チカッパプラン)のsshで接続する場合のログです。</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssh-copy-id sub.jp-example@ssh000.lolipop.jp -p2222</span></span><br><span class="line">/usr/<span class="keyword">local</span>/bin/ssh-<span class="keyword">copy</span>-<span class="property">id</span>: INFO: attempting <span class="keyword">to</span> <span class="command">log</span> <span class="keyword">in</span> <span class="keyword">with</span> <span class="keyword">the</span> new key(s), <span class="keyword">to</span> filter out any <span class="keyword">that</span> are already installed</span><br><span class="line">/usr/<span class="keyword">local</span>/bin/ssh-<span class="keyword">copy</span>-<span class="property">id</span>: INFO: <span class="number">1</span> key(s) remain <span class="keyword">to</span> be installed <span class="comment">-- if you are prompted now it is to install the new keys</span></span><br><span class="line">sub.jp-example@ssh000.lolipop.jp's password:</span><br><span class="line"></span><br><span class="line">Number <span class="keyword">of</span> key(s) added:        <span class="number">1</span></span><br><span class="line"></span><br><span class="line">Now <span class="keyword">try</span> logging <span class="keyword">into</span> <span class="keyword">the</span> machine, <span class="keyword">with</span>:   <span class="string">"ssh -p '2222' 'sub.jp-example@ssh000.lolipop.jp'"</span></span><br><span class="line"><span class="keyword">and</span> check <span class="keyword">to</span> make sure <span class="keyword">that</span> only <span class="keyword">the</span> key(s) you wanted were added.</span><br><span class="line"></span><br><span class="line"><span class="comment"># ssh -p '2222' 'sub.jp-example@ssh000.lolipop.jp'</span></span><br><span class="line">Last login: Wed Apr <span class="number">22</span> <span class="number">00</span>:<span class="number">40</span>:<span class="number">12</span> <span class="number">2015</span> <span class="keyword">from</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span></span><br><span class="line">-bash-<span class="number">3.2</span>$ ls -al .ssh/authorized_keys</span><br><span class="line">-rw<span class="comment">------- 1 sub.jp-example LolipopUser 406 Apr 22 00:40 .ssh/authorized_keys</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="参考にしたサイト">参考にしたサイト</h1><ul>
+<li><a href="http://l-w-i.net/t/openssh/auth_001.txt" target="_blank" rel="external">SSHの2つの認証方式の違い</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/04/Start-ssh-copy-id/" data-id="cigmhbpis003urdwgt29qu0fj" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/04/Start-ssh-copy-id/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/04/Start-ssh-copy-id/" class="hatena-bookmark-button" data-hatena-bookmark-title="ssh-copy-idでよりセキュアにより簡単にSSHログイン" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/centos7-start-systemd/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          systemdのメモ(サービス編)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/Start-Alfred2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Alfred2で快適生活はじめましょう</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/04/Start-ssh-copy-id/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

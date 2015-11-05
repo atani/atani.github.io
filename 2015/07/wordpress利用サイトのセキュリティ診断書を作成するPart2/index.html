@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>wordpress利用サイトのセキュリティ診断書を作成するPart2 | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="wordpress利用サイトのセキュリティ診断書を作成するでは、wpscan を紹介した。今回は、plecost3 をご紹介。
+plecost3 を動かすにはpython3で必要なので、簡単にpython3のインストール手順からご紹介する。
+python3をインストールリポジトリを登録
+1rpm -Uvh https://www.softwarecollections.org/en/scls/rh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wordpress利用サイトのセキュリティ診断書を作成するPart2">
+<meta property="og:url" content="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="wordpress利用サイトのセキュリティ診断書を作成するでは、wpscan を紹介した。今回は、plecost3 をご紹介。
+plecost3 を動かすにはpython3で必要なので、簡単にpython3のインストール手順からご紹介する。
+python3をインストールリポジトリを登録
+1rpm -Uvh https://www.softwarecollections.org/en/scls/rh">
+<meta property="og:updated_time" content="2015-07-15T15:08:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wordpress利用サイトのセキュリティ診断書を作成するPart2">
+<meta name="twitter:description" content="wordpress利用サイトのセキュリティ診断書を作成するでは、wpscan を紹介した。今回は、plecost3 をご紹介。
+plecost3 を動かすにはpython3で必要なので、簡単にpython3のインストール手順からご紹介する。
+python3をインストールリポジトリを登録
+1rpm -Uvh https://www.softwarecollections.org/en/scls/rh">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-wordpress利用サイトのセキュリティ診断書を作成するPart2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      wordpress利用サイトのセキュリティ診断書を作成するPart2
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-15T15:02:35.000Z" itemprop="datePublished">07-16-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://atani.github.io/2015/04/wordpress利用サイトのセキュリティ診断書を作成する/">wordpress利用サイトのセキュリティ診断書を作成する</a>では、<br><code>wpscan</code> を紹介した。今回は、<code>plecost3</code> をご紹介。</p>
+<p>plecost3 を動かすにはpython3で必要なので、簡単にpython3のインストール手順からご紹介する。</p>
+<h2 id="python3をインストール">python3をインストール</h2><p>リポジトリを登録</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -<span class="constant">Uvh</span> <span class="symbol">https:</span>/<span class="regexp">/www.softwarecollections.org/en</span><span class="regexp">/scls/rhscl</span><span class="regexp">/python33/epel</span>-<span class="number">7</span>-x86_64/download/rhscl-python33-epel-<span class="number">7</span>-x86_64.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>python3 をインストール</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> python33</span><br></pre></td></tr></table></figure>
+<p>scl(Software Collections)でpython3を利用するように設定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> python33 bash</span><br></pre></td></tr></table></figure>
+<p>pip をインストール</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">easy_install</span> pip</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="plecost_をインストール">plecost をインストール</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip <span class="keyword">install</span> plecost</span><br></pre></td></tr></table></figure>
+<p>チェックするプラグインリストを最新にする。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plecost <span class="comment">--update-plugins</span></span><br></pre></td></tr></table></figure>
+<p>実行結果</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ plecost --update-plugins</span><br><span class="line"></span><br><span class="line">(省略)</span><br><span class="line">To get rid <span class="keyword">of</span> <span class="keyword">this</span> warning, change <span class="attribute">this</span>:</span><br><span class="line"></span><br><span class="line"> BeautifulSoup([your markup])</span><br><span class="line"></span><br><span class="line">to <span class="attribute">this</span>:</span><br><span class="line"></span><br><span class="line"> BeautifulSoup([your markup], <span class="string">"html.parser"</span>)</span><br><span class="line"></span><br><span class="line">  markup_type=markup_type))</span><br><span class="line">[*] Downloading plugins (slow):  [<span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#####] 100.00%</span><br><span class="line">[*] Oks!</span></span><br></pre></td></tr></table></figure>
+<p>脆弱性情報も最新にする。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plecost <span class="comment">--update-cve</span></span><br></pre></td></tr></table></figure>
+<p>実行結果</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ plecost --update-cve</span><br><span class="line"></span><br><span class="line">(省略)</span><br><span class="line">[*] Updating CVE database...</span><br><span class="line">    Downloading NVD feed <span class="number">2013</span>:</span><br><span class="line">        Processing <span class="attribute">file</span>:  [<span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#####] 100.00%</span><br><span class="line">    Downloading NVD feed 2014:</span><br><span class="line">        Processing file:  [###</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">##] 100.00%</span></span><br><span class="line">    Downloading NVD feed <span class="number">2015</span>:</span><br><span class="line">        Processing <span class="attribute">file</span>:  [<span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">######</span><span class="comment">#####] 100.00%</span><br><span class="line"></span><br><span class="line">[*] Done!</span></span><br></pre></td></tr></table></figure>
+<p>以上で、plecostの利用準備は完了。</p>
+<h1 id="使い方">使い方</h1><p>使い方は簡単 <code>plecost</code> コマンドに WordpressのURLを渡すだけ。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plecost <span class="string">http:</span><span class="comment">//example.com</span></span><br></pre></td></tr></table></figure>
+<h1 id="使ってみよう">使ってみよう</h1><p>某サイトで試してみた。 バージョン3.5.1 とかなり古いバージョンを使っており、脆弱であることが確認できた。さらにCVE情報のリンクもあるので、どんな脆弱性があるのかも確認が可能となっている。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plecost http://example.com</span></span><br><span class="line"></span><br><span class="line">/<span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span><span class="regexp">//</span></span><br><span class="line">/<span class="regexp">/ ..................................DMI...</span><br><span class="line">/</span><span class="regexp">/ .............................:MMMM......</span><br><span class="line">/</span><span class="regexp">/ .........................$MMMMM:........</span><br><span class="line">/</span><span class="regexp">/ .........M.....,M,=NMMMMMMMMD...........</span><br><span class="line">/</span><span class="regexp">/ ........MMN...MMMMMMMMMMMM,.............</span><br><span class="line">/</span><span class="regexp">/ .......MMMMMMMMMMMMMMMMM~...............</span><br><span class="line">/</span><span class="regexp">/ .......MMMMMMMMMMMMMMM..................</span><br><span class="line">/</span><span class="regexp">/ ....?MMMMMMMMMMMMMMMN$I.................</span><br><span class="line">/</span><span class="regexp">/ .?.MMMMMMMMMMMMMMMMMMMMMM...............</span><br><span class="line">/</span><span class="regexp">/ .MMMMMMMMMMMMMMN........................</span><br><span class="line">/</span><span class="regexp">/ 7MMMMMMMMMMMMMON$.......................</span><br><span class="line">/</span><span class="regexp">/ ZMMMMMMMMMMMMMMMMMM.......libs.......</span><br><span class="line">/</span><span class="regexp">/ .:MMMMMMMZ~7MMMMMMMMMO..................</span><br><span class="line">/</span><span class="regexp">/ ....~+:.................................</span><br><span class="line">/</span><span class="regexp">/</span><br><span class="line">/</span><span class="regexp">/ Plecost - Wordpress finger printer Tool - v1.0.0</span><br><span class="line">/</span><span class="regexp">/</span><br><span class="line">/</span><span class="regexp">/ Developed by:</span><br><span class="line">/</span><span class="regexp">/        Francisco Jesus Gomez aka ffranz | @ffranz - ffranz-[at]-iniqua.com</span><br><span class="line">/</span><span class="regexp">/        Daniel Garcia aka cr0hn | @ggdaniel - cr0hn-[at]-cr0hn.com</span><br><span class="line">/</span><span class="regexp">/</span><br><span class="line">/</span><span class="regexp">/ Info: http:/</span><span class="regexp">/iniqua.com/labs</span><span class="regexp">/</span><br><span class="line">/</span><span class="regexp">/ Repo: https:/</span><span class="regexp">/github.com/iniqua</span><span class="regexp">/plecost</span><br><span class="line">/</span><span class="regexp">/ Bug report: libs@iniqua.com or https:/</span><span class="regexp">/github.com/iniqua</span><span class="regexp">/plecost/issues</span><span class="regexp">/</span><br><span class="line"></span><br><span class="line">[*] Testing target connection... ok!</span><br><span class="line">[*] Looking for WordPress installation...</span><br><span class="line">    [#########################################] 100.00%</span><br><span class="line">    ok!</span><br><span class="line">[*] Getting WordPress version... 3.5.1 (latest: 4.2.2)</span><br><span class="line">    |_CVE list:</span><br><span class="line">    |__CVE-2013-2205: (http:/</span><span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2205</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2202</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2202</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2203</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2203</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2200</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2200</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2201</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2201</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2204</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2204</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2199</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2199</span>)</span><br><span class="line">    |__CVE-<span class="number">2013</span>-<span class="number">2173</span>: (<span class="symbol">http:</span>/<span class="regexp">/cve.mitre.org/cgi</span>-bin/cvename.cgi?name=<span class="constant">CVE</span>-<span class="number">2013</span>-<span class="number">2173</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] <span class="constant">Looking</span> <span class="keyword">for</span> plugins (<span class="symbol">wordlist:</span> plugin_list_50.txt) ...</span><br><span class="line">[*] <span class="constant">Done</span>!</span><br></pre></td></tr></table></figure>
+<p>CVEの情報は、以下のオプションで確認することも可能。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plecost -nb --cve CVE-<span class="number">2013</span>-<span class="number">2204</span></span><br></pre></td></tr></table></figure>
+<p>実行結果</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ plecost -nb <span class="comment">--cve CVE-2013-2204</span></span><br><span class="line"></span><br><span class="line">// Plecost - Wordpress finger printer Tool - v1.<span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">[*] Detail <span class="keyword">for</span> CVE <span class="attribute">'CVE</span>-<span class="number">2013</span>-<span class="number">2204</span>':</span><br><span class="line"></span><br><span class="line">    moxieplayer.as <span class="keyword">in</span> Moxiecode moxieplayer, as used <span class="keyword">in</span> the TinyMCE Media plugin <span class="keyword">in</span> WordPress before <span class="number">3.5</span>.<span class="number">2</span> <span class="keyword">and</span> other products, does <span class="keyword">not</span> consider the presence <span class="keyword">of</span> a # (pound sign) <span class="typename">character</span> during extraction <span class="keyword">of</span> the QUERY_STRING, which allows remote attackers <span class="keyword">to</span> pass arbitrary parameters <span class="keyword">to</span> a Flash application, <span class="keyword">and</span> conduct content-spoofing attacks, via a crafted <span class="typename">string</span> <span class="keyword">after</span> a ? (question mark) <span class="typename">character</span>.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[*] Done!</span><br></pre></td></tr></table></figure>
+<p>脆弱性情報を持つプラグインリストは以下のコマンドで知ることが出来る。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plecost -nb <span class="comment">--show-plugins</span></span><br></pre></td></tr></table></figure>
+<p>実行結果</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ plecost -nb --show-plugins</span><br><span class="line"></span><br><span class="line"><span class="comment">// Plecost - Wordpress finger printer Tool - v1.0.0</span></span><br><span class="line"></span><br><span class="line">[*] Plugins with vulnerabilities known:</span><br><span class="line"></span><br><span class="line">    &#123; <span class="number">0</span> &#125; - ab_google_map_travel</span><br><span class="line">    &#123; <span class="number">1</span> &#125; - acobot_live_chat_%<span class="number">26</span>_contact_form</span><br><span class="line">    &#123; <span class="number">2</span> &#125; - activehelper_livehelp_live_chat</span><br><span class="line">    &#123; <span class="number">3</span> &#125; - ad-manager</span><br><span class="line">    &#123; <span class="number">4</span> &#125; - alipay</span><br><span class="line">    &#123; <span class="number">5</span> &#125; - all-video-gallery</span><br><span class="line">(省略)</span><br></pre></td></tr></table></figure>
+<p>プラグインの脆弱性情報は、先ほど実行したプラグインリストを<code>-vp</code>オプションに渡すことで確認することが出来る。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">plecost</span> -nb -vp infusionsoft_gravity_forms</span><br></pre></td></tr></table></figure>
+<p>実行結果</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ plecost -nb -vp infusionsoft_gravity_forms</span><br><span class="line"></span><br><span class="line">// Plecost - Wordpress finger printer Tool - v1.0.0</span><br><span class="line"></span><br><span class="line">[<span class="keyword">*</span>] Associated CVEs for plugin 'infusionsoft_gravity_forms':</span><br><span class="line"></span><br><span class="line">    &#123; 0 &#125; - CVE-2014-6446:</span><br><span class="line"></span><br><span class="line">             Affected versions:</span><br><span class="line"></span><br><span class="line">             <span class="variable">&lt;0&gt;</span> - 1.5.7.2</span><br><span class="line">             <span class="variable">&lt;1&gt;</span> - 1.5.7.1</span><br><span class="line">             <span class="variable">&lt;2&gt;</span> - 1.5.4.2</span><br><span class="line">             <span class="variable">&lt;3&gt;</span> - 1.5.9.5</span><br><span class="line">             <span class="variable">&lt;4&gt;</span> - 1.5.8.1</span><br><span class="line">             <span class="variable">&lt;5&gt;</span> - 1.5.10</span><br><span class="line">             <span class="variable">&lt;6&gt;</span> - 1.5.9.4</span><br><span class="line">             <span class="variable">&lt;7&gt;</span> - 1.5.9.1</span><br><span class="line">             <span class="variable">&lt;8&gt;</span> - 1.5.9.3</span><br><span class="line">             <span class="variable">&lt;9&gt;</span> - 1.5.9.2</span><br><span class="line">             <span class="variable">&lt;10&gt;</span> - 1.5.0</span><br><span class="line">             <span class="variable">&lt;11&gt;</span> - 1.5.1</span><br><span class="line">             <span class="variable">&lt;12&gt;</span> - 1.5.2</span><br><span class="line">             <span class="variable">&lt;13&gt;</span> - 1.5.3</span><br><span class="line">             <span class="variable">&lt;14&gt;</span> - 1.5.4</span><br><span class="line">             <span class="variable">&lt;15&gt;</span> - 1.5.5</span><br><span class="line">             <span class="variable">&lt;16&gt;</span> - 1.5.6</span><br><span class="line">             <span class="variable">&lt;17&gt;</span> - 1.5.7</span><br><span class="line">             <span class="variable">&lt;18&gt;</span> - 1.5.8</span><br><span class="line">             <span class="variable">&lt;19&gt;</span> - 1.5.9</span><br><span class="line">             <span class="variable">&lt;20&gt;</span> - 1.5.4.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[<span class="keyword">*</span>] Done!</span><br></pre></td></tr></table></figure>
+<p>以上が簡単な使い方になる。<br>是非、試してみてはどうだろうか？</p>
+<hr>
+<h2 id="参照URL">参照URL</h2><ul>
+<li><a href="https://devops.profitbricks.com/tutorials/install-python-3-in-centos-7/" target="_blank" rel="external">python3</a></li>
+<li><a href="http://qiita.com/murachi1208/items/202bff84964188619f57" target="_blank" rel="external">SCL</a></li>
+<li><a href="https://github.com/iniqua/plecost" target="_blank" rel="external">plecost</a></li>
+<li><a href="http://www.ehacking.net/2015/06/plecost-wordpress-vulnerabilities-finder.html" target="_blank" rel="external">Wordpress Vulnerabilities Finder</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" data-id="cigmhbpct001erdwg3ml1q42h" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" class="hatena-bookmark-button" data-hatena-bookmark-title="wordpress利用サイトのセキュリティ診断書を作成するPart2" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/penetration/">penetration</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ハニーポットcowrieのログを、mariaDBで管理しよう。
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/一冊の本で劇的に変われた/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一冊の本で劇的に変われた話</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

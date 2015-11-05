@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Simple blog @atani">
+<meta property="og:url" content="http://atani.github.io/page/5/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simple blog @atani">
+<meta name="twitter:description">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-rpm-hang" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2009/04/rpm-hang/">rpmの応答がなくなる場合の対処法</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2009-04-18T11:37:38.000Z" itemprop="datePublished">04-18-2009</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>rpm コマンドを実行すると、応答がなくなる事がある。<br>この対処法。</p>
+<p>rpmのDBを削除して再作成してあげると解決した。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@andk14 ~]<span class="id">#rm</span> /var/lib/rpm/__db.<span class="number">00</span>[<span class="number">1</span>-<span class="number">3</span>]</span><br><span class="line">[root@andk14 ~]<span class="id">#rpm</span> –rebuilddb</span><br><span class="line">error: db4 <span class="function"><span class="title">error</span><span class="params">(<span class="number">16</span>)</span></span> from dbenv-&gt;remove: Device or resource busy</span><br></pre></td></tr></table></figure>
+<p>エラー出るが、これで正常動作をするようになる。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2009/04/rpm-hang/" data-id="cigmhbpk4004brdwg4hxruai9" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2009/04/rpm-hang/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/error/">error</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hang/">hang</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-disk-quota-exceeded" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2009/02/disk-quota-exceeded/">Transfer aborted. Disk quota exceeded</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2009-02-05T13:33:53.000Z" itemprop="datePublished">02-05-2009</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数GBのファイルをアップロードしてた時の話。</p>
+<p>途中で以下のメッセージが出て止まった。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Transfer aborted. Disk quota exceeded</span><br><span class="line"><span class="string">[ 転送を中止しました。ディスク割り当てを超過しました。 ]</span></span><br></pre></td></tr></table></figure>
+<p>サーバースペースもかなり空きがあったのだが、ProFTPの設定で、</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MaxStoreFileSize                <span class="number">500</span> Mb</span><br></pre></td></tr></table></figure>
+<p>となっていた。<br>500MBまでアップロード可能という設定。これを変更することにより回避できた。</p>
+<p>試しに5Gbと設定して、proftpを再起動したら、以下エラー。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Starting</span><br><span class="line">proftpd:  – Fatal: MaxStoreFileSize: <span class="type">number</span> <span class="keyword">of</span> bytes must be <span class="keyword">between</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> <span class="number">4294967295</span> <span class="function_start"><span class="keyword">on</span></span> line <span class="number">31</span> <span class="keyword">of</span> ‘/usr/<span class="keyword">local</span>/etc/proftpd.conf’</span><br></pre></td></tr></table></figure>
+<p>4294967295 バイト(約)3.9GBまでしか設定できないみたい。<br>そもそもそんな大容量での制限って意味がないという解釈になるだろうか。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2009/02/disk-quota-exceeded/" data-id="cigmhbpk7004grdwgbmebsij0" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2009/02/disk-quota-exceeded/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/error/">error</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-change-date" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2009/02/change-date/">システム時計の日時を変更する</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2009-02-01T11:44:33.000Z" itemprop="datePublished">02-01-2009</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>日付の変わる時や、時間がかわったタイミングでの動作テストを行いたい時、<br>サーバーのシステム時計を強制的に変更してテストを行う事が年に何回かあるので備忘録。</p>
+<p>date -s “2008/02/01 00:00:00″</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2009/02/change-date/" data-id="cigmhbpkb004irdwgxsfyzlw2" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2009/02/change-date/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/date/">date</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nkf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2008/06/nkf/">ファイルの文字コードを調べる方法</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2008-06-24T10:52:43.000Z" itemprop="datePublished">06-24-2008</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ファイルの文字コードを調べる方法。<br>まずは、nkfをサーバーに入っていなかったのでインストール。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo port install nkf</span><br><span class="line">-<span class="ruby">--&gt;  <span class="constant">Fetching</span> nkf</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Attempting</span> to fetch nkf-<span class="number">2.0</span>.<span class="number">8</span>b.tar.gz from <span class="symbol">http:</span>/<span class="regexp">/keihanna.dl.sourceforge.jp/nkf</span><span class="regexp">/26243/</span></span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Verifying</span> checksum(s) <span class="keyword">for</span> nkf</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Extracting</span> nkf</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Configuring</span> nkf</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Building</span> nkf</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Staging</span> nkf into destroot</span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Installing</span> nkf <span class="number">2.0</span>.<span class="number">8</span>b_<span class="number">0</span></span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Activating</span> nkf <span class="number">2.0</span>.<span class="number">8</span>b_<span class="number">0</span></span><br><span class="line"></span>-<span class="ruby">--&gt;  <span class="constant">Cleaning</span> nkf</span></span><br></pre></td></tr></table></figure>
+<p>インストールが終わったら使ってみる</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nkf --guess test<span class="class">.txt</span></span><br><span class="line">EUC-JP (LF)</span><br></pre></td></tr></table></figure>
+<p>もしくは</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nkf -<span class="keyword">g</span> <span class="keyword">test</span>.txt</span><br><span class="line">EUC-JP (LF)</span><br></pre></td></tr></table></figure>
+<p>このオプションは、nkf2.0.5からの対応となっているようで、それ以前のヴァージョンだと、中身が表示されてしまう。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2008/06/nkf/" data-id="cigmhbpkg004lrdwgndjupmn2" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2008/06/nkf/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nkf/">nkf</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    </nav>
+  
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
