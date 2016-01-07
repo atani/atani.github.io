@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>macでパスワードを生成する | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="macでパスワードを作りたい場合、pwgenを使う。
+導入方法インストールは Homebrewを導入していればbrew installするだけ。
+brew install pwgen
+123456# brew install pwgen==&amp;gt; Downloading https://downloads.sourceforge.net/project/pwgen/pwgen/2.07/pwge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macでパスワードを生成する">
+<meta property="og:url" content="http://atani.github.io/2016/01/macでパスワードを生成する/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="macでパスワードを作りたい場合、pwgenを使う。
+導入方法インストールは Homebrewを導入していればbrew installするだけ。
+brew install pwgen
+123456# brew install pwgen==&amp;gt; Downloading https://downloads.sourceforge.net/project/pwgen/pwgen/2.07/pwge">
+<meta property="og:image" content="http://atani.github.io/2016/01/macでパスワードを生成する/passwd.png">
+<meta property="og:updated_time" content="2016-01-07T13:23:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macでパスワードを生成する">
+<meta name="twitter:description" content="macでパスワードを作りたい場合、pwgenを使う。
+導入方法インストールは Homebrewを導入していればbrew installするだけ。
+brew install pwgen
+123456# brew install pwgen==&amp;gt; Downloading https://downloads.sourceforge.net/project/pwgen/pwgen/2.07/pwge">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-macでパスワードを生成する" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      macでパスワードを生成する
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2016-01-07T13:24:00.000Z" itemprop="datePublished">01-07-2016</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <img src="/2016/01/macでパスワードを生成する/passwd.png" alt="[passwd.png]" title="[passwd.png]">
+<p>macでパスワードを作りたい場合、<code>pwgen</code>を使う。</p>
+<h1 id="導入方法">導入方法</h1><p>インストールは <code>Homebrew</code>を導入していれば<code>brew install</code>するだけ。</p>
+<p><code>brew install pwgen</code></p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># brew install pwgen</span><br><span class="line">=<span class="ruby"><span class="status">=&gt;</span> <span class="constant">Downloading</span> <span class="symbol">https:</span>/<span class="regexp">/downloads.sourceforge.net/project</span><span class="regexp">/pwgen/pwgen</span><span class="regexp">/2.07/pwgen</span>-<span class="number">2.07</span>.tar.gz</span><br><span class="line"></span>=<span class="ruby"><span class="status">=&gt;</span> <span class="constant">Downloading</span> from <span class="symbol">http:</span>/<span class="regexp">/jaist.dl.sourceforge.net/project</span><span class="regexp">/pwgen/pwgen</span><span class="regexp">/2.07/pwgen</span>-<span class="number">2.07</span>.tar.gz</span><br><span class="line"></span>######################################################################## 100.0%</span><br><span class="line">=<span class="ruby"><span class="status">=&gt;</span> ./configure --prefix=<span class="regexp">/usr/local</span><span class="regexp">/Cellar/pwgen</span><span class="regexp">/2.07 --mandir=/usr</span><span class="regexp">/local/</span><span class="constant">Cellar</span>/pwgen/<span class="number">2.07</span>/share/man</span><br><span class="line"></span>=<span class="ruby"><span class="status">=&gt;</span> make install</span></span><br></pre></td></tr></table></figure>
+<h1 id="使い方">使い方</h1><a id="more"></a>
+<p><code>pwgen</code> を実行するだけで、８桁のパスワードをたくさん出してくれるが、オプションを渡すことでさらに複雑なパスワードや逆に簡単なパスワードを生成することができる。</p>
+<p><code>Usage: pwgen [ OPTIONS ] [ pw_length ] [ num_pw ]</code></p>
+<h2 id="OPTIONS">OPTIONS</h2><table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c –capitalize</td>
+<td>パスワードに最低1文字は大文字を含める(デフォルト)</td>
+</tr>
+<tr>
+<td>-A –no-capitalize</td>
+<td>パスワードに大文字を含めない</td>
+</tr>
+<tr>
+<td>-n –numerals</td>
+<td>パスワードに最低1文字は数字を含める(デフォルト)</td>
+</tr>
+<tr>
+<td>-0 –no-numerals</td>
+<td>パスワードに数字を含めない</td>
+</tr>
+<tr>
+<td>-y –symbols</td>
+<td>パスワードに最低1文字は特殊文字を含める</td>
+</tr>
+<tr>
+<td>-s –secure</td>
+<td>完全にランダムなパスワードを生成する。</td>
+</tr>
+<tr>
+<td>-B –ambiguous</td>
+<td>パスワードに曖昧な文字は含めない(0とO等)</td>
+</tr>
+<tr>
+<td>-h –help</td>
+<td>使い方を表示する</td>
+</tr>
+<tr>
+<td>-H –sha1=path/to/file[#seed]</td>
+<td>ランダムなパスワードをファイルのsha1ハッシュを使用する</td>
+</tr>
+<tr>
+<td>-C</td>
+<td>列にパスワードを表示する(デフォルト)</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>列にパスワードを表示しない(1行1パスワード)</td>
+</tr>
+<tr>
+<td>-v –no-vowels</td>
+<td>偶然の不快な言葉を避けるために母音を使用しない</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pw_length">pw_length</h2><p>パスワードの文字数を指定する。</p>
+<h2 id="num_pw">num_pw</h2><p>パスワードの生成数を指定する。</p>
+<h1 id="例">例</h1><p>試しに使ってみよう。</p>
+<ul>
+<li>以下の条件で、実行する。<ul>
+<li>数字を含めない</li>
+<li>パスワードは10文字</li>
+<li>パスワードを5つ生成する。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># pwgen -<span class="number">0</span> <span class="number">10</span> <span class="number">5</span></span></span><br><span class="line">waijahgahM aeRahkemoo keeCeithoh Haeshaecam OhmieGeefa</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2016/01/macでパスワードを生成する/" data-id="cij4ac8700005rmvuso69jvyr" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2016/01/macでパスワードを生成する/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2016/01/macでパスワードを生成する/" class="hatena-bookmark-button" data-hatena-bookmark-title="macでパスワードを生成する" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/linux-command-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">現場で必須！超基本Linuxコマンド Vol.3</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2016/01/macでパスワードを生成する/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
