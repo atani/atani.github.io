@@ -94,7 +94,7 @@
 <p>cowrieでは、先ほどの問題は解消していた。<br><a href="https://github.com/micheloosterhof/cowrie/issues/8" target="_blank" rel="external">Logging issue with Twisted 15</a></p>
 <a id="more"></a>
 <p>必要モジュールはkippoと同じなので割愛する。<br><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">こちら</a>を参照されたし。</p>
-<h2 id="mariaDBをインストール">mariaDBをインストール</h2><p>mariaDBをインストールする。</p>
+<h2 id="mariaDB_u3092_u30A4_u30F3_u30B9_u30C8_u30FC_u30EB"><a href="#mariaDB_u3092_u30A4_u30F3_u30B9_u30C8_u30FC_u30EB" class="headerlink" title="mariaDBをインストール"></a>mariaDBをインストール</h2><p>mariaDBをインストールする。</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">yum</span> -y install <span class="keyword">mariadb-server </span><span class="keyword">mariadb-libs </span><span class="keyword">mariadb</span></span><br></pre></td></tr></table></figure>
 <p>madiaDBを起動する。</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> mariadb.service</span><br></pre></td></tr></table></figure>
@@ -116,17 +116,17 @@
 <p>ここまで出来れば後は、cowrieを起動する。</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sh</span> start.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
 <p>必要あれば、22ポートのアクセスを、cowrieのlistenしているポートに転送してあげれば、あとは不正アクセスを待つだけ(自身でアクセスしてmariaDBにデータが入っていることを確認しよう)。</p>
-<h1 id="最後に、恒例の観察日記">最後に、恒例の観察日記</h1><p>クラッカーの行動を今回も観察してみよう。<br>サーバを停止しようと試みたが出来ず、rebootで我慢したようだ。<br>クラッカーのうちの多くは動画のように愉快犯である。</p>
+<h1 id="u6700_u5F8C_u306B_u3001_u6052_u4F8B_u306E_u89B3_u5BDF_u65E5_u8A18"><a href="#u6700_u5F8C_u306B_u3001_u6052_u4F8B_u306E_u89B3_u5BDF_u65E5_u8A18" class="headerlink" title="最後に、恒例の観察日記"></a>最後に、恒例の観察日記</h1><p>クラッカーの行動を今回も観察してみよう。<br>サーバを停止しようと試みたが出来ず、rebootで我慢したようだ。<br>クラッカーのうちの多くは動画のように愉快犯である。</p>
 <img src="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/kippo_log.gif" alt="[kippo_log.gif]" title="[kippo_log.gif]">
 <hr>
-<h2 id="参考">参考</h2><ul>
+<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
 <li><a href="https://github.com/micheloosterhof/cowrie" target="_blank" rel="external">cowrie</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cij4ac892001crmvu6aibflh5" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cij4bwmz3001c57wgjc1uage4" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/#disqus_thread" class="article-comment-link">Comments</a>
       

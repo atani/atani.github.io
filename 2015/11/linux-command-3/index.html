@@ -86,7 +86,7 @@
 
       </header>
     
-    <time class="article-date" datetime="2015-11-05T17:13:04.000Z" itemprop="datePublished">11-06-2015</time>
+    <time class="article-date" datetime="2015-11-05T17:13:02.000Z" itemprop="datePublished">11-06-2015</time>
     
   </div>
   <div class="article-inner">
@@ -97,20 +97,20 @@
 <p>全て見知らぬコマンドを利用しているが今回はこの説明は割愛する。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># seq -w <span class="number">1</span> <span class="number">10</span> &gt;sample1.txt</span></span><br><span class="line"><span class="preprocessor"># cat sample1.txt</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">02</span></span><br><span class="line"><span class="number">03</span></span><br><span class="line"><span class="number">04</span></span><br><span class="line"><span class="number">05</span></span><br><span class="line"><span class="number">06</span></span><br><span class="line"><span class="number">07</span></span><br><span class="line"><span class="number">08</span></span><br><span class="line"><span class="number">09</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="cat">cat</h1><p>主にファイルの内容を表示するために利用する。</p>
+<h1 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h1><p>主にファイルの内容を表示するために利用する。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cat sample1.txt</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">02</span></span><br><span class="line"><span class="number">03</span></span><br><span class="line"><span class="number">04</span></span><br><span class="line"><span class="number">05</span></span><br><span class="line"><span class="number">06</span></span><br><span class="line"><span class="number">07</span></span><br><span class="line"><span class="number">08</span></span><br><span class="line"><span class="number">09</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-<h1 id="head">head</h1><p>先頭10行を表示する。<br><code>-n number</code>のオプションを指定することで、指定行数表示する。 </p>
+<h1 id="head"><a href="#head" class="headerlink" title="head"></a>head</h1><p>先頭10行を表示する。<br><code>-n number</code>のオプションを指定することで、指定行数表示する。 </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># head -n5 sample1.txt</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">02</span></span><br><span class="line"><span class="number">03</span></span><br><span class="line"><span class="number">04</span></span><br><span class="line"><span class="number">05</span></span><br></pre></td></tr></table></figure>
-<h1 id="tail">tail</h1><p>末尾10行を表示する。<br><code>-n number</code>のオプションを指定することで、指定行数表示する。 </p>
+<h1 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h1><p>末尾10行を表示する。<br><code>-n number</code>のオプションを指定することで、指定行数表示する。 </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># tail -n5 sample1.txt</span></span><br><span class="line"><span class="number">06</span></span><br><span class="line"><span class="number">07</span></span><br><span class="line"><span class="number">08</span></span><br><span class="line"><span class="number">09</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-<h1 id="grep">grep</h1><p>検索文字列に一致する行を検索して出力する。正規表現も利用可能。</p>
+<h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><p>検索文字列に一致する行を検索して出力する。正規表現も利用可能。</p>
 <p>例: <code>sample1.txt</code>の中から<code>1</code>という文字が入っている行を表示する。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># grep <span class="number">1</span> sample1.txt</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
-<h1 id="|_(パイプ)">| (パイプ)</h1><p>複数の処理の入出力をつなぐための仕組み。</p>
+<h1 id="7C__28_u30D1_u30A4_u30D7_29"><a href="#7C__28_u30D1_u30A4_u30D7_29" class="headerlink" title="| (パイプ)"></a>| (パイプ)</h1><p>複数の処理の入出力をつなぐための仕組み。</p>
 <p>例: <code>sample1.txt</code>の中から先頭５行の中から<code>1</code>という文字が入っている行を表示する。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># head -n5 sample1.txt | grep <span class="number">1</span></span></span><br><span class="line"><span class="number">01</span></span><br></pre></td></tr></table></figure>
 <p>パイプを使うことでより絞り込んだ検索をすることができるようになる。</p>
-<h2 id="高機能なgrep">高機能なgrep</h2><p>grepには大量にオプションがある。(詳細は <code>man grep</code> で確認！)</p>
+<h2 id="u9AD8_u6A5F_u80FD_u306Agrep"><a href="#u9AD8_u6A5F_u80FD_u306Agrep" class="headerlink" title="高機能なgrep"></a>高機能なgrep</h2><p>grepには大量にオプションがある。(詳細は <code>man grep</code> で確認！)</p>
 <p>その中でも特に便利なオプションを紹介しておく。</p>
 <ul>
 <li><p><code>--color</code></p>
@@ -145,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cij4ac87i000mrmvupzm8cxfp" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cij4bwmvs000m57wginwnd5yw" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/11/linux-command-3/#disqus_thread" class="article-comment-link">Comments</a>
       

@@ -89,19 +89,19 @@
   <div class="article-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ロケールの確認">ロケールの確認</h2><p><code>localectl</code> でシステムのロケールを確認。</p>
+        <h2 id="u30ED_u30B1_u30FC_u30EB_u306E_u78BA_u8A8D"><a href="#u30ED_u30B1_u30FC_u30EB_u306E_u78BA_u8A8D" class="headerlink" title="ロケールの確認"></a>ロケールの確認</h2><p><code>localectl</code> でシステムのロケールを確認。</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ localectl</span><br><span class="line">   System <span class="string">Locale:</span> LANG=ja_JP.EUC_JP</span><br><span class="line">       VC <span class="string">Keymap:</span> us</span><br><span class="line">      X11 <span class="string">Layout:</span> us</span><br></pre></td></tr></table></figure>
-<h1 id="ロケールの変更をするためにはやり方は二通り。">ロケールの変更をするためにはやり方は二通り。</h1><a id="more"></a>
+<h1 id="u30ED_u30B1_u30FC_u30EB_u306E_u5909_u66F4_u3092_u3059_u308B_u305F_u3081_u306B_u306F_u3084_u308A_u65B9_u306F_u4E8C_u901A_u308A_u3002"><a href="#u30ED_u30B1_u30FC_u30EB_u306E_u5909_u66F4_u3092_u3059_u308B_u305F_u3081_u306B_u306F_u3084_u308A_u65B9_u306F_u4E8C_u901A_u308A_u3002" class="headerlink" title="ロケールの変更をするためにはやり方は二通り。"></a>ロケールの変更をするためにはやり方は二通り。</h1><a id="more"></a>
 <ol>
 <li><code>localectl</code> を用いて、変更。</li>
 <li>confファイルを修正してサービス再起動</li>
 </ol>
-<h2 id="1-_localectl_を用いて、変更。">1. <code>localectl</code> を用いて、変更。</h2><ul>
+<h2 id="1-_localectl__u3092_u7528_u3044_u3066_u3001_u5909_u66F4_u3002"><a href="#1-_localectl__u3092_u7528_u3044_u3066_u3001_u5909_u66F4_u3002" class="headerlink" title="1. localectl を用いて、変更。"></a>1. <code>localectl</code> を用いて、変更。</h2><ul>
 <li><p><code>localectl set-locale LANG=ja_JP.UTF8</code> で<code>LANG</code>を変更できる。</p>
  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ localectl</span><br><span class="line">   System <span class="string">Locale:</span> LANG=ja_JP.EUC_JP</span><br><span class="line">       VC <span class="string">Keymap:</span> us</span><br><span class="line">      X11 <span class="string">Layout:</span> us</span><br><span class="line">$ sudo localectl set-locale LANG=ja_JP.UTF8</span><br><span class="line">$ localectl</span><br><span class="line">   System <span class="string">Locale:</span> LANG=ja_JP.UTF8</span><br><span class="line">       VC <span class="string">Keymap:</span> us</span><br><span class="line">      X11 <span class="string">Layout:</span> us</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="2-_confファイルを修正してサービス再起動">2. confファイルを修正してサービス再起動</h2><p>手順は以下の通り。</p>
+<h2 id="2-_conf_u30D5_u30A1_u30A4_u30EB_u3092_u4FEE_u6B63_u3057_u3066_u30B5_u30FC_u30D3_u30B9_u518D_u8D77_u52D5"><a href="#2-_conf_u30D5_u30A1_u30A4_u30EB_u3092_u4FEE_u6B63_u3057_u3066_u30B5_u30FC_u30D3_u30B9_u518D_u8D77_u52D5" class="headerlink" title="2. confファイルを修正してサービス再起動"></a>2. confファイルを修正してサービス再起動</h2><p>手順は以下の通り。</p>
 <ol>
 <li><p>ロケールの設定ファイルを修正する。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/locale<span class="class">.conf</span></span><br><span class="line">LANG=ja_JP.UTF8</span><br></pre></td></tr></table></figure>
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/localeの設定を変更しよう！/" data-id="cij4ac8bc003jrmvu4mci6gf8" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/05/localeの設定を変更しよう！/" data-id="cij4bwn5d003j57wgwed7ekss" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/05/localeの設定を変更しよう！/#disqus_thread" class="article-comment-link">Comments</a>
       

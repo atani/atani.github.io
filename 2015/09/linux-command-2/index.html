@@ -89,7 +89,7 @@
 <p>前回、<a href="http://atani.github.io/2015/09/linux-command">現場で必須！超基本Linuxコマンド Vol.1</a>の続き。<br>今回は、ファイルやディレクトリの操作と確認をしてみよう。</p>
 <p>現場では変更が行われる処理の前後には必ず状態を確認する。なぜならば、思った通りに動作しているかを確認するためだ。これは必ず必要な作業なので押さえておこう。</p>
 <!-- more -->
-<h1 id="ls">ls</h1><p>「list segmentation」の略<br>ファイルやディレクトリの一覧を表示する。</p>
+<h1 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h1><p>「list segmentation」の略<br>ファイルやディレクトリの一覧を表示する。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="tag">ls</span></span><br><span class="line"><span class="tag">sample1</span><span class="class">.txt</span> <span class="tag">sample2</span><span class="class">.txt</span> <span class="tag">sample3</span><span class="class">.txt</span> <span class="tag">sample4</span><span class="class">.txt</span> <span class="tag">sample5</span><span class="class">.txt</span> <span class="tag">temp1</span>       <span class="tag">temp2</span></span><br></pre></td></tr></table></figure>
 <p>ほとんどのコマンドには、オプションがあり、オプションを設定することで、こまやかな処理を実行する事ができるようになる。</p>
 <p>例えば、<code>ls</code>単体で実行すると先ほど結果を書いた通り、ファイルやディレクトリの一覧を出してくれる。今度は<code>-l</code>オプションを渡して、みる。</p>
@@ -97,19 +97,19 @@
 <p>すると、ファイルやディレクトリのより詳細な情報を表示してくれるようになった。<br>今度は、<code>-t</code>オプションを付け加えてみよう。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ls -l -t</span></span><br><span class="line">total <span class="number">0</span></span><br><span class="line">drwxr-xr-x  <span class="number">7</span> atani  staff  <span class="number">238</span>  <span class="number">9</span>  <span class="number">5</span> <span class="number">16</span>:<span class="number">24</span> temp2</span><br><span class="line">drwxr-xr-x  <span class="number">2</span> atani  staff   <span class="number">68</span>  <span class="number">9</span>  <span class="number">5</span> <span class="number">16</span>:<span class="number">24</span> temp1</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff    <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample1.txt</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff    <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample2.txt</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff    <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample3.txt</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff    <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample4.txt</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff    <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample5.txt</span><br></pre></td></tr></table></figure>
 <p><code>-t</code> オプションはリストをタイムスタンプ順が最新のもの順に並び替えてくれる。また、オプションは複数渡すことが可能である。さらに、オプションは同時に記述することも可能である場合がある。<br>上記の<code>ls -l -t</code> は <code>ls -lt</code> と同等である。</p>
-<h2 id="mkdir">mkdir</h2><p>「make directory」の略で、ディレクトリを作成する。</p>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>「make directory」の略で、ディレクトリを作成する。</p>
 <p>例:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># mkdir temp3</span></span><br><span class="line"><span class="preprocessor"># ls -ld temp3/</span></span><br><span class="line">drwxr-xr-x  <span class="number">2</span> atani  staff  <span class="number">68</span>  <span class="number">9</span>  <span class="number">7</span> <span class="number">20</span>:<span class="number">56</span> temp3/</span><br></pre></td></tr></table></figure>
-<h2 id="mv">mv</h2><p>「move」の略でファイルやディレクトリの移動または名前を変更する。</p>
+<h2 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h2><p>「move」の略でファイルやディレクトリの移動または名前を変更する。</p>
 <p>例:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># mv temp3 temp4</span></span><br><span class="line"><span class="preprocessor"># ls -ld temp4</span></span><br><span class="line">drwxr-xr-x  <span class="number">2</span> atani  staff  <span class="number">68</span>  <span class="number">9</span>  <span class="number">7</span> <span class="number">20</span>:<span class="number">56</span> temp4</span><br></pre></td></tr></table></figure>
-<h2 id="cp">cp</h2><p>「copy」の略でファイルやディレクトリをコピーする。</p>
+<h2 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h2><p>「copy」の略でファイルやディレクトリをコピーする。</p>
 <p>例:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cp sample6.txt sample7.txt</span></span><br><span class="line"><span class="preprocessor"># ls -l sample6.txt sample7.txt</span></span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff  <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample6.txt</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff  <span class="number">0</span>  <span class="number">9</span>  <span class="number">7</span> <span class="number">20</span>:<span class="number">58</span> sample7.txt</span><br></pre></td></tr></table></figure>
-<h2 id="rm">rm</h2><p>「remove」の略でファイルやディレクトリを削除する。</p>
+<h2 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h2><p>「remove」の略でファイルやディレクトリを削除する。</p>
 <p>例:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># rm sample7.txt</span></span><br><span class="line"><span class="preprocessor"># ls -l sample6.txt sample7.txt</span></span><br><span class="line">ls: sample7.txt: No such file or directory</span><br><span class="line">-rw-r--r--  <span class="number">1</span> atani  staff  <span class="number">0</span>  <span class="number">9</span>  <span class="number">3</span> <span class="number">21</span>:<span class="number">47</span> sample6.txt</span><br></pre></td></tr></table></figure>
-<h2 id="man">man</h2><p>ここまで足早に見てきたが、それぞれのコマンドにはもちろんオプションが用意されている。しかし、どのオプションが使えるの？と迷ったときに使うのが<code>man</code>コマンドだ。</p>
+<h2 id="man"><a href="#man" class="headerlink" title="man"></a>man</h2><p>ここまで足早に見てきたが、それぞれのコマンドにはもちろんオプションが用意されている。しかし、どのオプションが使えるの？と迷ったときに使うのが<code>man</code>コマンドだ。</p>
 <p><code>man ls</code> と実行すれば、<code>ls</code> コマンドの説明ページが出てくる。</p>
 <p>読み終わったら <code>q</code> で終了することができる。</p>
 <p>最後に総集編の動画をどうぞ。</p>
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command-2/" data-id="cij4ac87l000nrmvubt3tzp5l" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command-2/" data-id="cij4bwmvw000n57wguhpxiglx" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command-2/#disqus_thread" class="article-comment-link">Comments</a>
       

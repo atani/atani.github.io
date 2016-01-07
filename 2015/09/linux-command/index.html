@@ -97,22 +97,22 @@
 <p>そこで、基本中の基本のコマンドを中心にご紹介していく。どんな優秀なエンジニアでも使うことが多いコマンドたちなので安心して覚えてもらいたい。</p>
 <a id="more"></a>
 <p>コマンドを習う前にいくつかの用語と階層構造を理解する必要がある。</p>
-<h2 id="カレントディレクトリ">カレントディレクトリ</h2><p>ユーザが現在作業を行っているディレクトリの事 . 「ドット」で表す。</p>
-<h2 id="親ディレクトリ">親ディレクトリ</h2><p>ディレクトリの１階層上のディレクトリの事。 .. 「ドットドット」で表す。</p>
-<h2 id="絶対パス">絶対パス</h2><p>階層構造の頂点から、目的のフォルダやファイルまでを省略なしに記述したもの</p>
-<h2 id="相対パス">相対パス</h2><p>カレントディレクトリから目的のフォルダやファイルまでを記述したもの</p>
-<h3 id="例">例</h3><p><code>temp2</code> をカレントディレクトリとすると…<br>親ディレクトリは、 <code>temp</code><br><code>sample6.txt</code>までを相対パスで書くと <code>./sample6.txt</code><br><code>sample6.txt</code>までを絶対パスで書くと <code>/temp/temp2/sample6.txt</code></p>
+<h2 id="u30AB_u30EC_u30F3_u30C8_u30C7_u30A3_u30EC_u30AF_u30C8_u30EA"><a href="#u30AB_u30EC_u30F3_u30C8_u30C7_u30A3_u30EC_u30AF_u30C8_u30EA" class="headerlink" title="カレントディレクトリ"></a>カレントディレクトリ</h2><p>ユーザが現在作業を行っているディレクトリの事 . 「ドット」で表す。</p>
+<h2 id="u89AA_u30C7_u30A3_u30EC_u30AF_u30C8_u30EA"><a href="#u89AA_u30C7_u30A3_u30EC_u30AF_u30C8_u30EA" class="headerlink" title="親ディレクトリ"></a>親ディレクトリ</h2><p>ディレクトリの１階層上のディレクトリの事。 .. 「ドットドット」で表す。</p>
+<h2 id="u7D76_u5BFE_u30D1_u30B9"><a href="#u7D76_u5BFE_u30D1_u30B9" class="headerlink" title="絶対パス"></a>絶対パス</h2><p>階層構造の頂点から、目的のフォルダやファイルまでを省略なしに記述したもの</p>
+<h2 id="u76F8_u5BFE_u30D1_u30B9"><a href="#u76F8_u5BFE_u30D1_u30B9" class="headerlink" title="相対パス"></a>相対パス</h2><p>カレントディレクトリから目的のフォルダやファイルまでを記述したもの</p>
+<h3 id="u4F8B"><a href="#u4F8B" class="headerlink" title="例"></a>例</h3><p><code>temp2</code> をカレントディレクトリとすると…<br>親ディレクトリは、 <code>temp</code><br><code>sample6.txt</code>までを相対パスで書くと <code>./sample6.txt</code><br><code>sample6.txt</code>までを絶対パスで書くと <code>/temp/temp2/sample6.txt</code></p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/temp/</span><br><span class="line">├── sample1<span class="class">.txt</span></span><br><span class="line">├── sample2<span class="class">.txt</span></span><br><span class="line">├── sample3<span class="class">.txt</span></span><br><span class="line">├── sample4<span class="class">.txt</span></span><br><span class="line">├── sample5<span class="class">.txt</span></span><br><span class="line">├── temp1</span><br><span class="line">└── temp2             &lt;- カレントディレクトリ</span><br><span class="line">    ├── sample6<span class="class">.txt</span></span><br><span class="line">    ├── sample7<span class="class">.txt</span></span><br><span class="line">    ├── sample8<span class="class">.txt</span></span><br><span class="line">    ├── sample9<span class="class">.txt</span></span><br><span class="line">    └── sample10.txt</span><br></pre></td></tr></table></figure>
-<h1 id="基本コマンド">基本コマンド</h1><p>今回はカレントディレクトリの変更と、現在のカレントディレクトリを表示するコマンドをご紹介。</p>
-<h2 id="cd">cd</h2><p>「Change Directory」の略で、カレントディレクトリを変更する。</p>
-<h2 id="pwd">pwd</h2><p>「Print Working Directory」の略で、カレントディレクトリの絶対パスを表示する。</p>
+<h1 id="u57FA_u672C_u30B3_u30DE_u30F3_u30C9"><a href="#u57FA_u672C_u30B3_u30DE_u30F3_u30C9" class="headerlink" title="基本コマンド"></a>基本コマンド</h1><p>今回はカレントディレクトリの変更と、現在のカレントディレクトリを表示するコマンドをご紹介。</p>
+<h2 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h2><p>「Change Directory」の略で、カレントディレクトリを変更する。</p>
+<h2 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h2><p>「Print Working Directory」の略で、カレントディレクトリの絶対パスを表示する。</p>
 <p>上記、二つを組み合わせて、移動して、カレントディレクトリの確認をしてみよう。</p>
-<h3 id="動画">動画</h3><img src="/2015/09/linux-command/cd.gif" alt="[cd.gif]" title="[cd.gif]">
+<h3 id="u52D5_u753B"><a href="#u52D5_u753B" class="headerlink" title="動画"></a>動画</h3><img src="/2015/09/linux-command/cd.gif" alt="[cd.gif]" title="[cd.gif]">
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command/" data-id="cij4ac87b000grmvubydwdr46" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command/" data-id="cij4bwmv9000g57wgsh75oqyw" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command/#disqus_thread" class="article-comment-link">Comments</a>
       

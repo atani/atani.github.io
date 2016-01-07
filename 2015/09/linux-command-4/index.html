@@ -93,7 +93,7 @@
 <p>以下の構成を用いる。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── sample1<span class="class">.txt</span></span><br><span class="line">├── sample2<span class="class">.txt</span></span><br><span class="line">└── temp1</span><br><span class="line">    ├── depthfile1<span class="class">.txt</span></span><br><span class="line">    └── depthfile2.txt</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="find">find</h1><p>ディレクトリやファイルを見つけるコマンド。</p>
+<h1 id="find"><a href="#find" class="headerlink" title="find"></a>find</h1><p>ディレクトリやファイルを見つけるコマンド。</p>
 <ul>
 <li><p>例: <code>depthfile1.txt</code> というファイルを探したい。</p>
  <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">find</span> . -name <span class="string">"depthfile1.txt"</span></span><br><span class="line">.<span class="regexp">/temp1/</span>depthfile1.txt</span><br></pre></td></tr></table></figure>
@@ -108,7 +108,7 @@
  <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># find . ! -name <span class="string">"sample1.txt"</span> -a -<span class="typedef"><span class="keyword">type</span> f</span></span><br><span class="line">./sample2.txt</span><br><span class="line">./temp1/depthfile1.txt</span><br><span class="line">./temp1/depthfile2.txt</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="xargs">xargs</h1><p>標準入力を読み込み、引数にして指定したコマンドを実行することができる。</p>
+<h1 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h1><p>標準入力を読み込み、引数にして指定したコマンドを実行することができる。</p>
 <p>例えば、最初に表示した構成で、ファイルを全て消したい場合、一つ一つ<code>rm</code> <i>filename</i> を渡して消せば消えるが、４回実行する必要があるが、findとxargsを組み合わせると１回でファイルを削除することができる。</p>
 <figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">まずは確認</span><br><span class="line"># <span class="built_in">find</span> . -<span class="built_in">type</span> f</span><br><span class="line">./sample1.txt</span><br><span class="line">./sample2.txt</span><br><span class="line">./temp1/depthfile1.txt</span><br><span class="line">./temp1/depthfile2.txt</span><br><span class="line"></span><br><span class="line">実行</span><br><span class="line"># <span class="built_in">find</span> . -<span class="built_in">type</span> f | xargs rm</span><br><span class="line"></span><br><span class="line">消えていることを確認</span><br><span class="line"># <span class="built_in">find</span> . -<span class="built_in">type</span> f</span><br></pre></td></tr></table></figure>
 <p>このように組み合わせることで出来ることが増える。</p>
@@ -116,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cij4ac87f000jrmvuy5z7lpmp" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cij4bwmvl000j57wg0vzb0uc0" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command-4/#disqus_thread" class="article-comment-link">Comments</a>
       
