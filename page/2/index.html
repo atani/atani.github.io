@@ -65,6 +65,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-td-agent2-2-1ではfilterが使えるように" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/07/td-agent2-2-1ではfilterが使えるように/">td-agent2.2.1ではfilterが使えるように 備忘録</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-31T13:58:00.000Z" itemprop="datePublished">07-31-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、以下のような記事を書いた。 </p>
+<p><a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/">cowrieの不正侵入ログをelasticsearchにデータを入れる</a></p>
+<p>すると、Masahiro Nakagawaさんから以下のようなコメントいただいた(ありがとうございます!!)</p>
+<blockquote>
+<p>最新版のtd-agent 2を使っているのであれば，stdout filterが入っているので，今ではcopyとstdoutを組み合わせる必要はなくて，<filter replicator.**="">type stdout</filter>で簡単にログに吐けるようになっています．今後はこちらもお試しください :)” — Masahiro Nakagawa<br>ref: <a href="http://disq.us/8o5gpu">http://disq.us/8o5gpu</a></p>
+</blockquote>
+<p>そこで、<code>td-agent.conf</code> を以下のように書き換えてみた。</p>
+        
+          <p class="article-more-link">
+            <a href="/2015/07/td-agent2-2-1ではfilterが使えるように/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/" data-id="cik2sd0i0001ppwwgiubyuf1f" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/td-agent2/">td-agent2</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-cowrieの不正侵入ログをelasticsearchにデータを入れる" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -93,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/" data-id="cij4bwn0v002157wg5y0fbyov" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/" data-id="cik2sd0ir0024pwwgk2we3a6e" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -136,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記-Vol-2/" data-id="cij4bwn18002c57wgfor70tv4" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記-Vol-2/" data-id="cik2sd0j3002fpwwg5c1kvz45" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/SSH不正侵入、観察日記-Vol-2/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -182,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cij4bwmz3001c57wgjc1uage4" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cik2sd0hn001fpwwgcl2924pc" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -233,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" data-id="cij4bwmzg001i57wgj6exvf9j" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" data-id="cik2sd0hw001lpwwg66usj5ra" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -275,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/一冊の本で劇的に変われた/" data-id="cij4bwmyz001a57wgd26avst7" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/一冊の本で劇的に変われた/" data-id="cik2sd0hk001dpwwgdakotbjd" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/一冊の本で劇的に変われた/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -318,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記/" data-id="cij4bwn11002757wg1g1ozsn3" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記/" data-id="cik2sd0ix002apwwglj4sixb0" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/SSH不正侵入、観察日記/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -374,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" data-id="cij4bwn25002g57wgcy7iv4bz" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" data-id="cik2sd0jg002jpwwg3c9j1v7x" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -417,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/" data-id="cij4bwmyj001757wg97kgmpgn" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/" data-id="cik2sd0gv001apwwgtr8m78kl" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -460,56 +508,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/" data-id="cij4bwn3c002k57wgf7cztecr" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/" data-id="cik2sd0kf002npwwg5jxyoc80" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/#disqus_thread" class="article-comment-link">Comments</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-sshのポート番号を変更してセキュリティ対策" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/07/sshのポート番号を変更してセキュリティ対策/">sshのポート番号を変更してセキュリティ対策</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-07-05T15:40:00.000Z" itemprop="datePublished">07-06-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>過去、<a href="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/">ssh専用ハニーポットKippo</a> を使って、SSH経由でサーバに侵入しようと試みるクラッカーの動向を追った。</p>
-<p>今回は、実際サーバを管理する際に、セキュリティ対策の一つとして有効であるsshの接続ポートを変更する方法をご紹介。<br>ちなみにSELINUXを使うともっとセキュリティを高める事が出来るが、敷居が高い方も多く無効にしてる方も多いようなので、SELINUXを無効にしている場合の説明をさせていただく。</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/07/sshのポート番号を変更してセキュリティ対策/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/" data-id="cij4bwn0d001u57wgra5gr39f" class="article-share-link">Share</a>
-      
-        <a href="http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
 
     </footer>
   </div>

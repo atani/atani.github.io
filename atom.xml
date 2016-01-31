@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-01-07T13:23:39.000Z</updated>
+  <updated>2016-01-31T16:52:23.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -13,6 +13,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ダンボーのLightningケーブルが可愛すぎる。]]></title>
+    <link href="http://atani.github.io/2016/02/danboard-lightning/"/>
+    <id>http://atani.github.io/2016/02/danboard-lightning/</id>
+    <published>2016-01-31T16:52:23.000Z</published>
+    <updated>2016-01-31T16:52:23.000Z</updated>
+    <content type="html"><![CDATA[<p>外でPC作業するときに、短めのLightningケーブル欲しいなと思って探してたらダンボーのLightningケーブルに出会って衝動買いしてしまった。</p>
+<p>商品到着後、パッケージにもダンボールで装飾(かわいい…)<br><img src="/2016/02/danboard-lightning/danboard2.jpg" alt="[danboard2.jpg]" title="[danboard2.jpg]"></p>
+<p>そして、装着してみる…<br>ピカッ!!!!!</p>
+<img src="/2016/02/danboard-lightning/danboard.gif" alt="[danboard.gif]" title="[danboard.gif]">
+<p>かわいすぎる！！！</p>
+<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?t=daystoremem-22&o=9&p=8&l=as1&asins=B00OH4I6RO&ref=qf_sp_asin_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=000000&bg1=FFFFFF&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>外でPC作業するときに、短めのLightningケーブル欲しいなと思って探してたらダンボーのLightningケーブルに出会って衝動買いしてしまった。</p>
+<p>商品到着後、パッケージにもダンボールで装飾(かわいい…)<br><img src="/2016/02/dan]]>
+    </summary>
+    
+      <category term="gadgets" scheme="http://atani.github.io/tags/gadgets/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[macでパスワードを生成する]]></title>
@@ -960,52 +982,6 @@
       <category term="centos7" scheme="http://atani.github.io/tags/centos7/"/>
     
       <category term="honeypot" scheme="http://atani.github.io/tags/honeypot/"/>
-    
-      <category term="security" scheme="http://atani.github.io/tags/security/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[sshのポート番号を変更してセキュリティ対策]]></title>
-    <link href="http://atani.github.io/2015/07/ssh%E3%81%AE%E3%83%9D%E3%83%BC%E3%83%88%E7%95%AA%E5%8F%B7%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%97%E3%81%A6%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E5%AF%BE%E7%AD%96/"/>
-    <id>http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/</id>
-    <published>2015-07-05T15:40:00.000Z</published>
-    <updated>2015-07-05T15:34:35.000Z</updated>
-    <content type="html"><![CDATA[<p>過去、<a href="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/">ssh専用ハニーポットKippo</a> を使って、SSH経由でサーバに侵入しようと試みるクラッカーの動向を追った。</p>
-<p>今回は、実際サーバを管理する際に、セキュリティ対策の一つとして有効であるsshの接続ポートを変更する方法をご紹介。<br>ちなみにSELINUXを使うともっとセキュリティを高める事が出来るが、敷居が高い方も多く無効にしてる方も多いようなので、SELINUXを無効にしている場合の説明をさせていただく。</p>
-<a id="more"></a>
-<h2 id="sshd_config_u306E_u8A2D_u5B9A_u5909_u66F4"><a href="#sshd_config_u306E_u8A2D_u5B9A_u5909_u66F4" class="headerlink" title="sshd_configの設定変更"></a>sshd_configの設定変更</h2><p><code>/etc/ssh/sshd_config</code> の Portの設定がデフォルトだとコメントになっているので、このコメントを解除し、好きなポート番号を設定する。今回は<code>22222</code>とした。</p>
-<ul>
-<li><p>設定変更前</p>
- <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cat /etc/ssh/sshd_config | grep ^#Port</span></span><br><span class="line"><span class="preprocessor">#Port 22</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>設定変更後</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cat /etc/ssh/sshd_config | grep ^Port</span></span><br><span class="line">Port <span class="number">22222</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="u5909_u66F4_u3057_u305F_u8A2D_u5B9A_u3092_u53CD_u6620"><a href="#u5909_u66F4_u3057_u305F_u8A2D_u5B9A_u3092_u53CD_u6620" class="headerlink" title="変更した設定を反映"></a>変更した設定を反映</h2><h3 id="sshd_u3092_u518D_u8D77_u52D5"><a href="#sshd_u3092_u518D_u8D77_u52D5" class="headerlink" title="sshdを再起動"></a>sshdを再起動</h3><p>設定変更が完了したら、ファイルを保存し、sshdを再起動する。</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># systemctl restart sshd.service</span></span><br></pre></td></tr></table></figure>
-<h3 id="u53CD_u6620_u78BA_u8A8D"><a href="#u53CD_u6620_u78BA_u8A8D" class="headerlink" title="反映確認"></a>反映確認</h3><ul>
-<li><p><code>ss</code> コマンドで変更したポートでListen出来ているか確認する。正常にできている事を確認。</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ss -lntp | grep <span class="number">22222</span></span></span><br><span class="line">LISTEN     <span class="number">0</span>      <span class="number">128</span>                       *:<span class="number">22222</span>                     *:*      users:((<span class="string">"sshd"</span>,<span class="number">2457</span>,<span class="number">3</span>))</span><br><span class="line">LISTEN     <span class="number">0</span>      <span class="number">128</span>                      :::<span class="number">22222</span>                    :::*      users:((<span class="string">"sshd"</span>,<span class="number">2457</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>外部から接続を確認する。</p>
-</li>
-</ul>
-<p>以下のメッセージで接続出来ない事がある。</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="foreign"><span class="keyword">port</span> 22222: Connection refused</span></span><br></pre></td></tr></table></figure>
-<p>おそらくそれは<code>firewalld</code>が <code>22222</code> のアクセスを許可してないからだ。22222ポートのアクセスを許可してあげよう。</p>
-<h3 id="firewalld__u3067_22222__u306E_u63A5_u7D9A_u3092_u8A31_u53EF_u3057_u3066_u3042_u3052_u308B_u3002"><a href="#firewalld__u3067_22222__u306E_u63A5_u7D9A_u3092_u8A31_u53EF_u3057_u3066_u3042_u3052_u308B_u3002" class="headerlink" title="firewalld で 22222 の接続を許可してあげる。"></a>firewalld で <code>22222</code> の接続を許可してあげる。</h3><p>設定方法は以下の通り。</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># firewall-cmd --permanent --add-port 22222/tcp</span></span><br><span class="line"><span class="preprocessor"># systemctl reload firewalld.service</span></span><br></pre></td></tr></table></figure>
-<p>これで接続できる事を確認できればOK!</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>過去、<a href="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/">ssh専用ハニーポットKippo</a> を使って、SSH経由でサーバに侵入しようと試みるクラッカーの動向を追った。</p>
-<p>今回は、実際サーバを管理する際に、セキュリティ対策の一つとして有効であるsshの接続ポートを変更する方法をご紹介。<br>ちなみにSELINUXを使うともっとセキュリティを高める事が出来るが、敷居が高い方も多く無効にしてる方も多いようなので、SELINUXを無効にしている場合の説明をさせていただく。</p>]]>
-    
-    </summary>
-    
-      <category term="centos7" scheme="http://atani.github.io/tags/centos7/"/>
     
       <category term="security" scheme="http://atani.github.io/tags/security/"/>
     
