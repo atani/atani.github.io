@@ -65,6 +65,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="title-s3-collect-download" class="article article-type-title" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2016/02/s3-collect-download/">AWSのS3にあるデータをawscliを使って一括でダウンロードする。</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2016-02-02T05:29:06.000Z" itemprop="datePublished">02-02-2016</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AWS S3 の中に保存しているデータを全て手元にダウンロードする場合の手順。</p>
+<h2 id="IAM_Management_Console_u3067_u306E_u8A2D_u5B9A"><a href="#IAM_Management_Console_u3067_u306E_u8A2D_u5B9A" class="headerlink" title="IAM Management Consoleでの設定"></a>IAM Management Consoleでの設定</h2><p>AWSのIAM Management Console にアクセスし、S3にアクセスするためのユーザーを作成するため、新規ユーザーの作成。</p>
+<img src="/2016/02/s3-collect-download/aws1.png" alt="[aws1.png]" title="[aws1.png]">
+<p>ユーザー名を入力して、作成する。</p>
+<img src="/2016/02/s3-collect-download/aws2.png" alt="[aws2.png]" title="[aws2.png]">
+<p>アクセスキーIDと、シークレットアクセスキーが表示されるので、メモしておく。(csvでダウンロードもできる) メモを忘れると、再度ユーザーを作り直したりする必要があるので、メモを忘れないようにする事。</p>
+<img src="/2016/02/s3-collect-download/aws3.png" alt="[aws3.png]" title="[aws3.png]">
+<p>IAMのトップページに戻り、作成したユーザーを選択する。<br>[アクセス許可] タブを選択し、[ポリシーのアタッチ] を選択する。</p>
+<img src="/2016/02/s3-collect-download/aws4.png" alt="[aws4.png]" title="[aws4.png]">
+<p>ポリシータイプで <code>AmazonS3ReadOnlyAccess</code> を検索し、チェックを入れ、ポリシーを作成する。</p>
+<img src="/2016/02/s3-collect-download/aws5.png" alt="[aws5.png]" title="[aws5.png]">
+<p>以下の通り、設定が入っていればweb画面での操作はOK.</p>
+<img src="/2016/02/s3-collect-download/aws6.png" alt="[aws6.png]" title="[aws6.png]">
+<h2 id="u30BF_u30FC_u30DF_u30CA_u30EB_u3067_u306E_u4F5C_u696D"><a href="#u30BF_u30FC_u30DF_u30CA_u30EB_u3067_u306E_u4F5C_u696D" class="headerlink" title="ターミナルでの作業"></a>ターミナルでの作業</h2><p>pythonが入っていれば、<code>pip</code>コマンドで<code>awscli</code>をインストールする。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pip install awscli</span></span><br><span class="line">Collecting awscli</span><br><span class="line">  Downloading awscli-<span class="number">1.10</span><span class="number">.1</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl (<span class="number">880</span>kB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">884</span>kB <span class="number">703</span>kB/s</span><br><span class="line">Collecting docutils&gt;=<span class="number">0.10</span> (<span class="built_in">from</span> awscli)</span><br><span class="line">  Downloading docutils-<span class="number">0.12</span>-py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl (<span class="number">508</span>kB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">512</span>kB <span class="number">1.2</span>MB/s</span><br><span class="line">Collecting botocore==<span class="number">1.3</span><span class="number">.23</span> (<span class="built_in">from</span> awscli)</span><br><span class="line">  Downloading botocore-<span class="number">1.3</span><span class="number">.23</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl (<span class="number">2.2</span>MB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">2.2</span>MB <span class="number">253</span>kB/s</span><br><span class="line">Collecting rsa&lt;=<span class="number">3.3</span><span class="number">.0</span>,&gt;=<span class="number">3.1</span><span class="number">.2</span> (<span class="built_in">from</span> awscli)</span><br><span class="line">  Downloading rsa-<span class="number">3.3</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl (<span class="number">44</span>kB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">45</span>kB <span class="number">7.8</span>MB/s</span><br><span class="line">Collecting colorama&lt;=<span class="number">0.3</span><span class="number">.3</span>,&gt;=<span class="number">0.2</span><span class="number">.5</span> (<span class="built_in">from</span> awscli)</span><br><span class="line">  Downloading colorama-<span class="number">0.3</span><span class="number">.3</span>.tar.gz</span><br><span class="line">Collecting python-dateutil&lt;<span class="number">3.0</span><span class="number">.0</span>,&gt;=<span class="number">2.1</span> (<span class="built_in">from</span> botocore==<span class="number">1.3</span><span class="number">.23</span>-&gt;awscli)</span><br><span class="line">  Downloading python_dateutil-<span class="number">2.4</span><span class="number">.2</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl (<span class="number">188</span>kB)</span><br><span class="line">    <span class="number">100</span>% |████████████████████████████████| <span class="number">192</span>kB <span class="number">2.7</span>MB/s</span><br><span class="line">Collecting jmespath&lt;<span class="number">1.0</span><span class="number">.0</span>,&gt;=<span class="number">0.7</span><span class="number">.1</span> (<span class="built_in">from</span> botocore==<span class="number">1.3</span><span class="number">.23</span>-&gt;awscli)</span><br><span class="line">  Downloading jmespath-<span class="number">0.9</span><span class="number">.0</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl</span><br><span class="line">Collecting pyasn1&gt;=<span class="number">0.1</span><span class="number">.3</span> (<span class="built_in">from</span> rsa&lt;=<span class="number">3.3</span><span class="number">.0</span>,&gt;=<span class="number">3.1</span><span class="number">.2</span>-&gt;awscli)</span><br><span class="line">  Downloading pyasn1-<span class="number">0.1</span><span class="number">.9</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl</span><br><span class="line">Collecting <span class="constant">six</span>&gt;=<span class="number">1.5</span> (<span class="built_in">from</span> python-dateutil&lt;<span class="number">3.0</span><span class="number">.0</span>,&gt;=<span class="number">2.1</span>-&gt;botocore==<span class="number">1.3</span><span class="number">.23</span>-&gt;awscli)</span><br><span class="line">  Downloading <span class="constant">six</span>-<span class="number">1.10</span><span class="number">.0</span>-py2.py3-<span class="constant">none</span>-<span class="keyword">any</span>.whl</span><br><span class="line">Installing collected packages: docutils, <span class="constant">six</span>, python-dateutil, jmespath, botocore, pyasn1, rsa, colorama, awscli</span><br><span class="line">  Running setup.py install <span class="keyword">for</span> colorama</span><br><span class="line">Successfully installed awscli-<span class="number">1.10</span><span class="number">.1</span> botocore-<span class="number">1.3</span><span class="number">.23</span> colorama-<span class="number">0.3</span><span class="number">.3</span> docutils-<span class="number">0.12</span> jmespath-<span class="number">0.9</span><span class="number">.0</span> pyasn1-<span class="number">0.1</span><span class="number">.9</span> python-dateutil-<span class="number">2.4</span><span class="number">.2</span> rsa-<span class="number">3.3</span> <span class="constant">six</span>-<span class="number">1.10</span><span class="number">.0</span></span><br><span class="line">You are <span class="keyword">using</span> pip <span class="built_in">version</span> <span class="number">7.1</span><span class="number">.2</span>, however <span class="built_in">version</span> <span class="number">8.0</span><span class="number">.2</span> is available.</span><br><span class="line">You should consider upgrading via <span class="operator">the</span> <span class="string">'pip install --upgrade pip'</span> <span class="command"><span class="keyword">command</span>.</span></span><br></pre></td></tr></table></figure>
+<p><code>awscli</code>が無事インストールされると、awsコマンドが使えるようになる。<br><code>aws configure</code>でawsにアクセスするための初期設定をする。<br>先ほど、メモしたアクセスキーとシークレットアクセスキーを入力。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># aws configure</span><br><span class="line">AWS <span class="keyword">Access</span> Key ID [<span class="type">None</span>]: </span><br><span class="line">AWS Secret <span class="keyword">Access</span> Key [<span class="type">None</span>]: </span><br><span class="line"><span class="keyword">Default</span> region <span class="keyword">name</span> [<span class="type">None</span>]: </span><br><span class="line"><span class="keyword">Default</span> output <span class="keyword">format</span> [<span class="type">None</span>]:</span><br></pre></td></tr></table></figure>
+<p><code>aws s3 ls s3://[bucket_name]</code> : S3の中身を閲覧し、アクセスできる事を確認する。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># aws <span class="literal">s3</span> ls <span class="literal">s3</span>://hogemoge</span><br><span class="line">                           PRE <span class="keyword">backgrounds/</span><br><span class="line"></span>                           PRE logos/</span><br></pre></td></tr></table></figure>
+<p><code>aws s3 sync s3://[bucket_name] backup/</code> でS3にあるデータを全て取得できる。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># aws <span class="literal">s3</span> sync <span class="literal">s3</span>://[<span class="keyword">bucket_name] </span><span class="keyword">backup/</span><br><span class="line"></span><span class="label">download</span>: <span class="literal">s3</span>://hogemoge/logos/<span class="number">0</span>/original.png to <span class="keyword">backup_hogemoge/logos/0/original.png</span><br><span class="line"></span><span class="label">download</span>: <span class="literal">s3</span>://hogemoge/logos/<span class="number">0</span>/medium.jpg to <span class="keyword">backup_hogemoge/logos/0/medium.jpg</span></span><br></pre></td></tr></table></figure>
+<p>取得できた事を確認できれば、作業完了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2016/02/s3-collect-download/" data-id="cik50lxe90005ytvujq16zm6w" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2016/02/s3-collect-download/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-danboard-lightning" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -92,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/danboard-lightning/" data-id="cik2sd0c90005pwwg20qm1grt" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/danboard-lightning/" data-id="cik50lxf80008ytvupn4jm3x7" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/danboard-lightning/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -139,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/01/macでパスワードを生成する/" data-id="cik2sd0cy0008pwwg7s1jxw40" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/01/macでパスワードを生成する/" data-id="cik50lxfl000bytvu4azhawyk" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/01/macでパスワードを生成する/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -166,7 +225,7 @@
 
       </header>
     
-    <time class="article-date" datetime="2015-11-05T17:13:02.000Z" itemprop="datePublished">11-06-2015</time>
+    <time class="article-date" datetime="2015-11-05T17:13:04.000Z" itemprop="datePublished">11-06-2015</time>
     
   </div>
   <div class="article-inner">
@@ -184,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cik2sd0e6000ppwwgrlaqlt7p" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cik50lxgk000sytvu9x0fqs7n" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/11/linux-command-3/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -224,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/11/hacker-watch/" data-id="cik2sd0d9000cpwwgg4n0uwva" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/11/hacker-watch/" data-id="cik50lxg7000fytvu2ajmhwzx" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/11/hacker-watch/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -268,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cik2sd0dy000mpwwghly8nk4o" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cik50lxgh000pytvubo2w11i2" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command-4/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -310,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command-2/" data-id="cik2sd0e9000qpwwgyr70r51o" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command-2/" data-id="cik50lxgm000tytvu6he44fub" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command-2/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -356,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command/" data-id="cik2sd0dq000jpwwgfpu3xsac" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/09/linux-command/" data-id="cik50lxge000mytvu68ab3ncp" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/09/linux-command/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -398,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/08/MacbookAir-repair/" data-id="cik2sd0g30017pwwg6dhqgytv" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/08/MacbookAir-repair/" data-id="cik50lxha001aytvucl7d3b9f" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/08/MacbookAir-repair/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -441,63 +500,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/08/SSH不正侵入、観察日記-Vol-3/" data-id="cik2sd0fm0013pwwgc4ibnp29" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/08/SSH不正侵入、観察日記-Vol-3/" data-id="cik50lxh60016ytvusbgwubos" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/08/SSH不正侵入、観察日記-Vol-3/#disqus_thread" class="article-comment-link">Comments</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-cowrie-td-agent-elasticsearch-kibana4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/08/cowrie-td-agent-elasticsearch-kibana4/">地理情報を取得して、どこから不正アクセスがあったのか分布図を出す。</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-08-03T12:26:53.000Z" itemprop="datePublished">08-03-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>数回に分けて、cowrieでsshの不正アクセスの実態を取得するようにしてきた。</p>
-<ol>
-<li><a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう%E3%80%82/">ハニーポットcowrieのログを、mariaDBで管理しよう</a></li>
-<li><a href="http://atani.github.io/2015/07/cowrieの不正侵入ログをelasticsearchにデータを入れる/">cowrieの不正侵入ログをelasticsearchにデータを入れる</a></li>
-<li><a href="http://atani.github.io/2015/07/td-agent2-2-1ではfilterが使えるように/">td-agent2-2-1ではfilterが使えるように</a></li>
-</ol>
-<p>構成としてはこのような感じ。</p>
-<img src="/2015/08/cowrie-td-agent-elasticsearch-kibana4/image.jpg" alt="[image.jpg]" title="[image.jpg]">
-<p>今回は不正アクセスIPを利用し、地理情報を得て、どの国からのアクセスが多いのかをkibana4を使って出してみた。</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/08/cowrie-td-agent-elasticsearch-kibana4/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/" data-id="cik2sd0en000tpwwgy9kthplc" class="article-share-link">Share</a>
-      
-        <a href="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/geoip/">geoip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kibana4/">kibana4</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/td-agent/">td-agent</a></li></ul>
 
     </footer>
   </div>
