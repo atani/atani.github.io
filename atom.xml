@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-03T08:35:29.000Z</updated>
+  <updated>2016-02-09T04:31:16.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -13,6 +13,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[h2oのrpmファイルを使ってh2oをアップデートする。]]></title>
+    <link href="http://atani.github.io/2016/02/h2o-rpm-update/"/>
+    <id>http://atani.github.io/2016/02/h2o-rpm-update/</id>
+    <published>2016-02-09T04:31:16.000Z</published>
+    <updated>2016-02-09T04:31:16.000Z</updated>
+    <content type="html"><![CDATA[<p>h2oのバージョンが上がっていたので、新しいバージョンのh2oのrpmファイルを作り、アップデート作業を行う。<br>@tatsushid さんが h2oをビルドするためのスペックファイルを準備してくれているので、こちらに甘えることとする。</p>
+<p>また、コンパイルにはmakeが必要なので、 <code>cmake</code> をインストールしておく。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># yum install cmake</span></span><br></pre></td></tr></table></figure>
+<p>そもそもh2oとは？と疑問になる方は作者のKazuhoさんの記事<a href="http://blog.kazuhooku.com/2015/02/http-h2o.html" target="_blank" rel="external">なぜ今、新しいHTTPサーバが必要なのか</a>をご覧ください。</p>
+<a id="more"></a>
+<h2 id="rpm_u4F5C_u6210_u624B_u9806"><a href="#rpm_u4F5C_u6210_u624B_u9806" class="headerlink" title="rpm作成手順"></a>rpm作成手順</h2><p>h2o-rpmをcloneする</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># git clone https:<span class="comment">//github.com/tatsushid/h2o-rpm.git</span></span></span><br></pre></td></tr></table></figure>
+<p>rpmbuild をする。すると必要ファイルがデフォルトだとホームディレクトリに作成される。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd h2o-rpm/rpmbuild/SPECS/</span></span><br><span class="line"><span class="preprocessor"># rpmbuild -ba h2o.spec</span></span><br><span class="line">エラー: ファイル /root/rpmbuild/SOURCES/v1<span class="number">.7</span><span class="number">.0</span>.tar.gz: そのようなファイルやディレクトリはありません</span><br></pre></td></tr></table></figure>
+<p>なお、rpmbuildコマンドがない場合は以下実行。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># yum -y <span class="operator"><span class="keyword">install</span> rpm-<span class="keyword">build</span></span></span><br></pre></td></tr></table></figure>
+<p>執筆時点で、h2oの最新安定版は1.7.0だが、specファイルを少し触りたいので一つ前のバージョンを使用する。<br>こちらのtarballファイルを<code>/root/rpmbuil/SOUCES</code> 配下に配置する。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># wget https:<span class="comment">//github.com/h2o/h2o/archive/v1.6.3.tar.gz</span></span></span><br><span class="line"><span class="preprocessor"># mv v1<span class="number">.6</span><span class="number">.3</span>.tar.gz /root/rpmbuild/SOURCES/</span></span><br></pre></td></tr></table></figure>
+<p>デフォルトだと、v1.7.0をビルドしようとするので、specファイルの<br> <code>Version:</code> を <code>1.6.3</code> にする。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># diff -ur h2o.spec_old h2o.spec</span></span><br><span class="line">--- h2o.spec_old    <span class="number">2016</span>-<span class="number">02</span>-<span class="number">09</span> <span class="number">12</span>:<span class="number">51</span>:<span class="number">17.899503647</span> +<span class="number">0900</span></span><br><span class="line">+++ h2o.spec    <span class="number">2016</span>-<span class="number">02</span>-<span class="number">09</span> <span class="number">12</span>:<span class="number">58</span>:<span class="number">57.758516137</span> +<span class="number">0900</span></span><br><span class="line">@@ -<span class="number">20</span>,<span class="number">7</span> +<span class="number">20</span>,<span class="number">7</span> @@</span><br><span class="line"></span><br><span class="line"> Summary: H2O - The optimized HTTP/<span class="number">1</span>, HTTP/<span class="number">2</span> server</span><br><span class="line"> Name: h2o</span><br><span class="line">-Version: <span class="number">1.7</span><span class="number">.0</span></span><br><span class="line">+Version: <span class="number">1.6</span><span class="number">.3</span></span><br><span class="line"> Release: <span class="number">1</span>%&#123;?dist&#125;</span><br><span class="line"> URL: https:<span class="comment">//h2o.examp1e.net/</span></span><br><span class="line"> Source0: https:<span class="comment">//github.com/h2o/h2o/archive/v%&#123;version&#125;.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p><code>h2o-rpm</code> の SOURCESにはあらかじめ必要なconfや起動ファイルがあるのでこれを丸ごと、先ほど作った <code>/root/rpmbuild/SOURCES/</code> にコピーする。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ls -l ../SOURCES/</span></span><br><span class="line">合計 <span class="number">20</span></span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root  <span class="number">488</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">12</span>:<span class="number">51</span> h2o.conf</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root <span class="number">2432</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">12</span>:<span class="number">51</span> h2o.init</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root  <span class="number">190</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">12</span>:<span class="number">51</span> h2o.logrotate</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root  <span class="number">342</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">12</span>:<span class="number">51</span> h2o.service</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root  <span class="number">177</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">12</span>:<span class="number">51</span> index.html</span><br><span class="line"></span><br><span class="line"><span class="preprocessor"># cp -p ../SOURCES<span class="comment">/* /root/rpmbuild/SOURCES/</span></span></span><br></pre></td></tr></table></figure>
+<p>再度、rpmbuildをする。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># rpmbuild -ba h2o.spec</span></span><br></pre></td></tr></table></figure>
+<p>問題なければ、以下RPMファイルが作成できる。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ls -l /root/rpmbuild/RPMS/x86_64/</span></span><br><span class="line">合計 <span class="number">6196</span></span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root <span class="number">1845760</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">13</span>:<span class="number">09</span> h2o-<span class="number">1.6</span><span class="number">.3</span>-<span class="number">1.</span>el7.centos.x86_64.rpm</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root <span class="number">4241868</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">13</span>:<span class="number">09</span> h2o-debuginfo-<span class="number">1.6</span><span class="number">.3</span>-<span class="number">1.</span>el7.centos.x86_64.rpm</span><br><span class="line">-rw-r--r-- <span class="number">1</span> root root  <span class="number">250784</span>  <span class="number">2</span>月  <span class="number">9</span> <span class="number">13</span>:<span class="number">09</span> h2o-devel-<span class="number">1.6</span><span class="number">.3</span>-<span class="number">1.</span>el7.centos.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<h2 id="h2o_u30A2_u30C3_u30D7_u30C7_u30FC_u30C8"><a href="#h2o_u30A2_u30C3_u30D7_u30C7_u30FC_u30C8" class="headerlink" title="h2oアップデート"></a>h2oアップデート</h2><p>あとはrpmコマンドでアップデートするだけ。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># rpm -Uvh /root/rpmbuild/RPMS/x86_64/h2o-<span class="number">1.6</span><span class="number">.3</span>-<span class="number">1.</span>el7.centos.x86_64.rpm</span></span><br></pre></td></tr></table></figure>
+<p>すでに起動している場合は、 daemonのリロードが必要なので、以下コマンドを実行。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># systemctl daemon-reload</span></span><br><span class="line"><span class="preprocessor"># systemctl reload h2o.service</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>h2oのバージョンが上がっていたので、新しいバージョンのh2oのrpmファイルを作り、アップデート作業を行う。<br>@tatsushid さんが h2oをビルドするためのスペックファイルを準備してくれているので、こちらに甘えることとする。</p>
+<p>また、コンパイルにはmakeが必要なので、 <code>cmake</code> をインストールしておく。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># yum install cmake</span></span><br></pre></td></tr></table></figure>
+<p>そもそもh2oとは？と疑問になる方は作者のKazuhoさんの記事<a href="http://blog.kazuhooku.com/2015/02/http-h2o.html">なぜ今、新しいHTTPサーバが必要なのか</a>をご覧ください。</p>]]>
+    
+    </summary>
+    
+      <category term="centos7" scheme="http://atani.github.io/tags/centos7/"/>
+    
+      <category term="h2o" scheme="http://atani.github.io/tags/h2o/"/>
+    
+      <category term="rpmbuild" scheme="http://atani.github.io/tags/rpmbuild/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[インストールされているperlモジュールのバージョン確認]]></title>
@@ -201,7 +249,7 @@
     <title><![CDATA[現場で必須！超基本Linuxコマンド Vol.3]]></title>
     <link href="http://atani.github.io/2015/11/linux-command-3/"/>
     <id>http://atani.github.io/2015/11/linux-command-3/</id>
-    <published>2015-11-05T17:13:04.000Z</published>
+    <published>2015-11-05T17:13:02.000Z</published>
     <updated>2015-11-05T17:13:02.000Z</updated>
     <content type="html"><![CDATA[<p>今回はファイルの中身を見たり検索したりしてみよう。</p>
 <p>まず事前に中身のあるファイルを用意する。</p>
@@ -890,73 +938,6 @@
     <summary type="html">
     <![CDATA[<p>不正アクセスを観測したのでご紹介。</p>
 <p>動画を見ていただこう。</p>]]>
-    
-    </summary>
-    
-      <category term="honeypot" scheme="http://atani.github.io/tags/honeypot/"/>
-    
-      <category term="kippo" scheme="http://atani.github.io/tags/kippo/"/>
-    
-      <category term="security" scheme="http://atani.github.io/tags/security/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[SSHの不正侵入で多いパスワードランキング]]></title>
-    <link href="http://atani.github.io/2015/07/SSH%E3%81%AE%E4%B8%8D%E6%AD%A3%E4%BE%B5%E5%85%A5%E3%81%A7%E5%A4%9A%E3%81%84%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/"/>
-    <id>http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/</id>
-    <published>2015-07-13T01:00:26.000Z</published>
-    <updated>2015-07-22T13:32:45.000Z</updated>
-    <content type="html"><![CDATA[<p>サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。</p>
-<p>本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。</p>
-<p>また、kippoの導入方法は既に以下に記載済みなので参考にされたし。</p>
-<ul>
-<li><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">CentOS7にKippoをインストールする</a></li>
-</ul>
-<h1 id="u62BD_u51FA_u6761_u4EF6"><a href="#u62BD_u51FA_u6761_u4EF6" class="headerlink" title="抽出条件"></a>抽出条件</h1><p>kippo の以下のログインを試みたが失敗しているログから、アカウントとパスワードを取得。</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login attempt <span class="string">[shoutcast/123456]</span> failed</span><br></pre></td></tr></table></figure>
-<p>ランキング化をしたものは大きく以下の２パターン。</p>
-<ul>
-<li>最も試行の多いパスワードの文字数</li>
-<li>６列目までのそれぞれ使用される頻度が多い文字数</li>
-</ul>
-<p>取得期間: <code>2015/06/28 - 2015/07/04</code></p>
-<p>では、ランキングスタート!!</p>
-<a id="more"></a>
-<h1 id="u30E9_u30F3_u30AD_u30F3_u30B0"><a href="#u30E9_u30F3_u30AD_u30F3_u30B0" class="headerlink" title="ランキング"></a>ランキング</h1><p>パスワードを使った文字数ランキングを出してみた。</p>
-<h2 id="u6587_u5B57_u6570_u30E9_u30F3_u30AD_u30F3_u30B0"><a href="#u6587_u5B57_u6570_u30E9_u30F3_u30AD_u30F3_u30B0" class="headerlink" title="文字数ランキング"></a>文字数ランキング</h2><p>1位は8文字！続いて7文字、6文字と続いている。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_length.png" alt="[pass_length.png]" title="[pass_length.png]">
-<h2 id="u5404_u5217_u3067_u6700_u3082_u4F7F_u7528_u983B_u5EA6_u304C_u9AD8_u3044_u6587_u5B57_u6570_u30E9_u30F3_u30AD_u30F3_u30B0"><a href="#u5404_u5217_u3067_u6700_u3082_u4F7F_u7528_u983B_u5EA6_u304C_u9AD8_u3044_u6587_u5B57_u6570_u30E9_u30F3_u30AD_u30F3_u30B0" class="headerlink" title="各列で最も使用頻度が高い文字数ランキング"></a>各列で最も使用頻度が高い文字数ランキング</h2><h3 id="1_u6587_u5B57_u76EE"><a href="#1_u6587_u5B57_u76EE" class="headerlink" title="1文字目"></a>1文字目</h3><p><code>a</code> が1位。<code>s</code>, <code>1</code> と続いた。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_1.png" alt="[pass_1.png]" title="[pass_1.png]">
-<h3 id="2_u6587_u5B57_u76EE"><a href="#2_u6587_u5B57_u76EE" class="headerlink" title="2文字目"></a>2文字目</h3><p><code>a</code> が独走。 <code>o</code> と <code>e</code> が僅差で2,3位。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_2.png" alt="[pass_2.png]" title="[pass_2.png]">
-<h3 id="3_u6587_u5B57_u76EE"><a href="#3_u6587_u5B57_u76EE" class="headerlink" title="3文字目"></a>3文字目</h3><p>ここでも <code>a</code> が1位。 続いて、<code>n</code>、<code>s</code></p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_3.png" alt="[pass_3.png]" title="[pass_3.png]">
-<h3 id="4_u6587_u5B57_u76EE"><a href="#4_u6587_u5B57_u76EE" class="headerlink" title="4文字目"></a>4文字目</h3><p><code>a</code> ４冠目。もはや敵なし。<code>i</code>、<code>e</code> と続く。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_4.png" alt="[pass_4.png]" title="[pass_4.png]">
-<h3 id="5_u6587_u5B57_u76EE"><a href="#5_u6587_u5B57_u76EE" class="headerlink" title="5文字目"></a>5文字目</h3><p><code>a</code>がついに首位陥落。 <code>e</code> が1位となった。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_5.png" alt="[pass_5.png]" title="[pass_5.png]">
-<h3 id="6_u6587_u5B57_u76EE"><a href="#6_u6587_u5B57_u76EE" class="headerlink" title="6文字目"></a>6文字目</h3><p><code>e</code> が1位。 <code>1</code> が2位、<code>a</code>は3位となった。</p>
-<img src="/2015/07/SSHの不正侵入で多いパスワードランキング/pass_6.png" alt="[pass_6.png]" title="[pass_6.png]">
-<h2 id="u7D50_u679C_u4E00_u756A_u8106_u5F31_u306A_u30D1_u30B9_u30EF_u30FC_u30C9"><a href="#u7D50_u679C_u4E00_u756A_u8106_u5F31_u306A_u30D1_u30B9_u30EF_u30FC_u30C9" class="headerlink" title="結果一番脆弱なパスワード"></a>結果一番脆弱なパスワード</h2><p>1位… aaaaee<br>2位… sonia1<br>3位… 1eseia</p>
-<p>参考にされてみてはいかが?</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>サーバーにKippoを導入して以来、クラッカーから大量にSSHのログイン試行されているので、ログインに失敗したログからアカウントとパスワードを抜き出して、ランキングを作ってみた。</p>
-<p>本ランキングを作るにあたり、 elasticsearch1.6 + kibana4 を利用した(こちらの導入方法は後日)。</p>
-<p>また、kippoの導入方法は既に以下に記載済みなので参考にされたし。</p>
-<ul>
-<li><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">CentOS7にKippoをインストールする</a></li>
-</ul>
-<h1 id="u62BD_u51FA_u6761_u4EF6"><a href="#u62BD_u51FA_u6761_u4EF6" class="headerlink" title="抽出条件"></a>抽出条件</h1><p>kippo の以下のログインを試みたが失敗しているログから、アカウントとパスワードを取得。</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login attempt <span class="string">[shoutcast/123456]</span> failed</span><br></pre></td></tr></table></figure>
-<p>ランキング化をしたものは大きく以下の２パターン。</p>
-<ul>
-<li>最も試行の多いパスワードの文字数</li>
-<li>６列目までのそれぞれ使用される頻度が多い文字数</li>
-</ul>
-<p>取得期間: <code>2015/06/28 - 2015/07/04</code></p>
-<p>では、ランキングスタート!!</p>]]>
     
     </summary>
     
