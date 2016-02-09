@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-09T04:31:16.000Z</updated>
+  <updated>2016-02-09T04:33:42.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://atani.github.io/2016/02/h2o-rpm-update/"/>
     <id>http://atani.github.io/2016/02/h2o-rpm-update/</id>
     <published>2016-02-09T04:31:16.000Z</published>
-    <updated>2016-02-09T04:31:16.000Z</updated>
+    <updated>2016-02-09T04:33:42.000Z</updated>
     <content type="html"><![CDATA[<p>h2oのバージョンが上がっていたので、新しいバージョンのh2oのrpmファイルを作り、アップデート作業を行う。<br>@tatsushid さんが h2oをビルドするためのスペックファイルを準備してくれているので、こちらに甘えることとする。</p>
 <p>また、コンパイルにはmakeが必要なので、 <code>cmake</code> をインストールしておく。</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># yum install cmake</span></span><br></pre></td></tr></table></figure>
@@ -67,7 +67,7 @@
     <link href="http://atani.github.io/2016/02/perl-module-version/"/>
     <id>http://atani.github.io/2016/02/perl-module-version/</id>
     <published>2016-02-03T08:22:33.000Z</published>
-    <updated>2016-02-03T08:35:29.000Z</updated>
+    <updated>2016-02-09T04:33:55.000Z</updated>
     <content type="html"><![CDATA[<p>インストールされているperlモジュールのバージョンを確認したい。</p>
 <p><code>perl -M&#39;モジュール名&#39; -e &#39;print $モジュール名::VERSION&#39;</code></p>
 <p>実行例</p>
