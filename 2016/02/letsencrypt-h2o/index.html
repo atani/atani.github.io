@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>h2oとLet&#39;s Encryptを使ってhttp/2に対応する | Simple blog @atani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="h2oによるhttp/2に対応した備忘録。主要ブラウザは、HTTP/2に対応しているが、HTTP/2 over TLSのみなので、SSLサーバ証明書が必要になる。そのため、証明書には最近話題のLet’s Encrypt を利用した。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h2oとLet's Encryptを使ってhttp/2に対応する">
+<meta property="og:url" content="http://atani.github.io/2016/02/letsencrypt-h2o/index.html">
+<meta property="og:site_name" content="Simple blog @atani">
+<meta property="og:description" content="h2oによるhttp/2に対応した備忘録。主要ブラウザは、HTTP/2に対応しているが、HTTP/2 over TLSのみなので、SSLサーバ証明書が必要になる。そのため、証明書には最近話題のLet’s Encrypt を利用した。">
+<meta property="og:image" content="http://atani.github.io/2016/02/letsencrypt-h2o/screenshot.png">
+<meta property="og:image" content="http://atani.github.io/2016/02/letsencrypt-h2o/letsencrypt.png">
+<meta property="og:image" content="http://atani.github.io/2016/02/letsencrypt-h2o/report.png">
+<meta property="og:updated_time" content="2016-02-11T04:07:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="h2oとLet's Encryptを使ってhttp/2に対応する">
+<meta name="twitter:description" content="h2oによるhttp/2に対応した備忘録。主要ブラウザは、HTTP/2に対応しているが、HTTP/2 over TLSのみなので、SSLサーバ証明書が必要になる。そのため、証明書には最近話題のLet’s Encrypt を利用した。">
+<meta name="twitter:creator" content="@atani">
+  
+    <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-49087490-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Simple blog @atani</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-letsencrypt-h2o" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      h2oとLet&#39;s Encryptを使ってhttp/2に対応する
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2016-02-11T04:07:23.000Z" itemprop="datePublished">02-11-2016</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>h2oによるhttp/2に対応した備忘録。<br>主要ブラウザは、HTTP/2に対応しているが、HTTP/2 over TLSのみなので、<br>SSLサーバ証明書が必要になる。<br>そのため、証明書には最近話題の<a href="https://letsencrypt.org" target="_blank" rel="external">Let’s Encrypt</a> を利用した。</p>
+<a id="more"></a>
+<h2 id="SSL_u30B5_u30FC_u30D0_u8A3C_u660E_u66F8_u3092_u767A_u884C"><a href="#SSL_u30B5_u30FC_u30D0_u8A3C_u660E_u66F8_u3092_u767A_u884C" class="headerlink" title="SSLサーバ証明書を発行"></a>SSLサーバ証明書を発行</h2><p>Let’s Encryptのソースをgitリポジトリからcloneしてくる。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd /usr/local/</span></span><br><span class="line"><span class="preprocessor"># git clone https://github.com/letsencrypt/letsencrypt</span></span><br></pre></td></tr></table></figure>
+<p>Let’s Encrypt の依存するパッケージを自動でインストールする。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd letsencrypt</span></span><br><span class="line"><span class="preprocessor"># ./letsencrypt-auto --help</span></span><br></pre></td></tr></table></figure>
+<p>証明書を作成するために、ドメインへのアクセスがあるのでアクセスできるようにしておく。<br>h2oのでのアクセスログは以下のようなログだった。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">192.168.0.1</span> - - <span class="string">[10/Feb/2016:10:04:11 +0900]</span> <span class="string">"<span class="keyword">GET</span> /.well-known/acme-challenge/4cHoLYVoyqHvhKcW7zMz08ixIUfxT3cO5uQc6wx-cYk HTTP/1.1"</span> <span class="number">200</span> <span class="number">87</span> <span class="string">"-"</span> <span class="string">"Mozilla/5.0 (compatible; Let's Encrypt validation server; +https://www.letsencrypt.org)"</span></span><br></pre></td></tr></table></figure>
+<p>証明書発行のコマンドは以下。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ./letsencrypt-auto certonly \</span><br><span class="line">-<span class="ruby">-webroot -w /var/www/html/example.com/ \ <span class="comment"># ドキュメントルート</span></span><br><span class="line"></span>-<span class="ruby">d example.com \ <span class="comment"># FQDN</span></span><br><span class="line"></span>-<span class="ruby">m hoge<span class="variable">@example</span>.com \ <span class="comment"># メールアドレス</span></span><br><span class="line"></span>-<span class="ruby">-agree-tos <span class="comment"># Let's Encryptの利用規約に同意する。</span></span></span><br></pre></td></tr></table></figure>
+<p>なんらかの原因でアクセスできない場合は以下のようなエラーになる。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># ./letsencrypt-auto certonly --webroot -w /<span class="keyword">var</span>/www/html/example.com/ -d example.com -m hoge@example.com --agree-tos</span><br><span class="line">Updating letsencrypt <span class="keyword">and</span> <span class="keyword">virtual</span> environment dependencies......</span><br><span class="line">Requesting root privileges <span class="keyword">to</span> run <span class="keyword">with</span> virtualenv: /root/.local/share/letsencrypt/bin/letsencrypt certonly --webroot -w /<span class="keyword">var</span>/www/html/example.com/ -d example.com -m hoge@example.com --agree-tos</span><br><span class="line">Failed authorization <span class="function"><span class="keyword">procedure</span>. <span class="title">example</span>.<span class="title">com</span> <span class="params">(http-01)</span>:</span> urn:acme:error:connection :: The server could <span class="keyword">not</span> connect <span class="keyword">to</span> the client <span class="keyword">to</span> verify the domain :: Could <span class="keyword">not</span> connect <span class="keyword">to</span> http:<span class="comment">//example.com/.well-known/acme-challenge/QlsKdh9xfkuDr2mm-iIEyC58ep0tsy2gqX3K1nhJo0M</span></span><br><span class="line"></span><br><span class="line">IMPORTANT NOTES:</span><br><span class="line"> - The following errors were reported <span class="keyword">by</span> the server:</span><br><span class="line"></span><br><span class="line">   Domain: example.com</span><br><span class="line">   <span class="keyword">Type</span>:   urn:acme:error:connection</span><br><span class="line">   Detail: Could <span class="keyword">not</span> connect <span class="keyword">to</span> http:<span class="comment">//example.com/.well-known</span></span><br><span class="line">   /acme-challenge/QlsKdh9xfkuDr2mm-iIEyC58ep0tsy2gqX3K1nhJo0M</span><br></pre></td></tr></table></figure>
+<p>ちなみに今回は、firewallで弾かれていたので、80/443ポートを解放してあげた。</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># firewall-cmd --permanent --add-port 80/tcp</span></span><br><span class="line"><span class="preprocessor"># firewall-cmd --permanent --add-port 443/tcp</span></span><br><span class="line"><span class="preprocessor"># systemctl restart firewalld.service</span></span><br></pre></td></tr></table></figure>
+<p>再度実行で、証明書が作成された。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># ./letsencrypt-auto certonly --webroot -w /<span class="keyword">var</span>/www/html/example.com/ -<span class="keyword">d</span> example.com -<span class="keyword">m</span> hoge@example.com --agree-tos</span><br><span class="line">Updating letsencrypt and virtual environment dependencies......</span><br><span class="line">Requesting root privileges to <span class="keyword">run</span> with virtualenv: /root/.<span class="keyword">local</span>/share/letsencrypt/bin/letsencrypt certonly --webroot -w /<span class="keyword">var</span>/www/html/example.com/ -<span class="keyword">d</span> example.com -<span class="keyword">m</span> hoge@example.com --agree-tos</span><br><span class="line"></span><br><span class="line">IMPORTANT <span class="keyword">NOTES</span>:</span><br><span class="line"> - Congratulations! Your certificate and chain have been saved at</span><br><span class="line">   /etc/letsencrypt/live/example.com/fullchain.pem. Your cert</span><br><span class="line">   will expire <span class="keyword">on</span> 2016-05-10. To obtain a new <span class="keyword">version</span> of the</span><br><span class="line">   certificate <span class="keyword">in</span> the future, simply <span class="keyword">run</span> Let's Encrypt again.</span><br><span class="line"> - <span class="keyword">If</span> you like Let's Encrypt, please consider supporting our work <span class="keyword">by</span>:</span><br><span class="line"></span><br><span class="line">   Donating to ISRG / Let's Encrypt:   https:<span class="comment">//letsencrypt.org/donate</span></span><br><span class="line">   Donating to EFF:                    https:<span class="comment">//eff.org/donate-le</span></span><br></pre></td></tr></table></figure>
+<p>証明書の実態は<code>/etc/letsencrypt/archive/[ドメイン]</code>配下にでき、 <code>/etc/letsencrypt/live/[ドメイン]</code> がsymlinkとなっている。設定する際は、<code>/etc/letsencrypt/live/[ドメイン]</code> を利用すると良い。</p>
+<h2 id="h2o_u306E_u8A2D_u5B9A"><a href="#h2o_u306E_u8A2D_u5B9A" class="headerlink" title="h2oの設定"></a>h2oの設定</h2><p><code>/etc/h2o/h2o.conf</code> にSSL証明書の設定をする。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">http2-<span class="symbol">casper:</span> <span class="constant">ON</span></span><br><span class="line">http2-reprioritize-blocking-<span class="symbol">assets:</span> <span class="constant">ON</span></span><br><span class="line">max-<span class="symbol">connections:</span> <span class="number">128</span></span><br><span class="line">num-<span class="symbol">threads:</span> <span class="number">1</span></span><br><span class="line"><span class="symbol">user:</span> nobody</span><br><span class="line"><span class="symbol">hosts:</span></span><br><span class="line">  <span class="string">"example.com"</span><span class="symbol">:</span></span><br><span class="line">    <span class="symbol">listen:</span> <span class="number">80</span></span><br><span class="line">    <span class="symbol">listen:</span></span><br><span class="line">      <span class="symbol">port:</span> <span class="number">443</span></span><br><span class="line">      <span class="symbol">ssl:</span></span><br><span class="line">        certificate-<span class="symbol">file:</span> /etc/letsencrypt/live/example.com/fullchain.pem</span><br><span class="line">        key-<span class="symbol">file:</span> /etc/letsencrypt/live/example.com/privkey.pem</span><br><span class="line">        minimum-<span class="symbol">version:</span> <span class="constant">TLSv1</span></span><br><span class="line">        cipher-<span class="symbol">suite:</span> <span class="constant">ECDHE</span>-<span class="constant">RSA</span>-<span class="constant">AES128</span>-<span class="constant">GCM</span>-<span class="constant">SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-GCM-SHA256</span><span class="symbol">:ECDHE-RSA-AES256-GCM-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-GCM-SHA384</span><span class="symbol">:DHE-RSA-AES128-GCM-SHA256</span><span class="symbol">:DHE-DSS-AES128-GCM-SHA256</span><span class="symbol">:kEDH+AESGCM</span><span class="symbol">:ECDHE-RSA-AES128-SHA256</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA256</span><span class="symbol">:ECDHE-RSA-AES128-SHA</span><span class="symbol">:ECDHE-ECDSA-AES128-SHA</span><span class="symbol">:ECDHE-RSA-AES256-SHA384</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA384</span><span class="symbol">:ECDHE-RSA-AES256-SHA</span><span class="symbol">:ECDHE-ECDSA-AES256-SHA</span><span class="symbol">:DHE-RSA-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES128-SHA</span><span class="symbol">:DHE-DSS-AES128-SHA256</span><span class="symbol">:DHE-RSA-AES256-SHA256</span><span class="symbol">:DHE-DSS-AES256-SHA</span><span class="symbol">:DHE-RSA-AES256-SHA</span><span class="symbol">:</span>!<span class="symbol">aNULL:</span>!<span class="symbol">eNULL:</span>!<span class="constant">EXPORT</span><span class="symbol">:</span>!<span class="constant">DES</span><span class="symbol">:</span>!<span class="constant">RC4</span><span class="symbol">:</span>!<span class="number">3</span><span class="constant">DES:</span>!<span class="constant">MD5</span><span class="symbol">:</span>!<span class="constant">PSK</span></span><br><span class="line">    <span class="symbol">paths:</span></span><br><span class="line">      <span class="string">"/"</span><span class="symbol">:</span></span><br><span class="line">        file.<span class="symbol">dir:</span> /var/www/html/example.com</span><br><span class="line">access-<span class="symbol">log:</span> /var/log/h2o/access.log</span><br><span class="line">error-<span class="symbol">log:</span> /var/log/h2o/error.log</span><br><span class="line">pid-<span class="symbol">file:</span> /var/run/h2o/h2o.pid</span><br></pre></td></tr></table></figure>
+<p>h2oがうまく起動しない場合、 <code>systemctl status h2o.service</code> で確認する。以下は、keyファイル名を間違っていて起動できなかった時のログ(h2oのログには出なかった)。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># systemctl status h2o.service</span><br><span class="line">● h2o.service - H2O - the optimized HTTP/1, HTTP/2 server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/h2o.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: failed (Result: exit-code) since 水 2016-02-10 10:27:27 JST; 1min 16s ago</span><br><span class="line">  Process: 2496 ExecStop=/bin/<span class="operator"><span class="keyword">kill</span> -TERM $&#123;MAINPID&#125; (code=exited, <span class="keyword">status</span>=<span class="number">1</span>/<span class="keyword">FAILURE</span>)</span><br><span class="line">  Process: <span class="number">9099</span> ExecReload=/<span class="keyword">bin</span>/<span class="keyword">kill</span> -HUP $&#123;MAINPID&#125; (code=exited, <span class="keyword">status</span>=<span class="number">0</span>/<span class="keyword">SUCCESS</span>)</span><br><span class="line">  Process: <span class="number">2495</span> ExecStart=/usr/<span class="keyword">bin</span>/h2o -<span class="keyword">m</span> <span class="keyword">master</span> -<span class="keyword">c</span> /etc/h2o/h2o.conf (code=exited, <span class="keyword">status</span>=<span class="number">78</span>)</span><br><span class="line"> <span class="keyword">Main</span> PID: <span class="number">2495</span> (code=exited, <span class="keyword">status</span>=<span class="number">78</span>)</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com systemd[<span class="number">1</span>]: <span class="keyword">Starting</span> H2O - the optimized <span class="keyword">HTTP</span>/<span class="number">1</span>, <span class="keyword">HTTP</span>/<span class="number">2</span> <span class="keyword">server</span>...</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com h2o[<span class="number">2495</span>]: [/etc/h2o/h2o.conf:<span class="number">13</span>] <span class="keyword">in</span> command listen, <span class="keyword">failed</span> <span class="keyword">to</span> <span class="keyword">load</span> <span class="keyword">private</span> <span class="keyword">key</span> <span class="keyword">file</span>:/etc/letsencrypt/live/example.com/privkey1.pem</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com h2o[<span class="number">2495</span>]: <span class="number">139896520619968</span>:<span class="keyword">error</span>:<span class="number">02001002</span>:<span class="keyword">system</span> <span class="keyword">library</span>:fopen:<span class="keyword">No</span> such <span class="keyword">file</span> <span class="keyword">or</span> <span class="keyword">directory</span>:bio/bss_file.<span class="keyword">c</span>:<span class="number">255</span>:fopen(<span class="string">'/etc/letsencrypt/live/cra...1.pem'</span>, <span class="string">'r'</span>)</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com h2o[<span class="number">2495</span>]: <span class="number">139896520619968</span>:<span class="keyword">error</span>:<span class="number">20074002</span>:BIO routines:FILE_CTRL:<span class="keyword">system</span> lib:bio/bss_file.<span class="keyword">c</span>:<span class="number">257</span>:</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com h2o[<span class="number">2495</span>]: <span class="number">139896520619968</span>:<span class="keyword">error</span>:<span class="number">140</span>B0002:SSL routines:SSL_CTX_use_PrivateKey_file:<span class="keyword">system</span> lib:ssl_rsa.<span class="keyword">c</span>:<span class="number">596</span>:</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com systemd[<span class="number">1</span>]: h2o.service: <span class="keyword">main</span> process exited, code=exited, <span class="keyword">status</span>=<span class="number">78</span>/<span class="keyword">n</span>/a</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com <span class="keyword">kill</span>[<span class="number">2496</span>]: <span class="keyword">kill</span>: cannot find process <span class="string">""</span></span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com systemd[<span class="number">1</span>]: h2o.service: control process exited, code=exited <span class="keyword">status</span>=<span class="number">1</span></span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com systemd[<span class="number">1</span>]: Unit h2o.service entered <span class="keyword">failed</span> state.</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">27</span>:<span class="number">27</span> example.com systemd[<span class="number">1</span>]: h2o.service <span class="keyword">failed</span>.</span><br><span class="line">Hint: <span class="keyword">Some</span> <span class="keyword">lines</span> were ellipsized, <span class="keyword">use</span> -<span class="keyword">l</span> <span class="keyword">to</span> <span class="keyword">show</span> <span class="keyword">in</span> <span class="keyword">full</span>.</span></span><br></pre></td></tr></table></figure>
+<p>該当箇所を修正後、無事にh2oが起動した。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># systemctl status h2o.service</span></span><br><span class="line">● h2o.service - H2O - the optimized HTTP/<span class="number">1</span>, HTTP/<span class="number">2</span> server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/h2o.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since 水 <span class="number">2016</span>-<span class="number">02</span>-<span class="number">10</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">31</span> JST; <span class="number">28</span>min ago</span><br><span class="line">  Process: <span class="number">2496</span> ExecStop=/bin/kill -TERM $&#123;MAINPID&#125; (code=exited, status=<span class="number">1</span>/FAILURE)</span><br><span class="line">  Process: <span class="number">3155</span> ExecReload=/bin/kill -HUP $&#123;MAINPID&#125; (code=exited, status=<span class="number">0</span>/SUCCESS)</span><br><span class="line"> Main PID: <span class="number">2523</span> (perl)</span><br><span class="line">   CGroup: /system.slice/h2o.service</span><br><span class="line">           ├─<span class="number">2523</span> perl -x /usr/share/h2o/start_server --pid-file=/var/run/h2o/h2o.pid --<span class="built_in">log</span>-file=/var/<span class="built_in">log</span>/h2o/error.<span class="built_in">log</span> --port=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">80</span> --port=[::]:<span class="number">80</span> --port=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">443</span> --port=[::]:<span class="number">443</span> -- /usr/bin/...</span><br><span class="line">           ├─<span class="number">3157</span> /usr/bin/h2o -c /etc/h2o/h2o.conf</span><br><span class="line">           ├─<span class="number">3158</span> /usr/bin/h2o -c /etc/h2o/h2o.conf</span><br><span class="line">           └─<span class="number">3163</span> perl -x /usr/share/h2o/annotate-backtrace-symbols</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">31</span> example.com systemd[<span class="number">1</span>]: Started H2O - the optimized HTTP/<span class="number">1</span>, HTTP/<span class="number">2</span> server.</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">31</span> example.com systemd[<span class="number">1</span>]: Starting H2O - the optimized HTTP/<span class="number">1</span>, HTTP/<span class="number">2</span> server...</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">29</span>:<span class="number">31</span> example.com h2o[<span class="number">2523</span>]: start_server (pid:<span class="number">2523</span>) starting now...</span><br><span class="line"> <span class="number">2</span>月 <span class="number">10</span> <span class="number">10</span>:<span class="number">42</span>:<span class="number">03</span> example.com systemd[<span class="number">1</span>]: Reloaded H2O - the optimized HTTP/<span class="number">1</span>, HTTP/<span class="number">2</span> server.</span><br></pre></td></tr></table></figure>
+<h2 id="u52D5_u4F5C_u78BA_u8A8D"><a href="#u52D5_u4F5C_u78BA_u8A8D" class="headerlink" title="動作確認"></a>動作確認</h2><p>firefoxで、httpsでアクセスしてみると、SSLにてアクセスできていることが確認出来た。</p>
+<img src="/2016/02/letsencrypt-h2o/screenshot.png" alt="[screenshot.png]" title="[screenshot.png]">
+<p>イナヅママークが青くなっていれば、http/2 でアクセスしている。<br>(※ firefoxのアドオン <a href="https://addons.mozilla.org/ja/firefox/addon/spdy-indicator/" target="_blank" rel="external">HTTP/2 and SPDY indicator</a> をインストールする事で利用可能となる)</p>
+<p>なお、アクセスログでも確認ができる。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">192.168.0.1</span> - - <span class="string">[11/Feb/2016:12:40:14 +0900]</span> <span class="string">"<span class="keyword">GET</span> / HTTP/2"</span> <span class="number">200</span> <span class="number">493</span> <span class="string">"-"</span> <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:40.0) Gecko/20100101 Firefox/40.0"</span></span><br></pre></td></tr></table></figure>
+<p>SSL証明書は以下の通り。</p>
+<img src="/2016/02/letsencrypt-h2o/letsencrypt.png" alt="[letsencrypt.png]" title="[letsencrypt.png]">
+<h2 id="SSL_u8A55_u4FA1"><a href="#SSL_u8A55_u4FA1" class="headerlink" title="SSL評価"></a>SSL評価</h2><p><a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">Qualys SSL Report</a> にてSSL評価チェック。</p>
+<img src="/2016/02/letsencrypt-h2o/report.png" alt="[report.png]" title="[report.png]">
+<p>まずまずではないだろうか。</p>
+<h2 id="Let_u2019s_Encrypt__u81EA_u52D5_u66F4_u65B0_u8A2D_u5B9A"><a href="#Let_u2019s_Encrypt__u81EA_u52D5_u66F4_u65B0_u8A2D_u5B9A" class="headerlink" title="Let’s Encrypt 自動更新設定"></a>Let’s Encrypt 自動更新設定</h2><p>Let’s Encryptの証明書有効期間が90日と短いため、自動で更新されるように以下、登録する。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00</span> <span class="number">05</span> <span class="number">01</span> * * /usr/local/letsencrypt-<span class="keyword">auto</span> certonly --webroot -w /var/www/html/example.com -d example.com -m hoge@example.com --renew-by-<span class="keyword">default</span> &amp;&amp; /bin/systemctl reload h2o</span><br></pre></td></tr></table></figure>
+<h3 id="u53C2_u7167URL"><a href="#u53C2_u7167URL" class="headerlink" title="参照URL"></a>参照URL</h3><ul>
+<li><a href="https://blog.apar.jp/linux/3619/" target="_blank" rel="external">Let’s Encrypt サーバー証明書の取得と自動更新設定メモ</a></li>
+<li><a href="http://d.hatena.ne.jp/kazu-yamamoto/20141219/1418976024" target="_blank" rel="external">HTTP/2から見えるTLS事情</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2016/02/letsencrypt-h2o/" data-id="cikhqvult000bi4wg08rj148v" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2016/02/letsencrypt-h2o/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2016/02/letsencrypt-h2o/" class="hatena-bookmark-button" data-hatena-bookmark-title="h2oとLet's Encryptを使ってhttp/2に対応する" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/h2o/">h2o</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http2/">http2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/letsencrypt/">letsencrypt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/02/h2o-rpm-update/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">h2o-rpmで、rpmファイルを作ってh2oをアップデートする。</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 atani<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+<script>
+  var disqus_shortname = 'atani';
+  
+  var disqus_url = 'http://atani.github.io/2016/02/letsencrypt-h2o/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>
