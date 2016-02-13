@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-11T04:07:36.000Z</updated>
+  <updated>2016-02-13T04:06:06.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -13,6 +13,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[peekfd(全ファイル入出力を盗聴)を試してみた。]]></title>
+    <link href="http://atani.github.io/2016/02/peekfd/"/>
+    <id>http://atani.github.io/2016/02/peekfd/</id>
+    <published>2016-02-13T04:05:58.000Z</published>
+    <updated>2016-02-13T04:06:06.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://qiita.com/aosho235/items/9ed2d69b2913033cf95c" target="_blank" rel="external">Linuxのpeekfdコマンドが面白い（全ファイル入出力を盗聴）</a> を参考に試してみた。</p>
+<p>リアルタイムに盗聴出来ている。</p>
+<img src="/2016/02/peekfd/peekfd.gif" alt="[peekfd.gif]" title="[peekfd.gif]">
+<p>使いところによっては便利。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://qiita.com/aosho235/items/9ed2d69b2913033cf95c" target="_blank" rel="external">Linuxのpeekfdコマンドが面白い（全ファイル入出力を盗聴）</a> を参考に試]]>
+    </summary>
+    
+      <category term="peekfd" scheme="http://atani.github.io/tags/peekfd/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[h2oとLet's Encryptを使ってhttp/2に対応する]]></title>
@@ -945,36 +964,6 @@
       <category term="penetration" scheme="http://atani.github.io/tags/penetration/"/>
     
       <category term="security" scheme="http://atani.github.io/tags/security/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[一冊の本で劇的に変われた話]]></title>
-    <link href="http://atani.github.io/2015/07/%E4%B8%80%E5%86%8A%E3%81%AE%E6%9C%AC%E3%81%A7%E5%8A%87%E7%9A%84%E3%81%AB%E5%A4%89%E3%82%8F%E3%82%8C%E3%81%9F/"/>
-    <id>http://atani.github.io/2015/07/一冊の本で劇的に変われた/</id>
-    <published>2015-07-14T15:00:26.000Z</published>
-    <updated>2015-07-14T15:03:20.000Z</updated>
-    <content type="html"><![CDATA[<p>これまでブログをやってみるものの３日坊主だった私が今、アウトプットをし続けてる事が出来ているのは一冊の本に出会ったから。</p>
-<a id="more"></a>
-<p>樺沢紫苑 著の 「読んだら忘れない読書術」</p>
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=daystoremem-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=4763134507" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
-
-<p>たくさんタメになる事が書かれているが、その中で特に<b>出来るだけ</b>実践している事を抜粋。</p>
-<ul>
-<li>１週間に３〜４回のアウトプットをする事で記憶に残りやすくなる。</li>
-<li>読書をする事で、物事を習得する時間を節約出来る。</li>
-<li>速読より深読。早く読んでも記憶に残っていなければ読んでないのと一緒。</li>
-</ul>
-<p>などなど。</p>
-<p>2000円かからず、他人が時間をかけて学んだ体験を学べる本はすごい！</p>
-<p>先ほど出来るだけ実践はしていると記載したが、<br><a href="https://twitter.com/monochromegane" target="_blank" rel="external">goroutine三段さん</a> に<br><b>「がんばりすぎると続かないゾ」 </b><br>と本ブログ立ち上げの際にアドバイスいただいていたので、一切無理はしてないし、楽しく物事を習得できている。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>これまでブログをやってみるものの３日坊主だった私が今、アウトプットをし続けてる事が出来ているのは一冊の本に出会ったから。</p>]]>
-    
-    </summary>
-    
-      <category term="notes" scheme="http://atani.github.io/tags/notes/"/>
     
   </entry>
   
