@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   
-  <title>straceを使った際の備忘録 | Simple blog @atani</title>
+  <title>straceを使った際の不具合調査 | Simple blog @atani</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="処理に時間がかかることがあり、何が原因なのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
+  <meta name="description" content="処理に時間がかかることがあり、どこが原因で遅くなっているのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
 基本的な使い方
 これから処理を実行するとき
 
@@ -16,12 +16,12 @@ ex: strace perl hoge.pl
 既に起動しているプロセスに対して実行するとき
 
 usage: strace -p [pid]
-ex: strace -p 111">
+ex: strac">
 <meta property="og:type" content="article">
-<meta property="og:title" content="straceを使った際の備忘録">
+<meta property="og:title" content="straceを使った際の不具合調査">
 <meta property="og:url" content="http://atani.github.io/2016/02/strace/index.html">
 <meta property="og:site_name" content="Simple blog @atani">
-<meta property="og:description" content="処理に時間がかかることがあり、何が原因なのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
+<meta property="og:description" content="処理に時間がかかることがあり、どこが原因で遅くなっているのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
 基本的な使い方
 これから処理を実行するとき
 
@@ -32,11 +32,11 @@ ex: strace perl hoge.pl
 既に起動しているプロセスに対して実行するとき
 
 usage: strace -p [pid]
-ex: strace -p 111">
-<meta property="og:updated_time" content="2016-02-15T13:07:13.000Z">
+ex: strac">
+<meta property="og:updated_time" content="2016-02-15T13:10:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="straceを使った際の備忘録">
-<meta name="twitter:description" content="処理に時間がかかることがあり、何が原因なのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
+<meta name="twitter:title" content="straceを使った際の不具合調査">
+<meta name="twitter:description" content="処理に時間がかかることがあり、どこが原因で遅くなっているのかを調べるときにstraceを利用して原因調査をしたことがあったので、使い方をまとめる。
 基本的な使い方
 これから処理を実行するとき
 
@@ -47,7 +47,7 @@ ex: strace perl hoge.pl
 既に起動しているプロセスに対して実行するとき
 
 usage: strace -p [pid]
-ex: strace -p 111">
+ex: strac">
 <meta name="twitter:creator" content="@atani">
   
     <link rel="alternative" href="/atom.xml" title="Simple blog @atani" type="application/atom+xml">
@@ -104,7 +104,7 @@ ex: strace -p 111">
         
   
     <h1 class="article-title" itemprop="name">
-      straceを使った際の備忘録
+      straceを使った際の不具合調査
     </h1>
   
 
@@ -116,7 +116,7 @@ ex: strace -p 111">
   <div class="article-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <p>処理に時間がかかることがあり、何が原因なのかを調べるときに<code>strace</code>を利用して原因調査をしたことがあったので、使い方をまとめる。</p>
+        <p>処理に時間がかかることがあり、どこが原因で遅くなっているのかを調べるときに<code>strace</code>を利用して原因調査をしたことがあったので、使い方をまとめる。</p>
 <h1 id="u57FA_u672C_u7684_u306A_u4F7F_u3044_u65B9"><a href="#u57FA_u672C_u7684_u306A_u4F7F_u3044_u65B9" class="headerlink" title="基本的な使い方"></a>基本的な使い方</h1><ul>
 <li><p>これから処理を実行するとき</p>
 <ul>
@@ -176,7 +176,7 @@ ex: strace -p 111">
       
         <a href="http://atani.github.io/2016/02/strace/#disqus_thread" class="article-comment-link">Comments</a>
       
-      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2016/02/strace/" class="hatena-bookmark-button" data-hatena-bookmark-title="straceを使った際の備忘録" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+      <a href="http://b.hatena.ne.jp/entry/atani.github.io/2016/02/strace/" class="hatena-bookmark-button" data-hatena-bookmark-title="straceを使った際の不具合調査" data-hatena-bookmark-layout="standard-balloon" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/strace/">strace</a></li></ul>
 
