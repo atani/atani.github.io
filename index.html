@@ -65,6 +65,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="title-strace" class="article article-type-title" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2016/02/strace/">straceを使った際の備忘録</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2016-02-15T12:32:34.000Z" itemprop="datePublished">02-15-2016</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>処理に時間がかかることがあり、何が原因なのかを調べるときに<code>strace</code>を利用して原因調査をしたことがあったので、使い方をまとめる。</p>
+<h1 id="u57FA_u672C_u7684_u306A_u4F7F_u3044_u65B9"><a href="#u57FA_u672C_u7684_u306A_u4F7F_u3044_u65B9" class="headerlink" title="基本的な使い方"></a>基本的な使い方</h1><ul>
+<li><p>これから処理を実行するとき</p>
+<ul>
+<li>usage: <code>strace 実行処理</code> </li>
+<li>ex: <code>strace perl hoge.pl</code> </li>
+</ul>
+</li>
+<li><p>既に起動しているプロセスに対して実行するとき</p>
+<ul>
+<li>usage: <code>strace -p [pid]</code></li>
+<li>ex: <code>strace -p 111</code></li>
+</ul>
+</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/02/strace/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2016/02/strace/" data-id="ciknzsizz0005fhvuwnunj8mb" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2016/02/strace/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/strace/">strace</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-peekfd" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -90,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/peekfd/" data-id="cikklp8aa000b7ywgspgwqcyl" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/peekfd/" data-id="ciknzsj2b000efhvuoye8fctd" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/peekfd/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -132,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/letsencrypt-h2o/" data-id="cikklp8bg000e7ywgn3u1la1c" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/letsencrypt-h2o/" data-id="ciknzsj2m000hfhvugdqecegb" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/letsencrypt-h2o/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -177,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/h2o-rpm-update/" data-id="cikklp8ca000n7ywgsziobkxz" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/h2o-rpm-update/" data-id="ciknzsj30000qfhvu7e1k9by8" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/h2o-rpm-update/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -218,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/perl-module-version/" data-id="cikklp8a100087ywgd1in1z7l" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/perl-module-version/" data-id="ciknzsj25000bfhvup9sq1xdc" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/perl-module-version/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -277,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/s3-collect-download/" data-id="cikklp86k00057ywgcsg2kvah" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/s3-collect-download/" data-id="ciknzsj070008fhvu04a3mkc5" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/s3-collect-download/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -320,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/02/danboard-lightning/" data-id="cikklp8cj000t7ywgynsmaagm" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/02/danboard-lightning/" data-id="ciknzsj33000wfhvum0zl0srr" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/02/danboard-lightning/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -367,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2016/01/macでパスワードを生成する/" data-id="cikklp8d3000w7ywgz7rudetm" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2016/01/macでパスワードを生成する/" data-id="ciknzsj3b000zfhvugnq1f74l" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2016/01/macでパスワードを生成する/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -394,7 +450,7 @@
 
       </header>
     
-    <time class="article-date" datetime="2015-11-05T17:13:02.000Z" itemprop="datePublished">11-06-2015</time>
+    <time class="article-date" datetime="2015-11-05T17:13:04.000Z" itemprop="datePublished">11-06-2015</time>
     
   </div>
   <div class="article-inner">
@@ -412,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="cikklp8eh001d7ywgsdborszx" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/11/linux-command-3/" data-id="ciknzsj3v001gfhvuryp47f6g" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/11/linux-command-3/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -452,57 +508,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/11/hacker-watch/" data-id="cikklp8dk00107ywg4wmcbcna" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/11/hacker-watch/" data-id="ciknzsj3j0013fhvuh1zeskp0" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/11/hacker-watch/#disqus_thread" class="article-comment-link">Comments</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cowrie/">cowrie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux-command-4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/09/linux-command-4/">現場で必須！超基本Linuxコマンド Vol.4</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-09-10T10:04:07.000Z" itemprop="datePublished">09-10-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前回、ファイルの操作や検索について紹介した。<br>今回は、目的のファイルを探したり、もう少し実践で使う処理について紹介する。</p>
-<p>以下の構成を用いる。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── sample1<span class="class">.txt</span></span><br><span class="line">├── sample2<span class="class">.txt</span></span><br><span class="line">└── temp1</span><br><span class="line">    ├── depthfile1<span class="class">.txt</span></span><br><span class="line">    └── depthfile2.txt</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2015/09/linux-command-4/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/09/linux-command-4/" data-id="cikklp8ec001a7ywg6lqsg6zw" class="article-share-link">Share</a>
-      
-        <a href="http://atani.github.io/2015/09/linux-command-4/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tutorial/">tutorial</a></li></ul>
 
     </footer>
   </div>

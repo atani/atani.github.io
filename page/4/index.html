@@ -65,6 +65,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-firewalld-備忘録" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/06/firewalld-備忘録/">firewalld 備忘録</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-06-26T10:25:08.000Z" itemprop="datePublished">06-26-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>サービスを許可する場合</p>
+<p><code>firewall-cmd --permanent --add-service=http</code></p>
+<p>指定ポートへのアクセス許可</p>
+<p><code>firewall-cmd --permanent --add-port 22/tcp</code></p>
+<p>ポートフォワード設定</p>
+<p><code>firewall-cmd --permanent --zone=public --add-forward-port=port=22:proto=tcp:toport=22222</code></p>
+<p><code>--permanent</code> を指定していると恒久的に設定が反映される。しかし、有効にするには、firewalldの<code>reload</code>か<code>restart</code>が必要。</p>
+<p><code>systemctl restart firewalld.service</code></p>
+<p>設定の確認</p>
+<p><code>firewall-cmd --list-all</code></p>
+<hr>
+<p>参照URL: <a href="http://www.kakiro-web.com/linux/firewalld.html" target="_blank" rel="external">CentOS7.1 64bit firewalldによるアクセス制御</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/06/firewalld-備忘録/" data-id="ciknzsj77003wfhvukb3q71sd" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/06/firewalld-備忘録/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firewalld/">firewalld</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Glastopfで不穏な行動を安全に観察しよう！" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -93,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/Glastopfで不穏な行動を安全に観察しよう！/" data-id="cikklp8n600407ywghoclux2w" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/06/Glastopfで不穏な行動を安全に観察しよう！/" data-id="ciknzsj7d0043fhvujvkcww4v" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/06/Glastopfで不穏な行動を安全に観察しよう！/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -138,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/Javascriptの難読化されたコードを解読しよう！/" data-id="cikklp8my003y7ywgarwsji2h" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/06/Javascriptの難読化されたコードを解読しよう！/" data-id="ciknzsj790041fhvuf7t43a3w" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/06/Javascriptの難読化されたコードを解読しよう！/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -185,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/hexoで日本語のパーマリンクを見れるようにしよう！/" data-id="cikklp8mn003p7ywg8q6jvt4a" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/06/hexoで日本語のパーマリンクを見れるようにしよう！/" data-id="ciknzsj72003sfhvuff558raq" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/06/hexoで日本語のパーマリンクを見れるようにしよう！/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -228,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/起動が遅い原因は？そんな時はsystemd-analyzeでチェック/" data-id="cikklp8m1003e7ywgi2ne127v" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/06/起動が遅い原因は？そんな時はsystemd-analyzeでチェック/" data-id="ciknzsj6s003hfhvu0y6nmogt" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/06/起動が遅い原因は？そんな時はsystemd-analyzeでチェック/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -270,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/swaksで快適なメール送信テスト/" data-id="cikklp8mc003i7ywg3j001fsc" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/06/swaksで快適なメール送信テスト/" data-id="ciknzsj6x003lfhvub28wcx4t" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/06/swaksで快適なメール送信テスト/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -315,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/" data-id="cikklp8o2004h7ywgi5og4407" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/" data-id="ciknzsj7t004kfhvugyoalj4h" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/05/SiteGuard-WP-Plugin/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -359,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/localeの設定を変更しよう！/" data-id="cikklp8nq00497ywgyc3sqg1s" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/05/localeの設定を変更しよう！/" data-id="ciknzsj7k004cfhvusfwsrzyc" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/05/localeの設定を変更しよう！/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -401,7 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/vim-permute/" data-id="cikklp8n800437ywgii4m90qa" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/05/vim-permute/" data-id="ciknzsj7f0046fhvusl2yl261" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/05/vim-permute/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -443,56 +492,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/vagrant-scp/" data-id="cikklp8nn00467ywg1tsjaohe" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/05/vagrant-scp/" data-id="ciknzsj7i0049fhvu9s4zwxwz" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/05/vagrant-scp/#disqus_thread" class="article-comment-link">Comments</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vagrant/">vagrant</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Start-haraka" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/05/Start-haraka/">harakaでsmtpサーバを立てよう！</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-05-19T13:57:54.000Z" itemprop="datePublished">05-19-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://haraka.github.io">haraka</a> is a modern, high performance, flexible SMTP server.</p>
-<p>harakaで自分だけのオリジナルSMTPサーバを立てちゃおう！</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/05/Start-haraka/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/05/Start-haraka/" data-id="cikklp8nx004e7ywgqnxroivh" class="article-share-link">Share</a>
-      
-        <a href="http://atani.github.io/2015/05/Start-haraka/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smtp/">smtp</a></li></ul>
 
     </footer>
   </div>
