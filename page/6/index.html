@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-disk-quota-exceeded" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2009/02/disk-quota-exceeded/">Transfer aborted. Disk quota exceeded</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2009-02-05T13:33:53.000Z" itemprop="datePublished">02-05-2009</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数GBのファイルをアップロードしてた時の話。</p>
+<p>途中で以下のメッセージが出て止まった。</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Transfer aborted. Disk quota exceeded</span><br><span class="line"><span class="string">[ 転送を中止しました。ディスク割り当てを超過しました。 ]</span></span><br></pre></td></tr></table></figure>
+<p>サーバースペースもかなり空きがあったのだが、ProFTPの設定で、</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MaxStoreFileSize                <span class="number">500</span> Mb</span><br></pre></td></tr></table></figure>
+<p>となっていた。<br>500MBまでアップロード可能という設定。これを変更することにより回避できた。</p>
+<p>試しに5Gbと設定して、proftpを再起動したら、以下エラー。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Starting</span><br><span class="line">proftpd:  – Fatal: MaxStoreFileSize: <span class="type">number</span> <span class="keyword">of</span> bytes must be <span class="keyword">between</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">and</span> <span class="number">4294967295</span> <span class="function_start"><span class="keyword">on</span></span> line <span class="number">31</span> <span class="keyword">of</span> ‘/usr/<span class="keyword">local</span>/etc/proftpd.conf’</span><br></pre></td></tr></table></figure>
+<p>4294967295 バイト(約)3.9GBまでしか設定できないみたい。<br>そもそもそんな大容量での制限って意味がないという解釈になるだろうか。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2009/02/disk-quota-exceeded/" data-id="cikpmsz7q005hs6wgdqyflzn8" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2009/02/disk-quota-exceeded/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/error/">error</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-change-date" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -88,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2009/02/change-date/" data-id="ciknzsj92005ffhvuwqzbwjtd" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2009/02/change-date/" data-id="cikpmsz7s005js6wgmwvkojtt" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2009/02/change-date/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -132,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2008/06/nkf/" data-id="ciknzsj93005ifhvuevr36hxc" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2008/06/nkf/" data-id="cikpmsz7v005ms6wg2cxelo4y" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2008/06/nkf/#disqus_thread" class="article-comment-link">Comments</a>
       

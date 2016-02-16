@@ -65,6 +65,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ハニーポットcowrieのログを、mariaDBで管理しよう。" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/">ハニーポットcowrieのログを、mariaDBで管理しよう。</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-07-22T14:00:26.000Z" itemprop="datePublished">07-22-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前回、<a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">構築手順を書いたkippo</a>。<br>ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">21</span> <span class="number">00</span>:<span class="number">41</span>:<span class="number">42</span>+<span class="number">0900</span> [-] Unable <span class="built_in">to</span> <span class="built_in">format</span> event &#123;<span class="string">'log_namespace'</span>: <span class="string">'twisted.logger._global'</span>, <span class="string">'log_level'</span>: &lt;LogLevel=warn&gt;, <span class="string">'fileNow'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'format'</span>: <span class="string">'%(log_legacy)s'</span>, <span class="string">'lineNow'</span>: <span class="number">210</span>, <span class="string">'fileThen'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'log_source'</span>: None, <span class="string">'system'</span>: <span class="string">'-'</span>, <span class="string">'lineThen'</span>: <span class="number">210</span>, <span class="string">'log_logger'</span>: &lt;Logger <span class="string">'twisted.logger._global'</span>&gt;, <span class="string">'time'</span>: <span class="number">1437406902.593759</span>, <span class="string">'log_format'</span>: <span class="string">'Warning: primary log target selected twice at &lt;&#123;fileNow&#125;:&#123;lineNow&#125;&gt; - previously selected at &lt;&#123;fileThen:logThen&#125;&gt;.  Remove one of the calls to beginLoggingTo.'</span>, <span class="string">'message'</span>: (), <span class="string">'log_time'</span>: <span class="number">1437406902.593759</span>&#125;: Invalid conversion specification</span><br></pre></td></tr></table></figure>
+<p>調べてみると、Twistedのインターフェースが変わったようで、MySQL(mariaDB)にデータが入らなかった。</p>
+<p>そこで、kippoをベースに作られた <code>cowrie</code>(タカラガイ) を発見。<br>こちらを利用することにした。</p>
+<p>cowrieでは、先ほどの問題は解消していた。<br><a href="https://github.com/micheloosterhof/cowrie/issues/8">Logging issue with Twisted 15</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/" data-id="cikpmsyzv002as6wgipkouf8y" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/secutiry/">secutiry</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-wordpress利用サイトのセキュリティ診断書を作成するPart2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -100,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" data-id="ciknzsj54002bfhvucq0u38xs" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/" data-id="cikpmsz05002fs6wg0cl62cn1" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/wordpress利用サイトのセキュリティ診断書を作成するPart2/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -142,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/一冊の本で劇的に変われた/" data-id="ciknzsj4w0024fhvuynniebpb" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/一冊の本で劇的に変われた/" data-id="cikpmsyzq0028s6wgtgbn6z12" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/一冊の本で劇的に変われた/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -185,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記/" data-id="ciknzsj5t0030fhvuwkwzfshn" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/SSH不正侵入、観察日記/" data-id="cikpmsz1e0034s6wgod2eto6g" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/SSH不正侵入、観察日記/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -241,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" data-id="ciknzsj620039fhvuax05k1ir" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/" data-id="cikpmsz1z003ds6wg4wq9p24h" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/SSHの不正侵入で多いパスワードランキング/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -284,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/" data-id="ciknzsj4r0021fhvu9xjl7wmt" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/" data-id="cikpmsyzi0025s6wgnpiq9i31" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/２週間でここまで出来た２週間チャレンジ/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -327,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/" data-id="ciknzsj6q003dfhvuh2his7vi" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/" data-id="cikpmsz30003hs6wgciicjnh3" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -370,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/" data-id="ciknzsj5e002nfhvutuwzbbvo" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/" data-id="cikpmsz0n002rs6wgtflh85sc" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/sshのポート番号を変更してセキュリティ対策/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -413,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/mod-mrubyとmruby-geoipを使ってアクセス制御/" data-id="ciknzsj5g002qfhvuug3s2f7s" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/mod-mrubyとmruby-geoipを使ってアクセス制御/" data-id="cikpmsz0q002us6wgdpmupum9" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/mod-mrubyとmruby-geoipを使ってアクセス制御/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -455,55 +501,13 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/" data-id="ciknzsj58002jfhvu5ma4yuhk" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/" data-id="cikpmsz0f002ns6wg8df2j415" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2015/07/ssh専用ハニーポットKippo/#disqus_thread" class="article-comment-link">Comments</a>
       
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/honeypot/">honeypot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hexoプラグインのご紹介" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/06/hexoプラグインのご紹介/">hexoプラグインのご紹介</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-06-30T04:50:27.000Z" itemprop="datePublished">06-30-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>hexo を使いはじめて、いくつか欲しい機能があったので <a href="http://blog.kazu69.net/">@kazu69</a>さんにお問い合わせしたところ、さくっと作っていただいたのでご紹介！</p>
-        
-          <p class="article-more-link">
-            <a href="/2015/06/hexoプラグインのご紹介/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://atani.github.io/2015/06/hexoプラグインのご紹介/" data-id="ciknzsj70003pfhvugqtak1u4" class="article-share-link">Share</a>
-      
-        <a href="http://atani.github.io/2015/06/hexoプラグインのご紹介/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
     </footer>
   </div>

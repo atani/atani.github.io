@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-15T13:10:42.000Z</updated>
+  <updated>2016-02-16T16:35:47.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[SSHの不正侵入で多いものランキング]]></title>
+    <link href="http://atani.github.io/2016/02/cracklog/"/>
+    <id>http://atani.github.io/2016/02/cracklog/</id>
+    <published>2016-02-16T16:35:47.000Z</published>
+    <updated>2016-02-16T16:35:47.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/">cowrie</a>を <strong>7か月</strong> 運用して、大量に来た不正アクセス全20154件から色んなランキングを出してみた。</p>
+<p>今後の運用の参考にして欲しい。</p>
+<a id="more"></a>
+<h1 id="u30A2_u30AB_u30A6_u30F3_u30C8_u540D_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01"><a href="#u30A2_u30AB_u30A6_u30F3_u30C8_u540D_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01" class="headerlink" title="アカウント名ランキング！"></a>アカウント名ランキング！</h1><img src="/2016/02/cracklog/account.png" alt="[account.png]" title="[account.png]">
+<p>１位はダントツで <code>root</code>。 rootユーザーでログインできたらクラッカーはやりたい放題。２位以降もよく使いそうなパスワードと、ミドルウェアをインストールすると作られるアカウントがランクいんしている。 </p>
+<h1 id="u30D1_u30B9_u30EF_u30FC_u30C9_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01"><a href="#u30D1_u30B9_u30EF_u30FC_u30C9_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01" class="headerlink" title="パスワードランキング！"></a>パスワードランキング！</h1><img src="/2016/02/cracklog/password.png" alt="[password.png]" title="[password.png]">
+<p>1位は<code>password</code>。 ２位以降も開発環境などで一時的に使いそうなパスワードがランキングしている。本番では絶対に設定してはいけないパスワードたち。</p>
+<h1 id="u56FD_u30B3_u30FC_u30C9_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01"><a href="#u56FD_u30B3_u30FC_u30C9_u30E9_u30F3_u30AD_u30F3_u30B0_uFF01" class="headerlink" title="国コードランキング！"></a>国コードランキング！</h1><img src="/2016/02/cracklog/country.png" alt="[country.png]" title="[country.png]">
+<p>1位は、<code>US</code>(アメリカ) ! ２位は<code>CN</code>(中国)と続いた。</p>
+<p>今後も統計を取っていくのでお楽しみに。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://atani.github.io/2015/08/cowrie-td-agent-elasticsearch-kibana4/">cowrie</a>を <strong>7か月</strong> 運用して、大量に来た不正アクセス全20154件から色んなランキングを出してみた。</p>
+<p>今後の運用の参考にして欲しい。</p>]]>
+    
+    </summary>
+    
+      <category term="cowrie" scheme="http://atani.github.io/tags/cowrie/"/>
+    
+      <category term="honeypot" scheme="http://atani.github.io/tags/honeypot/"/>
+    
+      <category term="security" scheme="http://atani.github.io/tags/security/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[straceを使った際の不具合調査]]></title>
@@ -411,7 +442,7 @@
     <title><![CDATA[現場で必須！超基本Linuxコマンド Vol.3]]></title>
     <link href="http://atani.github.io/2015/11/linux-command-3/"/>
     <id>http://atani.github.io/2015/11/linux-command-3/</id>
-    <published>2015-11-05T17:13:04.000Z</published>
+    <published>2015-11-05T17:13:02.000Z</published>
     <updated>2015-11-05T17:13:02.000Z</updated>
     <content type="html"><![CDATA[<p>今回はファイルの中身を見たり検索したりしてみよう。</p>
 <p>まず事前に中身のあるファイルを用意する。</p>
@@ -915,65 +946,6 @@
       <category term="honeypot" scheme="http://atani.github.io/tags/honeypot/"/>
     
       <category term="security" scheme="http://atani.github.io/tags/security/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[ハニーポットcowrieのログを、mariaDBで管理しよう。]]></title>
-    <link href="http://atani.github.io/2015/07/%E3%83%8F%E3%83%8B%E3%83%BC%E3%83%9D%E3%83%83%E3%83%88cowrie%E3%81%AE%E3%83%AD%E3%82%B0%E3%82%92%E3%80%81mariaDB%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%97%E3%82%88%E3%81%86%E3%80%82/"/>
-    <id>http://atani.github.io/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/</id>
-    <published>2015-07-22T14:00:26.000Z</published>
-    <updated>2015-07-22T13:33:19.000Z</updated>
-    <content type="html"><![CDATA[<p>前回、<a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">構築手順を書いたkippo</a>。<br>ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">21</span> <span class="number">00</span>:<span class="number">41</span>:<span class="number">42</span>+<span class="number">0900</span> [-] Unable <span class="built_in">to</span> <span class="built_in">format</span> event &#123;<span class="string">'log_namespace'</span>: <span class="string">'twisted.logger._global'</span>, <span class="string">'log_level'</span>: &lt;LogLevel=warn&gt;, <span class="string">'fileNow'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'format'</span>: <span class="string">'%(log_legacy)s'</span>, <span class="string">'lineNow'</span>: <span class="number">210</span>, <span class="string">'fileThen'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'log_source'</span>: None, <span class="string">'system'</span>: <span class="string">'-'</span>, <span class="string">'lineThen'</span>: <span class="number">210</span>, <span class="string">'log_logger'</span>: &lt;Logger <span class="string">'twisted.logger._global'</span>&gt;, <span class="string">'time'</span>: <span class="number">1437406902.593759</span>, <span class="string">'log_format'</span>: <span class="string">'Warning: primary log target selected twice at &lt;&#123;fileNow&#125;:&#123;lineNow&#125;&gt; - previously selected at &lt;&#123;fileThen:logThen&#125;&gt;.  Remove one of the calls to beginLoggingTo.'</span>, <span class="string">'message'</span>: (), <span class="string">'log_time'</span>: <span class="number">1437406902.593759</span>&#125;: Invalid conversion specification</span><br></pre></td></tr></table></figure>
-<p>調べてみると、Twistedのインターフェースが変わったようで、MySQL(mariaDB)にデータが入らなかった。</p>
-<p>そこで、kippoをベースに作られた <code>cowrie</code>(タカラガイ) を発見。<br>こちらを利用することにした。</p>
-<p>cowrieでは、先ほどの問題は解消していた。<br><a href="https://github.com/micheloosterhof/cowrie/issues/8" target="_blank" rel="external">Logging issue with Twisted 15</a></p>
-<a id="more"></a>
-<p>必要モジュールはkippoと同じなので割愛する。<br><a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">こちら</a>を参照されたし。</p>
-<h2 id="mariaDB_u3092_u30A4_u30F3_u30B9_u30C8_u30FC_u30EB"><a href="#mariaDB_u3092_u30A4_u30F3_u30B9_u30C8_u30FC_u30EB" class="headerlink" title="mariaDBをインストール"></a>mariaDBをインストール</h2><p>mariaDBをインストールする。</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">yum</span> -y install <span class="keyword">mariadb-server </span><span class="keyword">mariadb-libs </span><span class="keyword">mariadb</span></span><br></pre></td></tr></table></figure>
-<p>madiaDBを起動する。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> mariadb.service</span><br></pre></td></tr></table></figure>
-<p>mariaDBを自動起動するように設定する。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mariadb.service</span><br></pre></td></tr></table></figure>
-<p>cowrieのログをmariaDBに入れるためデータベースを作成し、ログイン権限を設定する。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line"><span class="operator"><span class="keyword">use</span> mysql</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'cowrie'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'your password'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> ALL <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> cowrie@localhost <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'your password'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> cowrie;</span></span><br></pre></td></tr></table></figure>
-<p>mariaDBの設定はこれでおしまい。</p>
-<p>次にcowrieを使えるようにしていく。<br>必要パッケージをインストールする。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> MySQL-python</span><br></pre></td></tr></table></figure>
-<p>cowrieを使えるようにする。<code>root</code>ユーザー以外で作業をしよう。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/micheloosterhof/cowrie.git</span><br><span class="line">cd cowrie</span><br></pre></td></tr></table></figure>
-<p><code>cowrie.cfg</code> を修正。最小限の項目について説明する。</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="setting">listen_port = <span class="value"><span class="number">22222</span> ## 好きなポートを指定する。デフォルトは<span class="number">2222</span></span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[database_mysql]</span>  <span class="comment">## データベースの接続設定を行う。</span></span><br><span class="line"><span class="setting">host = <span class="value">localhost</span></span></span><br><span class="line"><span class="setting">database = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">username = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">password = <span class="value">cowrie</span></span></span><br><span class="line"><span class="setting">port = <span class="value"><span class="number">3306</span></span></span></span><br></pre></td></tr></table></figure>
-<p>cowrieで使うテーブルを、先ほど作成したデータベース<code>cowrie</code>の中に作成していく。<code>cowrie/doc/sql</code>の中にsqlファイルがあるので、こちらを使う。</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> cowrie/doc/sql</span><br><span class="line"><span class="keyword">cat</span> mysql.sql | mysql -<span class="keyword">u</span> cowrie  -p cowrie</span><br><span class="line"><span class="keyword">cat</span> <span class="keyword">update</span>*.sql | mysql -<span class="keyword">u</span> cowrie  -p cowrie</span><br></pre></td></tr></table></figure>
-<p>mariadbにログインしてテーブルができていることを確認する。</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [cowrie]&gt; show tables;</span><br><span class="line"><span class="code">+------------------+</span></span><br><span class="line"><span class="header">| Tables_in_cowrie |</span><br><span class="line">+------------------+</span></span><br><span class="line">| auth             |</span><br><span class="line">| clients          |</span><br><span class="line">| downloads        |</span><br><span class="line">| input            |</span><br><span class="line">| sensors          |</span><br><span class="line">| sessions         |</span><br><span class="line"><span class="header">| ttylog           |</span><br><span class="line">+------------------+</span></span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>ここまで出来れば後は、cowrieを起動する。</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sh</span> start.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
-<p>必要あれば、22ポートのアクセスを、cowrieのlistenしているポートに転送してあげれば、あとは不正アクセスを待つだけ(自身でアクセスしてmariaDBにデータが入っていることを確認しよう)。</p>
-<h1 id="u6700_u5F8C_u306B_u3001_u6052_u4F8B_u306E_u89B3_u5BDF_u65E5_u8A18"><a href="#u6700_u5F8C_u306B_u3001_u6052_u4F8B_u306E_u89B3_u5BDF_u65E5_u8A18" class="headerlink" title="最後に、恒例の観察日記"></a>最後に、恒例の観察日記</h1><p>クラッカーの行動を今回も観察してみよう。<br>サーバを停止しようと試みたが出来ず、rebootで我慢したようだ。<br>クラッカーのうちの多くは動画のように愉快犯である。</p>
-<img src="/2015/07/ハニーポットcowrieのログを、mariaDBで管理しよう。/kippo_log.gif" alt="[kippo_log.gif]" title="[kippo_log.gif]">
-<hr>
-<h2 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/micheloosterhof/cowrie" target="_blank" rel="external">cowrie</a></li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>前回、<a href="http://atani.github.io/2015/07/CentOS7にKippoをインストールする/">構築手順を書いたkippo</a>。<br>ログをMySQL(mariaDB)で管理したいと思い、kippoで設定を試みるも、以下エラーが出て、途方にくれていた。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">07</span>-<span class="number">21</span> <span class="number">00</span>:<span class="number">41</span>:<span class="number">42</span>+<span class="number">0900</span> [-] Unable <span class="built_in">to</span> <span class="built_in">format</span> event &#123;<span class="string">'log_namespace'</span>: <span class="string">'twisted.logger._global'</span>, <span class="string">'log_level'</span>: &lt;LogLevel=warn&gt;, <span class="string">'fileNow'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'format'</span>: <span class="string">'%(log_legacy)s'</span>, <span class="string">'lineNow'</span>: <span class="number">210</span>, <span class="string">'fileThen'</span>: <span class="string">'/usr/lib64/python2.7/site-packages/twisted/python/log.py'</span>, <span class="string">'log_source'</span>: None, <span class="string">'system'</span>: <span class="string">'-'</span>, <span class="string">'lineThen'</span>: <span class="number">210</span>, <span class="string">'log_logger'</span>: &lt;Logger <span class="string">'twisted.logger._global'</span>&gt;, <span class="string">'time'</span>: <span class="number">1437406902.593759</span>, <span class="string">'log_format'</span>: <span class="string">'Warning: primary log target selected twice at &lt;&#123;fileNow&#125;:&#123;lineNow&#125;&gt; - previously selected at &lt;&#123;fileThen:logThen&#125;&gt;.  Remove one of the calls to beginLoggingTo.'</span>, <span class="string">'message'</span>: (), <span class="string">'log_time'</span>: <span class="number">1437406902.593759</span>&#125;: Invalid conversion specification</span><br></pre></td></tr></table></figure>
-<p>調べてみると、Twistedのインターフェースが変わったようで、MySQL(mariaDB)にデータが入らなかった。</p>
-<p>そこで、kippoをベースに作られた <code>cowrie</code>(タカラガイ) を発見。<br>こちらを利用することにした。</p>
-<p>cowrieでは、先ほどの問題は解消していた。<br><a href="https://github.com/micheloosterhof/cowrie/issues/8">Logging issue with Twisted 15</a></p>]]>
-    
-    </summary>
-    
-      <category term="centos7" scheme="http://atani.github.io/tags/centos7/"/>
-    
-      <category term="honeypot" scheme="http://atani.github.io/tags/honeypot/"/>
-    
-      <category term="secutiry" scheme="http://atani.github.io/tags/secutiry/"/>
     
   </entry>
   
