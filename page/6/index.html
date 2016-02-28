@@ -65,6 +65,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rpm-hang" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2009/04/rpm-hang/">rpmの応答がなくなる場合の対処法</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2009-04-18T11:37:38.000Z" itemprop="datePublished">04-18-2009</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>rpm コマンドを実行すると、応答がなくなる事がある。<br>この対処法。</p>
+<p>rpmのDBを削除して再作成してあげると解決した。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@andk14 ~]<span class="id">#rm</span> /var/lib/rpm/__db.<span class="number">00</span>[<span class="number">1</span>-<span class="number">3</span>]</span><br><span class="line">[root@andk14 ~]<span class="id">#rpm</span> –rebuilddb</span><br><span class="line">error: db4 <span class="function"><span class="title">error</span><span class="params">(<span class="number">16</span>)</span></span> from dbenv-&gt;remove: Device or resource busy</span><br></pre></td></tr></table></figure>
+<p>エラー出るが、これで正常動作をするようになる。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://atani.github.io/2009/04/rpm-hang/" data-id="cil6e7q9u005fkpwgpawzqkkf" class="article-share-link">Share</a>
+      
+        <a href="http://atani.github.io/2009/04/rpm-hang/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/error/">error</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hang/">hang</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-disk-quota-exceeded" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -95,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2009/02/disk-quota-exceeded/" data-id="cikpmsz7q005hs6wgdqyflzn8" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2009/02/disk-quota-exceeded/" data-id="cil6e7q9z005kkpwgomqmd9es" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2009/02/disk-quota-exceeded/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -134,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2009/02/change-date/" data-id="cikpmsz7s005js6wgmwvkojtt" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2009/02/change-date/" data-id="cil6e7qa1005mkpwgwvz6ibjg" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2009/02/change-date/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -178,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://atani.github.io/2008/06/nkf/" data-id="cikpmsz7v005ms6wg2cxelo4y" class="article-share-link">Share</a>
+      <a data-url="http://atani.github.io/2008/06/nkf/" data-id="cil6e7qa4005pkpwg6q1f8en7" class="article-share-link">Share</a>
       
         <a href="http://atani.github.io/2008/06/nkf/#disqus_thread" class="article-comment-link">Comments</a>
       
