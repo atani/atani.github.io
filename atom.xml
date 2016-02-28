@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-28T10:07:18.000Z</updated>
+  <updated>2016-02-28T10:10:17.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[iterm2-version3]]></title>
+    <title><![CDATA[iTerm2 ver3ベータ版が出ました。]]></title>
     <link href="http://atani.github.io/2016/02/iterm2-version3/"/>
     <id>http://atani.github.io/2016/02/iterm2-version3/</id>
     <published>2016-02-28T10:07:06.000Z</published>
-    <updated>2016-02-28T10:07:18.000Z</updated>
+    <updated>2016-02-28T10:10:17.000Z</updated>
     <content type="html"><![CDATA[<p><a href="https://iterm2.com/downloads.html" target="_blank" rel="external">iTerm2 2.9.20160206 beta</a> のベータ版が登場。<br>見た目が変わったり、親切機能が増えているので、いくつかご紹介。</p>
 <a id="more"></a>
 <h1 id="u30A2_u30A4_u30B3_u30F3_u304C_u5909_u308F_u3063_u305F"><a href="#u30A2_u30A4_u30B3_u30F3_u304C_u5909_u308F_u3063_u305F" class="headerlink" title="アイコンが変わった"></a>アイコンが変わった</h1><p>アイコンがフラットデザインになってる。</p>
