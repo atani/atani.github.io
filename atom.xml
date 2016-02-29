@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://atani.github.io/"/>
-  <updated>2016-02-28T10:10:17.000Z</updated>
+  <updated>2016-02-29T00:22:42.000Z</updated>
   <id>http://atani.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://atani.github.io/2016/02/iterm2-version3/"/>
     <id>http://atani.github.io/2016/02/iterm2-version3/</id>
     <published>2016-02-28T10:07:06.000Z</published>
-    <updated>2016-02-28T10:10:17.000Z</updated>
+    <updated>2016-02-29T00:22:42.000Z</updated>
     <content type="html"><![CDATA[<p><a href="https://iterm2.com/downloads.html" target="_blank" rel="external">iTerm2 2.9.20160206 beta</a> のベータ版が登場。<br>見た目が変わったり、親切機能が増えているので、いくつかご紹介。</p>
 <a id="more"></a>
 <h1 id="u30A2_u30A4_u30B3_u30F3_u304C_u5909_u308F_u3063_u305F"><a href="#u30A2_u30A4_u30B3_u30F3_u304C_u5909_u308F_u3063_u305F" class="headerlink" title="アイコンが変わった"></a>アイコンが変わった</h1><p>アイコンがフラットデザインになってる。</p>
@@ -31,7 +31,7 @@
 <p><code>Edit &gt; Paste Special &gt; Warn before Multi-Line Paste</code></p>
 <p>で変更することができる。</p>
 <p>また、上記はペーストの中身を見ることができないが、 <code>Cmd + Option + V</code> で中身を確認することができ、編集してペーストすることもできる。</p>
-<img src="/2016/02/iterm2-version3/paste.png" alt="[paste.png]" title="[paste.png]">
+<img src="/2016/02/iterm2-version3/paste2.png" alt="[paste2.png]" title="[paste2.png]">
 <p>ちなみに既存バージョンの場合、 @harasou 氏謹製の<a href="https://github.com/harasou/may-i-paste" target="_blank" rel="external">may-i-paste</a>を使う事で同等の機能を使うことができる。</p>
 <h1 id="u30BF_u30D6_u306E_u30C6_u30FC_u30DE_u304C_u5909_u3048_u3089_u308C_u308B_u3002"><a href="#u30BF_u30D6_u306E_u30C6_u30FC_u30DE_u304C_u5909_u3048_u3089_u308C_u308B_u3002" class="headerlink" title="タブのテーマが変えられる。"></a>タブのテーマが変えられる。</h1><p>タブのテーマと位置を変更することができるようになった。テーマは２種類</p>
 <ul>
