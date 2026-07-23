@@ -17,7 +17,7 @@
 <body>
   <header class="site-header">
     <a class="identity" href="#top" aria-label="ページの先頭へ">
-      <span class="identity__mark" aria-hidden="true">AT</span>
+      <img class="identity__mark" src="/assets/profile-icon.png" alt="" width="256" height="256">
       <span><strong>Akira Taniwaki</strong><small>Independent Developer</small></span>
     </a>
     <nav aria-label="メインナビゲーション">
@@ -47,13 +47,14 @@
 
     <section class="intro" aria-labelledby="intro-title">
       <p class="section-kicker">WHAT I MAKE</p>
-      <h2 id="intro-title">誰かの「欲しかった」を、<br>小さくつくって、育てていく。</h2>
+      <h2 id="intro-title">誰かの「欲しかった」を、<br class="br-wide">小さくつくって、育てていく。</h2>
       <p>公開して終わりではなく、使う人の声を聞きながら改善を続けます。大きなサービスが拾いにくい、小さく具体的な困りごとが出発点です。</p>
     </section>
 
     <section class="projects" id="projects" aria-labelledby="projects-title">
       <header class="section-header">
         <div><p class="section-kicker">APPS</p><h2 id="projects-title">開発しているアプリ</h2></div>
+        <p class="section-header__note">App Storeで公開中の<br>iPhoneアプリは8本です。</p>
       </header>
       <div class="project-grid">
         <article class="project project--featured">
@@ -98,6 +99,51 @@
           </div>
         </article>
       </div>
+
+      <div class="more-apps" aria-labelledby="more-apps-title">
+        <div class="more-apps__head">
+          <p class="section-kicker">MORE APPS</p>
+          <h3 id="more-apps-title">ほかにつくったアプリ</h3>
+          <p>暮らしや趣味、仕事にある小さな用事に向けて、買い切りで長く使えるアプリを公開しています。</p>
+        </div>
+        <ul class="app-list">
+          <li>
+            <a href="https://apps.apple.com/jp/app/id6781045740">
+              <img src="/assets/leafmark-icon.png" alt="" width="256" height="256" loading="lazy">
+              <div><strong>Leafmark</strong><span>読書</span><p>端末内のEPUBをそのまま開き、ハイライトを書き出せる買い切りのリーダーです。</p></div>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </li>
+          <li>
+            <a href="https://apps.apple.com/jp/app/id6782310741">
+              <img src="/assets/dotto-icon.png" alt="" width="256" height="256" loading="lazy">
+              <div><strong>Dotto</strong><span>タスク管理</span><p>1画面とワンタップだけのToDo。月額を払わずに使い続けられます。</p></div>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </li>
+          <li>
+            <a href="https://apps.apple.com/jp/app/id6791587493">
+              <img src="/assets/peyo-icon.png" alt="" width="256" height="256" loading="lazy">
+              <div><strong>Peyo</strong><span>図案づくり</span><p>ペヨーテステッチのビーズ図案を指で描き、色ごとの必要数まで自動で集計します。</p></div>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </li>
+          <li>
+            <a href="https://apps.apple.com/jp/app/id6782772002">
+              <img src="/assets/planonce-icon.png" alt="" width="256" height="256" loading="lazy">
+              <div><strong>PlanOnce</strong><span>家計</span><p>収入に役割を割り当てるゼロベース家計簿。銀行連携なし、記録は端末内だけで完結します。</p></div>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </li>
+          <li>
+            <a href="https://apps.apple.com/jp/app/id6785241430">
+              <img src="/assets/chillcast-icon.png" alt="" width="256" height="256" loading="lazy">
+              <div><strong>ChillCast</strong><span>果樹・気象</span><p>果樹が冬に受けた低温を、実測の気温データから積算して確かめられます。</p></div>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="about" id="about" aria-labelledby="about-title">
@@ -108,7 +154,7 @@
         <dl>
           <div><dt>Focus</dt><dd>ファン体験・スポーツ・現場の準備</dd></div>
           <div><dt>Principles</dt><dd>シンプル、低コスト、長く保守できる</dd></div>
-          <div><dt>Works</dt><dd>iPhone Apps</dd></div>
+          <div><dt>Works</dt><dd>iPhoneアプリ 8本を公開中</dd></div>
         </dl>
       </div>
     </section>
@@ -116,7 +162,7 @@
     <section class="support" id="support" aria-labelledby="support-title">
       <div class="support__copy">
         <p class="section-kicker">KEEP MAKING</p>
-        <h2 id="support-title">個人開発を、<br>一緒に育ててもらえたら。</h2>
+        <h2 id="support-title">個人開発を、<br class="br-wide">一緒に育ててもらえたら。</h2>
         <p>アプリの感想や「こんなものが欲しい」という声が、次の改善につながります。OFUSEでいただいた支援は、開発者プログラムの費用、動作確認、継続的な保守に活用します。</p>
         <div class="support__actions">
           <a class="button button--dark" href="/support/">Android版への取り組みを見る <span aria-hidden="true">→</span></a>
@@ -136,7 +182,7 @@
   </main>
 
   <footer>
-    <div class="identity identity--footer"><span class="identity__mark" aria-hidden="true">AT</span><span><strong>Akira Taniwaki</strong><small>Independent Developer</small></span></div>
+    <div class="identity identity--footer"><img class="identity__mark" src="/assets/profile-icon.png" alt="" width="256" height="256"><span><strong>Akira Taniwaki</strong><small>Independent Developer</small></span></div>
     <div class="footer-links"><a href="https://github.com/atani">GitHub</a><a href="https://note.com/akiraphoto">note</a><a href="https://zenn.dev/atani">Zenn</a><a href="/archives/">Archive</a></div>
     <p>© 2026 Akira Taniwaki</p>
   </footer>
