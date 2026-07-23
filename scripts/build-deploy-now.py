@@ -5,6 +5,9 @@ Deploy Now は Next.js の standalone 出力を動かす前提なので、ポー
 ページを public/ に置いた最小の Next.js アプリを生成する。ページ自体は静的 HTML の
 ままで、next.config の rewrites で `/` と `/support/` を public/ 配下へ向ける。
 
+支援ページは Deploy Now でのみ公開するため、ソースは GitHub Pages (Jekyll) が
+出力しない `_deploy-now/` に置いてある。
+
 GitHub Pages 側にしか存在しないパス (ブログのアーカイブ、アンクラスPortの紹介
 ページ) への絶対パスリンクは、GitHub Pages の URL に書き換える。
 
@@ -34,10 +37,11 @@ PAGES_ONLY_LINKS = {
     'href="/anclas-port/#contact"': f'href="{PAGES}/anclas-port/#contact"',
 }
 
-# 配信先のパス。next.config の trailingSlash: true に合わせ、末尾スラッシュ付きを正とする。
+# リポジトリ内のソース -> 配信先の (パス, public 配下の出力先)。
+# next.config の trailingSlash: true に合わせ、末尾スラッシュ付きを正とする。
 PAGES_TO_COPY = {
-    "index.html": "/",
-    "support/index.html": "/support/",
+    "index.html": ("/", "index.html"),
+    "_deploy-now/support/index.html": ("/support/", "support/index.html"),
 }
 
 ASSETS = ["assets/*.png", "assets/*.svg", "css/portfolio.css"]
@@ -106,11 +110,11 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         if not quiet:
             print(message)
 
-    for src, path in PAGES_TO_COPY.items():
-        dest = public / src
+    for src, (path, out_name) in PAGES_TO_COPY.items():
+        dest = public / out_name
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(rewrite((ROOT / src).read_text(encoding="utf-8"), path), encoding="utf-8")
-        log(f"page  public/{src}")
+        log(f"page  public/{out_name}")
 
     for pattern in ASSETS:
         for src in sorted(ROOT.glob(pattern)):

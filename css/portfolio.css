@@ -137,6 +137,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
 .support-voices__grid h3 { margin:0 0 10px; font-size:17px; }
 .support-voices__grid article > p:last-child { margin:0; color:var(--muted); font-size:14px; line-height:1.9; }
 .support-updates { align-items:center; }
+.support-updates__actions { display:flex; align-items:center; flex-wrap:wrap; gap:24px; }
 .support-updates__copy > p { max-width:34em; margin:0 0 28px; color:var(--muted); font-size:16px; line-height:2.05; }
 .support-faq__list details { border-top:1px solid var(--line); }
 .support-faq__list details:last-child { border-bottom:1px solid var(--line); }
