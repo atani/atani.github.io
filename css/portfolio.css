@@ -83,7 +83,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
 .support-table-wrap thead th { color:#fff; background:var(--ink); font-size:10px; letter-spacing:.08em; }
 .support-table-wrap tbody th { width:31%; font-size:12px; }
 .support-table-wrap tbody td { color:var(--muted); }
-.cost-pending { display:inline-block; color:#8b796c; font-size:10px; white-space:nowrap; }
+.support-cost__note { margin:22px 0 0; color:var(--muted); font-size:13px; line-height:1.9; }
 .support-progress { color:#fff; background:var(--ink); max-width:none; padding-inline:max(36px,calc((100vw - 1180px)/2)); border:0; }
 .support-progress .section-kicker { color:var(--lime); }
 .support-progress .support-section__heading > p:last-child { color:rgba(255,255,255,.58); }
