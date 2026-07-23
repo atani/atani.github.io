@@ -40,7 +40,7 @@ PAGES_ONLY_LINKS = {
 # リポジトリ内のソース -> 配信先の (パス, public 配下の出力先)。
 # next.config の trailingSlash: true に合わせ、末尾スラッシュ付きを正とする。
 PAGES_TO_COPY = {
-    "index.html": ("/", "index.html"),
+    "_deploy-now/index.html": ("/", "index.html"),
     "_deploy-now/support/index.html": ("/support/", "support/index.html"),
 }
 
