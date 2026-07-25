@@ -89,6 +89,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
 .support-hero h1 em { color:var(--lime); font-style:normal; }
 .support-hero__lead { max-width:36em; margin:28px 0 34px; color:rgba(255,255,255,.8); font-size:16px; line-height:2.05; }
 .support-hero__actions { display:flex; align-items:center; gap:26px; }
+.support-hero__meta { margin:20px 0 0; color:rgba(255,255,255,.6); font-size:12.5px; line-height:1.8; }
 .support-hero__visual { position:relative; min-height:520px; }
 .support-hero__glow { position:absolute; width:420px; height:420px; top:50%; left:50%; transform:translate(-50%,-50%); border:1px solid rgba(255,255,255,.14); border-radius:50%; box-shadow:0 0 90px rgba(255,122,26,.16); }
 .support-hero__icon { position:absolute; z-index:2; width:150px; top:118px; left:20px; border-radius:34px; box-shadow:0 25px 55px rgba(0,0,0,.35); transform:rotate(-6deg); }
@@ -130,6 +131,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
 .benefit-list article > span { color:var(--orange); font:800 11px/1.7 monospace; }
 .benefit-list h3 { margin:0 0 10px; font-size:17px; }
 .benefit-list p { max-width:34em; margin:0; color:var(--muted); font-size:14px; line-height:1.9; }
+.support-benefits__note { grid-column:2; max-width:44em; margin:22px 0 0; color:var(--muted); font-size:13.5px; line-height:1.95; }
 .support-voices { display:block; }
 .support-voices__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-top:50px; }
 .support-voices__grid article { min-height:270px; padding:30px; border:1px solid var(--line); background:#fff; }
@@ -145,6 +147,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
 .support-faq__list details p { max-width:40em; margin:0; padding:0 38px 24px 0; color:var(--muted); font-size:14.5px; line-height:2; }
 .support-final { padding:100px 24px; text-align:center; background:var(--lime); }
 .support-final p:not(.section-kicker) { max-width:34em; margin:22px auto 28px; font-size:15.5px; line-height:2; }
+.support-final p.support-final__alt { margin:26px auto 0; font-size:14px; }
 .support-footer { grid-template-columns:auto 1fr auto; }
 .support-footer .footer-links { justify-content:center; flex-wrap:wrap; }
 .support-footer__notice { grid-column:1/-1; margin:0; text-align:center; color:rgba(255,255,255,.45); line-height:1.7; }
@@ -157,6 +160,7 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
   .support-section { grid-template-columns:1fr; gap:45px; margin-inline:28px; }
   .support-progress { margin-inline:0; }
   .support-ways__grid,.support-voices__grid { grid-template-columns:1fr; }
+  .support-benefits__note { grid-column:auto; }
   .support-card { min-height:auto; }
   .support-card--featured { transform:none; }
   .support-footer { grid-template-columns:1fr; }
@@ -175,7 +179,15 @@ footer { display:grid; grid-template-columns:1fr auto 1fr; gap:30px; align-items
   .support-hero__device { width:190px; right:6px; }
   .support-section { margin-inline:20px; padding:82px 0; }
   .support-progress { margin-inline:0; padding-inline:20px; }
-  .support-table-wrap th,.support-table-wrap td { min-width:150px; padding:15px 13px; font-size:13.5px; }
+  /* 3列のままだと横スクロールが生じ、「規模」列が画面外に隠れて読めなくなる */
+  .support-table-wrap thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  .support-table-wrap table,.support-table-wrap tbody,.support-table-wrap tr,.support-table-wrap tbody th,.support-table-wrap tbody td { display:block; width:auto; }
+  .support-table-wrap tbody tr { padding:18px 16px; border-bottom:1px solid var(--line); }
+  .support-table-wrap tbody tr:last-child { border-bottom:0; }
+  .support-table-wrap tbody th,.support-table-wrap tbody td { padding:0; border:0; font-size:13.5px; }
+  .support-table-wrap tbody td { margin-top:8px; }
+  .support-table-wrap tbody td:last-child { margin-top:12px; color:#c04d00; font-size:12.5px; font-weight:750; }
+  .support-table-wrap tbody td:last-child::before { content:"規模: "; color:#83878f; font-weight:600; }
   .milestone-list { grid-template-columns:1fr; }
   .support-card { padding:27px; }
   .support-footer .footer-links { flex-direction:column; align-items:center; gap:14px; }
