@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="アンクラスPortのAndroid版実現を目指す、開発者個人の支援ページです。">
+  <meta name="description" content="アンクラスPortのAndroid版を公開するには、12人のテスターが必要です。Android端末をお持ちの方の参加を募っています。">
   <meta name="theme-color" content="#171a20">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="アンクラスPortのAndroid版を、一緒に実現しませんか">
-  <meta property="og:description" content="無料・広告なしのアンクラスPortを、Androidでも使えるようにするための継続支援を募集しています。">
+  <meta property="og:title" content="Android版に必要なのは、お金より先に12人の仲間です">
+  <meta property="og:description" content="Google Playのルールで、12人が14日間テストに参加しないとアンクラスPortのAndroid版は公開できません。費用はかかりません。">
   <meta property="og:url" content="https://atani.github.io/support/">
   <meta property="og:image" content="https://atani.github.io/assets/og-support.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <title>アンクラスPort Android版への支援 | Akira Taniwaki</title>
+  <title>アンクラスPort Android版のテスター募集 | Akira Taniwaki</title>
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/css/portfolio.css">
@@ -22,10 +22,15 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {"@type":"Question","name":"テスターは何をすればいいですか","acceptedAnswer":{"@type":"Answer","text":"Google Playから配信されるテスト版をAndroid端末にインストールし、14日間そのままにしておいてください。毎日使う必要はありません。気づいたことがあれば教えていただけると助かります。"}},
+      {"@type":"Question","name":"登録すると何が起きますか","acceptedAnswer":{"@type":"Answer","text":"すぐには何も起きません。12人が集まった時点で開発者登録を済ませ、ご登録のメールアドレスにテストへの参加リンクをお送りします。そこから14日間の期間が始まります。"}},
+      {"@type":"Question","name":"テスターになると費用はかかりますか","acceptedAnswer":{"@type":"Answer","text":"かかりません。アプリは無料で、支援とも関係ありません。テスターに登録したからといって、支援をお願いすることはありません。"}},
+      {"@type":"Question","name":"なぜ12人も必要なのですか","acceptedAnswer":{"@type":"Answer","text":"Google Playの規定で、個人開発者が新しくアプリを公開するには、12人以上のテスターが14日間続けてテストに参加している必要があるためです。開発者側で変更できる条件ではありません。"}},
+      {"@type":"Question","name":"テスターが集まらないとどうなりますか","acceptedAnswer":{"@type":"Answer","text":"Android版は公開できません。そのときは経緯をお伝えし、メンバーシップを終了して以後の課金が発生しないようにします。"}},
       {"@type":"Question","name":"この支援はクラブへの寄付ですか","acceptedAnswer":{"@type":"Answer","text":"いいえ。支援は開発者個人の開発活動に対するものであり、福岡J・アンクラスへの寄付ではありません。"}},
       {"@type":"Question","name":"集まった支援は何に使われますか","acceptedAnswer":{"@type":"Answer","text":"Google Playのデベロッパー登録、サーバー費用、そして開発と維持のための時間に使います。支出が発生したときは開発記録でお知らせします。"}},
       {"@type":"Question","name":"支援すればAndroid版は必ず公開されますか","acceptedAnswer":{"@type":"Answer","text":"公開の確約ではありません。目標の達成状況を、開発への着手と継続を判断する基準にします。"}},
-      {"@type":"Question","name":"Android版はいつごろ公開されますか","acceptedAnswer":{"@type":"Answer","text":"時期はお約束できません。第1目標に届いた時点で着手を判断し、そこから移植とテスト、ストアの審査に進みます。見通しが立った段階で開発記録に書きます。"}},
+      {"@type":"Question","name":"Android版はいつごろ公開されますか","acceptedAnswer":{"@type":"Answer","text":"時期はお約束できません。テスターが12人に届いた時点で開発者登録を済ませ、14日間のテストを経てストアの審査に進みます。見通しが立った段階で開発記録に書きます。"}},
       {"@type":"Question","name":"iPhone版を使っています。支援すると自分にも関係がありますか","acceptedAnswer":{"@type":"Answer","text":"あります。iPhone版とAndroid版は同じ土台の上で動くため、支援で確保できた時間は、iPhone版の不具合修正やOS更新への対応にも充てます。"}},
       {"@type":"Question","name":"Android版に進まないと決めたときはどうなりますか","acceptedAnswer":{"@type":"Answer","text":"メンバーシップを終了して、以後の課金が発生しないようにします。そう判断するに至った経緯も、あわせてお知らせします。"}},
       {"@type":"Question","name":"メンバーシップはいつでも解約できますか","acceptedAnswer":{"@type":"Answer","text":"はい。OFUSEの設定からいつでも解約できます。解約すると、次回の更新日以降は課金されません。"}},
@@ -41,7 +46,7 @@
       <span><strong>Akira Taniwaki</strong><small>Independent Developer</small></span>
     </a>
     <nav aria-label="ページ内ナビゲーション">
-      <a href="#story">背景</a><a href="#cost">必要なもの</a><a href="#ways-to-support">支援方法</a>
+      <a href="#story">背景</a><a href="#milestones">12人のこと</a><a href="#ways-to-support">協力する</a>
     </nav>
   </header>
 
@@ -49,13 +54,13 @@
     <section class="support-hero" aria-labelledby="support-hero-title">
       <div class="support-hero__copy">
         <p class="status"><span aria-hidden="true"></span> ANDROID PROJECT</p>
-        <h1 id="support-hero-title">アンクラスPortの<br><em>Android版</em>を、<br>一緒に実現しませんか</h1>
-        <p class="support-hero__lead">福岡J・アンクラス公認アプリ「アンクラスPort」は、個人で開発し、無料・広告なしで運営しています。Androidでも使いたいという声に応えるため、月額500円の継続支援を募っています。</p>
+        <h1 id="support-hero-title">Android版に必要なのは、<br>お金より先に<br><em>12人の仲間</em>です</h1>
+        <p class="support-hero__lead">福岡J・アンクラス公認アプリ「アンクラスPort」は、個人で開発し、無料・広告なしで運営しています。Android版を出すにはGoogle Playのルールがあり、12人がテストに参加しないと公開できません。まず、その12人を探しています。</p>
         <div class="support-hero__actions">
-          <a class="button button--primary" href="https://ofuse.me/memberships/4761" target="_blank" rel="noopener">月額500円で応援する <span aria-hidden="true">↗</span></a>
+          <a class="button button--primary" href="#ways-to-support">テスターとして協力する <span aria-hidden="true">↓</span></a>
           <a class="text-link" href="#story">まずは話を読む <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="support-hero__meta">OFUSEメンバーシップ／いつでも解約できます</p>
+        <p class="support-hero__meta">費用はかかりません。Android端末をお持ちの方ならどなたでも</p>
       </div>
       <div class="support-hero__visual">
         <div class="support-hero__glow" aria-hidden="true"></div>
@@ -69,13 +74,14 @@
     <section class="support-section support-story" id="story" aria-labelledby="story-title">
       <div class="support-section__heading">
         <p class="section-kicker">01 — STORY</p>
-        <h2 id="story-title">Android版を届けるために、<br>支援が必要な理由。</h2>
+        <h2 id="story-title">お金では<br>買えないものが、<br>ひとつあります。</h2>
       </div>
       <div class="support-story__copy">
-        <p>アンクラスPortは、試合日程や結果、順位などをひとつの場所で見たいという思いから、個人で作り始めたiPhoneアプリです。公開にあたって、福岡J・アンクラスから公認をいただきました。</p>
+        <p>アンクラスPortは、試合日程や結果、順位などをひとつの場所で見たいという思いから、個人で作り始めたiPhoneアプリです。公開にあたって、福岡J・アンクラスから公認をいただきました。7月17日の公開から、100人を超える方に使っていただいています。</p>
         <p>無料・広告なしの方針を守りながら改善を続けるなかで、「Androidでも使いたい」という要望をいただいています。</p>
-        <p>一方、Android版の開発には、デベロッパー登録に加えて、移植やテストの時間が必要です。公開後もOSの更新や障害への対応が続きます。</p>
-        <p>個人負担だけでは継続が難しい部分を、無理のない月額支援で支えていただけたら、Android版へ進むための判断材料にできます。</p>
+        <p>ただ、Android版には個人開発者向けのルールがあります。Google Playでは、12人以上のテスターが14日間続けてテストに参加しないと、アプリを公開できません。ひとりでも途中で抜けると、その期間は数え直しになります。</p>
+        <p>これは、お金で解決できない条件です。支援がどれだけ集まっても、12人が集まらなければAndroid版は出せません。だから最初にお願いしたいのは、支援ではなく参加です。</p>
+        <p>そのうえで、移植とテストの時間、公開後のOS更新や障害への対応は個人負担で続きます。この部分を月額の支援で支えていただけたら、Android版へ進む判断ができます。</p>
         <p>すでにiPhone版を使っている方にとっても、無関係な話ではありません。両方は同じ土台の上で動くため、支援で確保できた時間は、iPhone版の不具合修正やOS更新への対応にも充てます。</p>
       </div>
     </section>
@@ -104,15 +110,15 @@
     <section class="support-section support-progress" id="milestones" aria-labelledby="milestones-title">
       <div class="support-section__heading">
         <p class="section-kicker">03 — MILESTONES</p>
-        <h2 id="milestones-title">目指している到達点。</h2>
-        <p>最初のひとりから数えていきます。到達の状況は、動きがあったときにお知らせします。</p>
+        <h2 id="milestones-title">越えるべき順に、<br>2つあります。</h2>
+        <p>先に必要なのはテスターです。ここを越えないと、支援が集まってもAndroid版は公開できません。</p>
       </div>
       <div class="support-progress__body">
         <ol class="milestone-list">
-          <li><span>第1目標</span><strong>継続メンバー 30人</strong><p>Android版の開発着手を判断する基準にします。</p></li>
-          <li><span>第2目標</span><strong>継続メンバー 60人</strong><p>公開と、その後1年間の維持を目指します。</p></li>
+          <li><span>第1関門・いまここ</span><strong>テスター 12人</strong><p>Google Playが定める公開の条件です。費用はかかりません。集まった時点で開発者登録を済ませ、テストを始めます。</p></li>
+          <li><span>第2関門</span><strong>継続メンバー 30人</strong><p>移植と、公開後の維持を続けるための支えです。テスターが集まってから本格的にお願いします。</p></li>
         </ol>
-        <p class="support-caution">目標人数の達成はAndroid版の公開を確約するものではありません。開発への着手と継続を判断する基準として扱い、状況は開発記録でお知らせします。</p>
+        <p class="support-caution">目標の達成はAndroid版の公開を確約するものではありません。開発への着手と継続を判断する基準として扱い、状況は開発記録でお知らせします。テスターが集まらなかった場合も、経緯を隠さずお伝えします。</p>
       </div>
     </section>
 
@@ -120,19 +126,20 @@
       <div class="support-section__heading support-section__heading--center">
         <p class="section-kicker">04 — SUPPORT</p>
         <h2 id="ways-title">あなたに合う方法で、<br>力を貸してください。</h2>
+        <p>いま足りていないのは、テスターの12人です。</p>
       </div>
       <div class="support-ways__grid">
-        <article class="support-card">
-          <p class="support-card__label">無料で</p>
-          <h3>感想を送る・シェアする</h3>
-          <p>使った感想やAndroid版への要望を届けることも、大切な応援になります。</p>
-          <a class="text-link" href="/anclas-port/#contact" target="_blank" rel="noopener">感想を送る <span aria-hidden="true">→</span></a>
-        </article>
         <article class="support-card support-card--featured">
-          <p class="support-card__label">月額500円・おすすめ</p>
+          <p class="support-card__label">無料・いま必要</p>
+          <h3>Androidテスターになる</h3>
+          <p>Android端末をお持ちなら、どなたでも参加できます。費用はかかりません。12人が集まってからテストを始めるため、開始まで数週間お待ちいただきます。</p>
+          <a class="button button--primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfBQs4jXZ8EZ7pmqVge6SFH0HBrFGzOK35iaQuC3KPqvXepqw/viewform" target="_blank" rel="noopener">テスターに登録する <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="support-card">
+          <p class="support-card__label">月額500円</p>
           <h3>OFUSEメンバーシップ</h3>
-          <p>月額500円で「Akiraの開発室」に加入する形です。開発と維持を継続するための、いちばん大きな支えになります。解約はOFUSEの設定からいつでもできます。</p>
-          <a class="button button--primary" href="https://ofuse.me/memberships/4761" target="_blank" rel="noopener">月額500円で応援する <span aria-hidden="true">↗</span></a>
+          <p>月額500円で「Akiraの開発室」に加入する形です。移植と、公開後の維持を続けるための支えになります。解約はOFUSEの設定からいつでもできます。</p>
+          <a class="text-link" href="https://ofuse.me/memberships/4761" target="_blank" rel="noopener">月額500円で応援する <span aria-hidden="true">↗</span></a>
         </article>
         <article class="support-card">
           <p class="support-card__label">一度だけ</p>
@@ -141,6 +148,7 @@
           <a class="text-link" href="https://ofuse.me/akirataniwaki" target="_blank" rel="noopener">ファンレターを送る <span aria-hidden="true">↗</span></a>
         </article>
       </div>
+      <p class="support-ways__note">ご登録にはメールアドレスだけが必要です。テストを始めるタイミングで参加リンクをお送りします。いただいたアドレスは、テスターの登録とご連絡以外には使いません。</p>
     </section>
 
     <section class="support-section support-benefits" id="benefits" aria-labelledby="benefits-title">
@@ -161,18 +169,18 @@
       <div class="support-section__heading">
         <p class="section-kicker">06 — SUPPORTERS</p>
         <h2 id="supporters-title">最初のひとりを、<br>探しています。</h2>
-        <p>このページは公開したばかりで、サポーター欄はまだ空です。隠さずに書いておきます。</p>
+        <p>このページは公開したばかりで、どちらの欄もまだ空です。隠さずに書いておきます。</p>
       </div>
       <div class="support-voices__grid">
+        <article>
+          <p class="support-voices__empty">YOU CAN BE No.1</p>
+          <h3>テスターの枠</h3>
+          <p>12人のうち、まだ誰も埋まっていません。ご希望の方はハンドルネームを掲載します。ここが12まで進んだとき、Android版が現実になります。</p>
+        </article>
         <article>
           <p class="support-voices__empty">YOUR NAME HERE</p>
           <h3>サポータークレジット</h3>
           <p>掲載はハンドルネームのみです。ご希望の方はOFUSEのメッセージに表示名をお書きください。お書きいただいた方だけを掲載します。</p>
-        </article>
-        <article>
-          <p class="support-voices__empty">YOUR VOICE HERE</p>
-          <h3>届いた声</h3>
-          <p>感想や要望は、掲載許可をいただいたものだけを紹介します。ここが埋まっていくことが、Android版へ進む合図になります。</p>
         </article>
       </div>
     </section>
@@ -198,6 +206,26 @@
       </div>
       <div class="support-faq__list">
         <details>
+          <summary>テスターは何をすればいいですか</summary>
+          <p>Google Playから配信されるテスト版をAndroid端末にインストールし、14日間そのままにしておいてください。毎日使う必要はありません。気づいたことがあれば教えていただけると助かります。</p>
+        </details>
+        <details>
+          <summary>登録すると何が起きますか</summary>
+          <p>すぐには何も起きません。12人が集まった時点で開発者登録を済ませ、ご登録のメールアドレスにテストへの参加リンクをお送りします。そこから14日間の期間が始まります。</p>
+        </details>
+        <details>
+          <summary>テスターになると費用はかかりますか</summary>
+          <p>かかりません。アプリは無料で、支援とも関係ありません。テスターに登録したからといって、支援をお願いすることはありません。</p>
+        </details>
+        <details>
+          <summary>なぜ12人も必要なのですか</summary>
+          <p>Google Playの規定で、個人開発者が新しくアプリを公開するには、12人以上のテスターが14日間続けてテストに参加している必要があるためです。開発者側で変更できる条件ではありません。</p>
+        </details>
+        <details>
+          <summary>テスターが集まらないとどうなりますか</summary>
+          <p>Android版は公開できません。そのときは経緯をお伝えし、メンバーシップを終了して以後の課金が発生しないようにします。</p>
+        </details>
+        <details>
           <summary>この支援はクラブへの寄付ですか</summary>
           <p>いいえ。支援は開発者個人の開発活動に対するものであり、福岡J・アンクラスへの寄付ではありません。</p>
         </details>
@@ -211,7 +239,7 @@
         </details>
         <details>
           <summary>Android版はいつごろ公開されますか</summary>
-          <p>時期はお約束できません。第1目標に届いた時点で着手を判断し、そこから移植とテスト、ストアの審査に進みます。見通しが立った段階で開発記録に書きます。</p>
+          <p>時期はお約束できません。テスターが12人に届いた時点で開発者登録を済ませ、14日間のテストを経てストアの審査に進みます。見通しが立った段階で開発記録に書きます。</p>
         </details>
         <details>
           <summary>iPhone版を使っています。支援すると自分にも関係がありますか</summary>
@@ -234,10 +262,10 @@
 
     <section class="support-final" aria-labelledby="support-final-title">
       <p class="section-kicker">KEEP MAKING</p>
-      <h2 id="support-final-title">Androidでも使える未来を、<br>一緒につくれたら。</h2>
-      <p>月額500円、いつでも解約できます。無理のない方法で、個人開発の次の一歩を支えてください。</p>
-      <a class="button button--dark" href="https://ofuse.me/memberships/4761" target="_blank" rel="noopener">月額500円で応援する <span aria-hidden="true">↗</span></a>
-      <p class="support-final__alt"><a class="text-link" href="https://ofuse.me/akirataniwaki" target="_blank" rel="noopener">一度だけの応援は、ファンレターで <span aria-hidden="true">↗</span></a></p>
+      <h2 id="support-final-title">12人のうちのひとりに、<br>なってもらえませんか。</h2>
+      <p>費用はかかりません。Android端末をお持ちなら、それだけで力になります。</p>
+      <a class="button button--dark" href="https://docs.google.com/forms/d/e/1FAIpQLSfBQs4jXZ8EZ7pmqVge6SFH0HBrFGzOK35iaQuC3KPqvXepqw/viewform" target="_blank" rel="noopener">テスターに登録する <span aria-hidden="true">↗</span></a>
+      <p class="support-final__alt"><a class="text-link" href="https://ofuse.me/memberships/4761" target="_blank" rel="noopener">月額500円で開発を支える <span aria-hidden="true">↗</span></a></p>
     </section>
   </main>
 
