@@ -69,6 +69,15 @@ a { color: inherit; }
 .promo-button--light { margin-top: 30px; background: white; color: var(--accent-deep); }
 .promo-footer { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 24px 0 34px; display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; }
 .promo-footer a { text-decoration: none; }
+.privacy-main { min-height: 100vh; padding: 132px max(24px, calc((100vw - 850px) / 2)) 88px; background: linear-gradient(180deg, var(--hero) 0 360px, var(--paper) 360px); }
+.privacy-card { padding: clamp(28px, 5vw, 64px); border-radius: 24px; background: white; box-shadow: 0 22px 60px rgba(16,18,24,.13); }
+.privacy-card h1 { margin: 0; font-size: clamp(36px, 6vw, 62px); line-height: 1.08; letter-spacing: -.045em; }
+.privacy-card > p:first-of-type { margin: 18px 0 42px; color: var(--muted); }
+.privacy-card section { padding: 28px 0; border-top: 1px solid var(--line); }
+.privacy-card section:last-child { padding-bottom: 0; }
+.privacy-card h2 { margin: 0 0 10px; font-size: 21px; }
+.privacy-card p, .privacy-card li { color: var(--muted); font-size: 15px; }
+.privacy-card ul { padding-left: 22px; }
 
 @media (max-width: 800px) {
   .promo-hero { min-height: 0; grid-template-columns: 1fr; gap: 42px; padding-top: 130px; }
