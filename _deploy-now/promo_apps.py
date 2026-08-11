@@ -19,6 +19,7 @@ PROMO_APPS = {
             "ja": {
                 "lang": "ja",
                 "label": "日本語",
+                "support": "/match-notebook/privacy/",
                 "kicker": "対戦相手ノート",
                 "headline": "前回効いた作戦を、<em>次の試合で忘れない。</em>",
                 "lead": "弱点、効いたこと、避けること。再戦前に、前回の気づきを30秒で思い出せます。",
@@ -43,6 +44,7 @@ PROMO_APPS = {
             "en": {
                 "lang": "en",
                 "label": "English",
+                "support": "/match-notebook/en/privacy/",
                 "store": "https://apps.apple.com/us/app/id6781687173",
                 "kicker": "Opponent notes for rematches",
                 "headline": "Remember what worked.<br><em>Win the rematch.</em>",
@@ -445,7 +447,7 @@ def render_promo_page(slug, locale):
     points = "".join(f"<li>{escape(point)}</li>" for point in copy["price_points"])
     hero = gallery[0]
     store = copy.get("store", app["store"])
-    support = app.get("support", "/support/")
+    support = copy.get("support", app.get("support", "/support/"))
     canonical_path = f"/{slug}/" if locale == "ja" else f"/{slug}/{locale}/"
     canonical = f"https://atani.lolipop-now.app{canonical_path}"
     alternates = "".join(

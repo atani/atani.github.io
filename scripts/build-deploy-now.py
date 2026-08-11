@@ -48,6 +48,8 @@ PAGES_TO_COPY = {
     "_deploy-now/support/index.html": ("/support/", "support/index.html"),
     "_deploy-now/peyo/index.html": ("/peyo/", "peyo/index.html"),
     "_deploy-now/sports-photo/index.html": ("/sports-photo/", "sports-photo/index.html"),
+    "_deploy-now/match-notebook/privacy/index.html": ("/match-notebook/privacy/", "match-notebook/privacy/index.html"),
+    "_deploy-now/match-notebook/en/privacy/index.html": ("/match-notebook/en/privacy/", "match-notebook/en/privacy/index.html"),
 }
 
 LOCALIZED_PAGES = {
@@ -355,6 +357,8 @@ NEXT_CONFIG = """const config = {
         { source: '/support/', destination: '/support/index.html' },
         { source: '/peyo/', destination: '/peyo/index.html' },
         { source: '/sports-photo/', destination: '/sports-photo/index.html' },
+        { source: '/match-notebook/privacy/', destination: '/match-notebook/privacy/index.html' },
+        { source: '/match-notebook/en/privacy/', destination: '/match-notebook/en/privacy/index.html' },
         { source: '/peyo/en/', destination: '/peyo/en/index.html' },
         { source: '/peyo/de/', destination: '/peyo/de/index.html' },
         { source: '/peyo/es/', destination: '/peyo/es/index.html' },
