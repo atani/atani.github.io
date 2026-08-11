@@ -34,15 +34,16 @@ PROMO_APPS = {
                 "gallery_title": "実際の画面で見る、<em>Match Notebook。</em>",
                 "gallery_alts": ["次の試合と対戦相手の記録", "試合後の気づき入力", "対戦相手の戦績と作戦カード", "対応スポーツ一覧", "プライバシー設定"],
                 "price_kicker": "無料で始める",
-                "price_title": "記録を積み上げるほど、<em>次の試合が軽くなる。</em>",
-                "price_body": "対戦相手5人・試合20件まで無料。必要になったらLifetime買い切りで記録を無制限に。未提供のサブスクは掲載していません。",
-                "price_points": ["アカウント・サーバー不要", "試合後の気づきを端末内に保存", "Lifetimeは一度の購入で継続利用"],
+                "price_title": "5人・20試合まで無料。<br><em>買い切り ¥1,500。</em>",
+                "price_body": "対戦相手5人・試合20件まで無料。続けたくなったら、¥1,500のLifetime買い切りで記録を無制限にできます。自動更新はありません。",
+                "price_points": ["アカウント・サーバー不要", "試合後の気づきを端末内に保存", "一度の購入で自動更新なし"],
                 "cta": "App Storeで見る",
                 "footer": "Match Notebookを無料で試す",
             },
             "en": {
                 "lang": "en",
                 "label": "English",
+                "store": "https://apps.apple.com/us/app/id6781687173",
                 "kicker": "Opponent notes for rematches",
                 "headline": "Remember what worked.<br><em>Win the rematch.</em>",
                 "lead": "Keep weaknesses, winning patterns, and what to avoid in one place—then review your next strategy before the match.",
@@ -58,9 +59,9 @@ PROMO_APPS = {
                 "gallery_title": "See Match Notebook, <em>as it really works.</em>",
                 "gallery_alts": ["Next match and opponent notes", "Post-match insight entry", "Opponent record and strategy card", "Supported sports", "Privacy settings"],
                 "price_kicker": "Start free",
-                "price_title": "The more you remember, <em>the easier the rematch becomes.</em>",
-                "price_body": "Free for up to 5 opponents and 20 matches. Upgrade to the Lifetime purchase when you need unlimited space. No unshipped subscription is shown.",
-                "price_points": ["No account or server required", "Your match notes stay on your device", "Lifetime is a single purchase"],
+                "price_title": "5 opponents and 20 matches free.<br><em>$14.99 once.</em>",
+                "price_body": "Free for up to 5 opponents and 20 matches. A one-time $14.99 Lifetime purchase unlocks unlimited records, with no auto-renewal.",
+                "price_points": ["No account or server required", "Your match notes stay on your device", "One purchase with no auto-renewal"],
                 "cta": "View on the App Store",
                 "footer": "Try Match Notebook free",
             },
@@ -443,10 +444,15 @@ def render_promo_page(slug, locale):
     )
     points = "".join(f"<li>{escape(point)}</li>" for point in copy["price_points"])
     hero = gallery[0]
-    store = app["store"]
+    store = copy.get("store", app["store"])
     support = app.get("support", "/support/")
     canonical_path = f"/{slug}/" if locale == "ja" else f"/{slug}/{locale}/"
     canonical = f"https://atani.lolipop-now.app{canonical_path}"
+    alternates = "".join(
+        f'  <link rel="alternate" hreflang="{escape(code)}" href="https://atani.lolipop-now.app/{escape(slug)}/{"" if code == "ja" else escape(code) + "/"}">\n'
+        for code in app["locales"]
+    )
+    alternates += f'  <link rel="alternate" hreflang="x-default" href="https://atani.lolipop-now.app/{escape(slug)}/">\n'
     og_image = f'https://atani.lolipop-now.app/assets/{app.get("og_image", app["icon"])}'
     title = f'{app["name"]} — {copy["headline"].replace("<br>", " ").replace("<em>", "").replace("</em>", "")}'
     description = copy["lead"]
@@ -463,6 +469,7 @@ def render_promo_page(slug, locale):
   <meta property="og:url" content="{escape(canonical)}">
   <meta property="og:image" content="{escape(og_image)}">
   <meta name="twitter:card" content="summary_large_image">
+{alternates.rstrip()}
   <link rel="icon" href="/assets/{escape(app["icon"])}">
   <link rel="stylesheet" href="/css/apps.css">
 </head>
