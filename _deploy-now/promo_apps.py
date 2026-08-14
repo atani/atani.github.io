@@ -19,6 +19,7 @@ PROMO_APPS = {
             "ja": {
                 "lang": "ja",
                 "label": "日本語",
+                "support": "/chillcast/privacy/",
                 "support": "/match-notebook/privacy/",
                 "kicker": "対戦相手ノート",
                 "headline": "前回効いた作戦を、<em>次の試合で忘れない。</em>",
@@ -144,53 +145,119 @@ PROMO_APPS = {
                 "label": "日本語",
                 "kicker": "果樹の低温時間トラッカー",
                 "headline": "今年、実はなる？<br><em>低温量から確かめる。</em>",
-                "lead": "現在地の過去気象データから、今シーズンの低温時間を自動計算。品種ごとの充足状況をひと目で確認できます。",
+                "lead": "NASA POWERの地域別気温推定値から今シーズンの低温量を自動計算。育てている品種だけを選び、充足状況を確認できます。",
                 "meta": "iPhone対応 / 南北半球対応 / APIキー不要",
                 "hero_alt": "ChillCastの低温量と積算モデル比較画面",
                 "section_kicker": "果樹の休眠を数字で見る",
                 "section_title": "ひとつの数字だけでなく、<em>3つのモデルで季節を読む。</em>",
                 "features": [
-                    ("低温量を自動計算", "現在地または指定地点の過去気象データから、今季の積算を表示。"),
+                    ("低温量を自動計算", "現在地または指定地点の地域別気温推定値から、今季の積算を表示。"),
                     ("モデルを比較", "45°F Hours、Utah、Dynamicを並べて、気候に合った見方を選べる。"),
-                    ("品種の充足を確認", "りんご、もも、ぶどうなどの必要量と現在の状況を一覧で確認。"),
+                    ("マイ品種で追跡", "りんご、もも、ぶどうなどから育てている木を選び、不足量を確認。"),
                 ],
                 "gallery_title": "栽培の判断に使える、<em>ChillCastの実画面。</em>",
                 "gallery_alts": ["今シーズンの低温量", "積算モデルの比較", "品種ごとの充足状況"],
                 "price_kicker": "無料 + Pro 買い切り",
-                "price_title": "まず今季の低温量を確認。<em>必要になったらProへ。</em>",
-                "price_body": "無料版は45°F Hoursと3品種を確認できます。Proの買い切りで3モデル、全品種、複数地点、履歴、CSV、通知を解放します。",
-                "price_points": ["APIキーなしで始められる", "南北半球を自動判定", "Proは一度の購入で使い続けられる"],
+                "price_title": "まず今季を無料で確認。<br><em>Proは買い切り ¥1,500。</em>",
+                "price_body": "無料版は45°F Hoursとマイ品種3件まで。Proの買い切りで3モデル、収録20品種、複数地点、履歴、CSVを解放します。地域ごとの価格はApp Storeで確認できます。",
+                "price_points": ["NASA POWERの出典と限界を明示", "南北半球を自動判定", "Proは自動更新なしの買い切り"],
+                "proof_items": ["実際のApp Store用スクリーンショット", "地域推定値の出典を明示", "Proは自動更新なし"],
                 "cta": "App Storeで見る",
                 "footer": "今季の低温量を見てみる",
             },
             "en": {
                 "lang": "en",
                 "label": "English",
+                "support": "/chillcast/privacy/",
+                "store": "https://apps.apple.com/us/app/id6785241430",
                 "kicker": "A chill-hours tracker for fruit growers",
                 "headline": "Will your trees fruit<br><em>this year?</em>",
-                "lead": "ChillCast calculates this season’s accumulated chill from historical weather data and shows whether each variety has had enough.",
+                "lead": "ChillCast turns NASA POWER regional temperature estimates into this season’s accumulated chill, then shows whether your own trees have had enough.",
                 "meta": "For iPhone / Northern & Southern Hemispheres / No API key",
                 "hero_alt": "ChillCast accumulated chill and model comparison screen",
                 "section_kicker": "See dormancy as a number",
                 "section_title": "Read the season with <em>three chill models, not one guess.</em>",
                 "features": [
-                    ("Calculate chill automatically", "Use historical weather for your current or selected location to track this season."),
+                    ("Calculate chill automatically", "Use regional temperature estimates for your current or selected location to track this season."),
                     ("Compare three models", "Put 45°F Hours, Utah, and Dynamic side by side for a better climate fit."),
-                    ("Check every variety", "See required chill and fulfillment for apples, peaches, grapes, and more."),
+                    ("Track your own trees", "Choose apples, peaches, grapes, and more in My Trees and see what is still short."),
                 ],
                 "gallery_title": "A closer look at <em>ChillCast in use.</em>",
                 "gallery_alts": ["This season's accumulated chill", "Chill model comparison", "Variety fulfillment status", "History chart", "Pro features"],
                 "price_kicker": "Free + Pro one-time purchase",
-                "price_title": "Check this season first.<br><em>Unlock the full picture when you need it.</em>",
-                "price_body": "The free version includes 45°F Hours and three varieties. Pro unlocks all three models, every variety, multiple locations, history, CSV export, and notifications.",
-                "price_points": ["Start without an API key", "Northern and Southern Hemispheres", "Pro is a single purchase"],
+                "price_title": "Check this season free.<br><em>Pro is a one-time $9.99.</em>",
+                "price_body": "Free includes 45°F Hours and up to three varieties in My Trees. Pro unlocks all three models, all 20 included varieties, multiple locations, history, and CSV export. Local App Store pricing may vary.",
+                "price_points": ["Transparent NASA POWER attribution", "Northern and Southern Hemispheres", "One purchase with no auto-renewal"],
+                "proof_items": ["Real App Store screenshots", "Transparent regional data source", "No auto-renewal"],
                 "cta": "View on the App Store",
                 "footer": "Check your season’s chill",
+            },
+            "es": {
+                "lang": "es",
+                "label": "Español",
+                "support": "/chillcast/privacy/",
+                "store": "https://apps.apple.com/es/app/id6785241430",
+                "kicker": "Horas frío para árboles frutales",
+                "headline": "¿Darán fruto tus árboles<br><em>este año?</em>",
+                "lead": "ChillCast convierte estimaciones regionales de temperatura de NASA POWER en el frío acumulado de la temporada y muestra si tus árboles han recibido suficiente.",
+                "meta": "Para iPhone / Hemisferios norte y sur / Sin clave API",
+                "hero_alt": "Pantalla de frío acumulado y comparación de modelos de ChillCast",
+                "section_kicker": "Convierte la dormancia en datos útiles",
+                "section_title": "Lee la temporada con <em>tres modelos de frío.</em>",
+                "features": [
+                    ("Calcula el frío automáticamente", "Usa estimaciones regionales para tu ubicación actual o elegida."),
+                    ("Compara tres modelos", "Consulta 45°F Hours, Utah y Dynamic uno junto a otro."),
+                    ("Sigue tus propios árboles", "Elige tus variedades en Mis árboles y comprueba cuánto les falta."),
+                ],
+                "gallery_title": "Mira <em>ChillCast en uso.</em>",
+                "gallery_alts": ["Frío acumulado de la temporada", "Comparación de modelos", "Estado de las variedades", "Historial", "Funciones Pro"],
+                "price_kicker": "Gratis + compra única Pro",
+                "price_title": "Comprueba la temporada gratis.<br><em>Pro: pago único de 9,99 US$.</em>",
+                "price_body": "Gratis incluye 45°F Hours y hasta tres variedades. Pro desbloquea los tres modelos, las 20 variedades incluidas, varias ubicaciones, historial y CSV. El precio local puede variar.",
+                "price_points": ["Fuente NASA POWER claramente indicada", "Hemisferios norte y sur", "Sin renovación automática"],
+                "proof_items": ["Capturas reales del App Store", "Fuente regional transparente", "Sin renovación automática"],
+                "features_cta": "Ver funciones",
+                "inside_label": "Dentro de la app",
+                "support_label": "Soporte y privacidad",
+                "cta": "Ver en el App Store",
+                "footer": "Comprueba el frío de esta temporada",
+            },
+            "tr": {
+                "lang": "tr",
+                "label": "Türkçe",
+                "support": "/chillcast/privacy/",
+                "store": "https://apps.apple.com/tr/app/id6785241430",
+                "kicker": "Meyve ağaçları için soğuklama takibi",
+                "headline": "Ağaçlarınız bu yıl<br><em>meyve verecek mi?</em>",
+                "lead": "ChillCast, NASA POWER bölgesel sıcaklık tahminlerini sezonluk soğuklama birikimine dönüştürür ve ağaçlarınızın gereksinimini karşılayıp karşılamadığını gösterir.",
+                "meta": "iPhone için / Kuzey ve Güney Yarımküre / API anahtarı yok",
+                "hero_alt": "ChillCast soğuklama birikimi ve model karşılaştırma ekranı",
+                "section_kicker": "Dormansiyi anlaşılır sayılara dönüştürün",
+                "section_title": "Sezonu <em>üç soğuklama modeliyle okuyun.</em>",
+                "features": [
+                    ("Soğuklamayı otomatik hesaplayın", "Mevcut veya seçilen konum için bölgesel sıcaklık tahminlerini kullanın."),
+                    ("Üç modeli karşılaştırın", "45°F Hours, Utah ve Dynamic sonuçlarını yan yana görün."),
+                    ("Kendi ağaçlarınızı takip edin", "Ağaçlarım'da çeşitlerinizi seçin ve ne kadar eksik olduğunu görün."),
+                ],
+                "gallery_title": "ChillCast'i <em>gerçek ekranlarda görün.</em>",
+                "gallery_alts": ["Sezonluk soğuklama birikimi", "Model karşılaştırması", "Çeşit durumu", "Geçmiş grafiği", "Pro özellikleri"],
+                "price_kicker": "Ücretsiz + tek seferlik Pro",
+                "price_title": "Sezonu ücretsiz kontrol edin.<br><em>Pro tek seferlik 9,99 ABD doları.</em>",
+                "price_body": "Ücretsiz sürüm 45°F Hours ve üç çeşide kadar takip sunar. Pro; üç modeli, sunulan 20 çeşidin tamamını, çoklu konumu, geçmişi ve CSV'yi açar. Yerel fiyat değişebilir.",
+                "price_points": ["NASA POWER kaynağı açıkça belirtilir", "Kuzey ve Güney Yarımküre", "Otomatik yenileme yok"],
+                "proof_items": ["Gerçek App Store ekran görüntüleri", "Şeffaf bölgesel veri kaynağı", "Otomatik yenileme yok"],
+                "features_cta": "Özellikleri gör",
+                "inside_label": "Uygulamanın içinde",
+                "support_label": "Destek ve gizlilik",
+                "cta": "App Store'da görüntüle",
+                "footer": "Bu sezonun soğuklamasını kontrol edin",
             },
         },
         "gallery": {
             "ja": ["chillcast-ja-hero.png", "chillcast-ja-models.png", "chillcast-ja-varieties.png"],
             "en": ["chillcast-en-hero.png", "chillcast-en-models.png", "chillcast-en-varieties.png", "chillcast-en-history.png", "chillcast-en-pro.png"],
+            "es": ["chillcast-en-hero.png", "chillcast-en-models.png", "chillcast-en-varieties.png", "chillcast-en-history.png", "chillcast-en-pro.png"],
+            "tr": ["chillcast-en-hero.png", "chillcast-en-models.png", "chillcast-en-varieties.png", "chillcast-en-history.png", "chillcast-en-pro.png"],
         },
     },
     "planonce": {
@@ -202,72 +269,82 @@ PROMO_APPS = {
             "ja": {
                 "lang": "ja",
                 "label": "日本語",
-                "kicker": "買い切りのゼロベース予算",
+                "kicker": "30日間試せるゼロベース予算",
                 "headline": "すべてのお金に、<em>役割を持たせる。</em>",
-                "lead": "収入をカテゴリに振り分け、支出を3タップで記録。銀行ログインなし、サブスクなし、データは端末の中に。",
+                "lead": "収入をカテゴリに振り分け、定期取引を自動記録。90日先の残高不足を見つけ、データはいつでも書き出せます。",
                 "meta": "iPhone・iPad対応 / オフライン / アカウント不要",
                 "hero_alt": "PlanOnceの予算カテゴリ画面",
                 "section_kicker": "お金の管理を自分の手元へ",
-                "section_title": "毎月の支払いではなく、<em>一度の計画で続ける。</em>",
+                "section_title": "今月を計画し、<em>12か月の流れまで見通す。</em>",
                 "features": [
                     ("予算をゼロまで振り分ける", "収入のすべてに役割を持たせ、残りのお金を見える化。"),
-                    ("3タップで支出記録", "カテゴリを選ぶ、金額を入れる、保存する。銀行同期を待たない。"),
-                    ("端末内で完結", "銀行ログイン、クラウドアカウント、追跡なし。データはiPhoneに保存。"),
+                    ("定期取引を自動記録", "毎週・毎月の予定を登録し、入力漏れと突然の支出を減らします。"),
+                    ("90日先の不足を予測", "予定収支から残高を予測し、最初に不足する可能性がある日を確認できます。"),
+                    ("6か月・12か月を比較", "収入、支出、純増減、上位カテゴリの推移を確認できます。"),
                 ],
                 "gallery_title": "お金の流れを、<em>実際の画面で確認。</em>",
                 "gallery_alts": ["予算カテゴリと残額", "支出履歴", "口座一覧", "設定画面"],
                 "price_kicker": "PlanOnce Pro",
-                "price_title": "サブスクなし。<em>買い切り ¥1,500。</em>",
-                "price_body": "基本機能は無料。Proの一度の購入で、カテゴリ・口座・目標の上限解除、レポート、YNAB CSVインポートを利用できます。",
-                "price_points": ["銀行ログイン不要", "すべてのデータを端末内に保存", "自動更新なしの買い切り"],
+                "price_title": "30日間カード不要。<br><em>年額または生涯買い切り。</em>",
+                "price_body": "すべてのPro機能を30日間無料で試せます。継続する場合は年額プラン、または一度だけ支払う生涯プランを選べます。地域ごとの価格はApp Storeで確認できます。",
+                "price_points": ["銀行ログイン不要", "バックアップ・復元・CSV出力は無料", "年額は自動更新 / 生涯プランは一度だけ"],
                 "cta": "App Storeで見る",
                 "footer": "PlanOnceで予算を始める",
             },
             "en": {
                 "lang": "en",
                 "label": "English",
-                "kicker": "Zero-based budgeting, bought once",
+                "store": "https://apps.apple.com/us/app/id6782772002",
+                "kicker": "Zero-based budgeting with a 30-day Preview",
                 "headline": "Give every dollar<br><em>a job.</em>",
-                "lead": "Assign income to categories, log spending in three taps, and keep your money data on your device—no bank login, no subscription.",
+                "lead": "Assign income, automate planned transactions, and spot possible cash shortfalls up to 90 days ahead—without connecting a bank account.",
                 "meta": "For iPhone & iPad / Works offline / No account",
                 "hero_alt": "PlanOnce budget categories screen",
                 "section_kicker": "Keep your money in your hands",
-                "section_title": "Make one plan, then <em>keep using it without a monthly fee.</em>",
+                "section_title": "Plan this month, then <em>see the next twelve clearly.</em>",
                 "features": [
                     ("Assign every dollar", "Give your income a job until the unassigned balance reaches zero."),
-                    ("Log spending in 3 taps", "Choose a category, enter the amount, save. No bank sync to wait for."),
-                    ("Keep it on your device", "No bank login, cloud account, or tracking. Your data stays on your iPhone."),
+                    ("Automate planned transactions", "Schedule weekly or monthly entries so recurring bills do not surprise you."),
+                    ("Spot cash shortfalls early", "Forecast your balance for 90 days and see the first day it may fall below zero."),
+                    ("See 6- and 12-month trends", "Compare income, expenses, net change, and top categories over time."),
                 ],
                 "gallery_title": "See your money flow <em>in the real screens.</em>",
                 "gallery_alts": ["Budget categories and remaining money", "Transaction history", "Accounts list", "Settings screen"],
                 "price_kicker": "PlanOnce Pro",
-                "price_title": "No subscription.<br><em>One-time $14.99.</em>",
-                "price_body": "Budgeting basics are free. One purchase unlocks unlimited categories, accounts, goals, reports, and YNAB CSV import.",
-                "price_points": ["No bank login required", "Everything stays on your device", "One purchase, no auto-renewal"],
+                "price_title": "Try Pro for 30 days.<br><em>$19.99/year or $49.99 lifetime.</em>",
+                "price_body": "The no-card Preview includes every Pro feature. Continue with the auto-renewable Annual plan or choose the one-time Lifetime purchase. Local App Store pricing may vary.",
+                "price_points": ["No bank login required", "Backup, restore, and CSV export stay free", "Annual auto-renews / Lifetime is one payment"],
+                "proof_items": ["Real App Store screenshots", "30-day no-card Preview", "Your data stays portable"],
                 "cta": "View on the App Store",
                 "footer": "Start budgeting with PlanOnce",
             },
             "de": {
                 "lang": "de",
                 "label": "Deutsch",
-                "kicker": "Budgetplanung ohne Abo",
+                "store": "https://apps.apple.com/de/app/id6782772002",
+                "kicker": "Zero-Based-Budget mit 30 Tagen Vorschau",
                 "headline": "Jeder Euro bekommt<br><em>eine Aufgabe.</em>",
-                "lead": "Einkommen Kategorien zuweisen, Ausgaben in drei Schritten erfassen und alles auf dem Gerät behalten – ohne Bank-Login und ohne Abo.",
+                "lead": "Einkommen einplanen, Buchungen automatisieren und mögliche Engpässe 90 Tage im Voraus erkennen – ohne Bank-Login.",
                 "meta": "Für iPhone & iPad / Offline / Kein Konto nötig",
                 "hero_alt": "PlanOnce Budget-Kategorien",
                 "section_kicker": "Dein Geld bleibt bei dir",
-                "section_title": "Einmal planen und <em>ohne Monatsgebühr weitermachen.</em>",
+                "section_title": "Diesen Monat planen und <em>zwölf Monate klar überblicken.</em>",
                 "features": [
                     ("Jeden Euro einplanen", "Verteile dein Einkommen, bis kein ungeplanter Betrag übrig bleibt."),
-                    ("Ausgaben in 3 Schritten", "Kategorie wählen, Betrag eingeben, speichern. Keine Banksynchronisation."),
-                    ("Alles bleibt auf dem Gerät", "Kein Bank-Login, kein Cloud-Konto, kein Tracking. Deine Daten bleiben auf dem iPhone."),
+                    ("Geplante Buchungen automatisieren", "Wöchentliche oder monatliche Einträge planen und keine Rechnung übersehen."),
+                    ("Engpässe früh erkennen", "Kontostand für 90 Tage prognostizieren und den ersten möglichen Minustag sehen."),
+                    ("6- und 12-Monats-Trends", "Einnahmen, Ausgaben, Nettoveränderung und Top-Kategorien vergleichen."),
                 ],
                 "gallery_title": "Dein Geld im Blick – <em>mit echten Screenshots.</em>",
                 "gallery_alts": ["Budget-Kategorien und Restbetrag", "Transaktionsliste", "Kontenübersicht", "Einstellungen"],
                 "price_kicker": "PlanOnce Pro",
-                "price_title": "Kein Abo.<br><em>Einmalig 14,99 €.</em>",
-                "price_body": "Die Grundlagen sind kostenlos. Ein Kauf schaltet unbegrenzte Kategorien, Konten, Ziele, Berichte und den YNAB-CSV-Import frei.",
-                "price_points": ["Kein Bank-Login nötig", "Alles bleibt auf deinem Gerät", "Ein Kauf ohne automatische Verlängerung"],
+                "price_title": "Pro 30 Tage testen.<br><em>Jahresabo oder Lifetime.</em>",
+                "price_body": "Die Vorschau benötigt keine Zahlungsmethode und enthält alle Pro-Funktionen. Danach kannst du das automatisch verlängernde Jahresabo oder den einmaligen Lifetime-Kauf wählen. Lokale Preise zeigt der App Store.",
+                "price_points": ["Kein Bank-Login nötig", "Backup, Wiederherstellung und CSV-Export bleiben kostenlos", "Jahresabo verlängert sich / Lifetime einmalig"],
+                "features_cta": "Funktionen ansehen",
+                "proof_items": ["Echte App-Store-Screenshots", "30 Tage Vorschau ohne Karte", "Deine Daten bleiben portabel"],
+                "inside_label": "In der App",
+                "support_label": "Support & Datenschutz",
                 "cta": "Im App Store ansehen",
                 "footer": "Mit PlanOnce starten",
             },
@@ -445,6 +522,13 @@ def render_promo_page(slug, locale):
         for filename, alt in zip(gallery, copy["gallery_alts"])
     )
     points = "".join(f"<li>{escape(point)}</li>" for point in copy["price_points"])
+    default_proof_items = (
+        ["実際のApp Store用スクリーンショット", "30日間カード不要で試せる", "データを書き出して保持できる"]
+        if locale == "ja"
+        else ["Real App Store screenshots", "30-day no-card Preview", "Your data stays portable"]
+    )
+    proof_items = copy.get("proof_items", default_proof_items)
+    proof = "".join(f"<span>{escape(item)}</span>" for item in proof_items)
     hero = gallery[0]
     store = copy.get("store", app["store"])
     support = copy.get("support", app.get("support", "/support/"))
@@ -486,19 +570,19 @@ def render_promo_page(slug, locale):
         <p class="promo-kicker">{escape(copy["kicker"])}</p>
         <h1>{copy["headline"]}</h1>
         <p class="promo-lead">{escape(copy["lead"])}</p>
-        <div class="promo-actions"><a class="promo-button" href="{escape(store)}">{escape(copy["cta"])}</a><a class="promo-text-link" href="#features">{'機能を見る' if locale == 'ja' else 'See the features'} <span>↓</span></a></div>
+        <div class="promo-actions"><a class="promo-button" href="{escape(store)}">{escape(copy["cta"])}</a><a class="promo-text-link" href="#features">{escape(copy.get("features_cta", "機能を見る" if locale == "ja" else "See the features"))} <span>↓</span></a></div>
         <p class="promo-meta">{escape(copy["meta"])}</p>
       </div>
       <div class="promo-hero__visual"><div class="promo-device"><img src="/assets/{escape(hero)}" alt="{escape(copy["hero_alt"])}"></div></div>
     </section>
-    <section class="promo-proof" aria-label="Highlights"><span>{'実際のApp Store用スクリーンショット' if locale == 'ja' else 'Real App Store screenshots'}</span><span>{'買い切り中心の価格設計' if locale == 'ja' else 'A clear one-time value proposition'}</span><span>{'端末内で完結' if locale == 'ja' else 'Designed to stay on your device'}</span></section>
+    <section class="promo-proof" aria-label="Highlights">{proof}</section>
     <section class="promo-section promo-section--light" id="features">
       <p class="promo-kicker">{escape(copy["section_kicker"])}</p>
       <h2>{copy["section_title"]}</h2>
       <div class="promo-features">{feature_cards}</div>
     </section>
     <section class="promo-section promo-screens">
-      <p class="promo-kicker">{'画面でわかること' if locale == 'ja' else 'Inside the app'}</p>
+      <p class="promo-kicker">{escape(copy.get("inside_label", "画面でわかること" if locale == "ja" else "Inside the app"))}</p>
       <h2>{copy["gallery_title"]}</h2>
       <div class="promo-gallery">{screenshots}</div>
     </section>
@@ -508,7 +592,7 @@ def render_promo_page(slug, locale):
     </section>
     <section class="promo-final"><p class="promo-kicker">{escape(app["name"])}</p><h2>{escape(copy["footer"])}</h2><a class="promo-button promo-button--light" href="{escape(store)}">{escape(copy["cta"])}</a></section>
   </main>
-  <footer class="promo-footer"><a href="{escape(support)}">{'サポート・プライバシー' if locale == 'ja' else 'Support & privacy'}</a><span>© Atani</span></footer>
+  <footer class="promo-footer"><a href="{escape(support)}">{escape(copy.get("support_label", "サポート・プライバシー" if locale == "ja" else "Support & privacy"))}</a><span>© Atani</span></footer>
 </body>
 </html>
 '''

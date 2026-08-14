@@ -48,6 +48,7 @@ PAGES_TO_COPY = {
     "_deploy-now/support/index.html": ("/support/", "support/index.html"),
     "_deploy-now/peyo/index.html": ("/peyo/", "peyo/index.html"),
     "_deploy-now/sports-photo/index.html": ("/sports-photo/", "sports-photo/index.html"),
+    "_deploy-now/chillcast/privacy/index.html": ("/chillcast/privacy/", "chillcast/privacy/index.html"),
     "_deploy-now/match-notebook/privacy/index.html": ("/match-notebook/privacy/", "match-notebook/privacy/index.html"),
     "_deploy-now/match-notebook/en/privacy/index.html": ("/match-notebook/en/privacy/", "match-notebook/en/privacy/index.html"),
 }
