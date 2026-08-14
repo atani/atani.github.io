@@ -358,6 +358,7 @@ NEXT_CONFIG = """const config = {
         { source: '/support/', destination: '/support/index.html' },
         { source: '/peyo/', destination: '/peyo/index.html' },
         { source: '/sports-photo/', destination: '/sports-photo/index.html' },
+        { source: '/chillcast/privacy/', destination: '/chillcast/privacy/index.html' },
         { source: '/match-notebook/privacy/', destination: '/match-notebook/privacy/index.html' },
         { source: '/match-notebook/en/privacy/', destination: '/match-notebook/en/privacy/index.html' },
         { source: '/peyo/en/', destination: '/peyo/en/index.html' },
