@@ -19,7 +19,7 @@ PROMO_APPS = {
             "ja": {
                 "lang": "ja",
                 "label": "日本語",
-                "support": "/chillcast/privacy/",
+                "support": "https://atani.github.io/chillcast-legal/",
                 "support": "/match-notebook/privacy/",
                 "kicker": "対戦相手ノート",
                 "headline": "前回効いた作戦を、<em>次の試合で忘れない。</em>",
@@ -168,7 +168,7 @@ PROMO_APPS = {
             "en": {
                 "lang": "en",
                 "label": "English",
-                "support": "/chillcast/privacy/",
+                "support": "https://atani.github.io/chillcast-legal/",
                 "store": "https://apps.apple.com/us/app/id6785241430",
                 "kicker": "A chill-hours tracker for fruit growers",
                 "headline": "Will your trees fruit<br><em>this year?</em>",
@@ -195,7 +195,7 @@ PROMO_APPS = {
             "es": {
                 "lang": "es",
                 "label": "Español",
-                "support": "/chillcast/privacy/",
+                "support": "https://atani.github.io/chillcast-legal/",
                 "store": "https://apps.apple.com/es/app/id6785241430",
                 "kicker": "Horas frío para árboles frutales",
                 "headline": "¿Darán fruto tus árboles<br><em>este año?</em>",
@@ -225,7 +225,7 @@ PROMO_APPS = {
             "tr": {
                 "lang": "tr",
                 "label": "Türkçe",
-                "support": "/chillcast/privacy/",
+                "support": "https://atani.github.io/chillcast-legal/",
                 "store": "https://apps.apple.com/tr/app/id6785241430",
                 "kicker": "Meyve ağaçları için soğuklama takibi",
                 "headline": "Ağaçlarınız bu yıl<br><em>meyve verecek mi?</em>",
