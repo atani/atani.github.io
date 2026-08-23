@@ -55,6 +55,10 @@ h1,h2,h3 { word-break:auto-phrase; line-break:strict; }
 .project__meta { display:flex; gap:10px; margin-bottom:18px; }.project__meta span { padding:6px 12px; border:1px solid currentColor; border-radius:999px; font-size:10.5px; font-weight:750; opacity:.85; }
 .project h3 { margin:0 0 18px; font-size:clamp(28px,3.4vw,42px); line-height:1.35; letter-spacing:-.02em; }.project p { max-width:34em; margin:0 0 30px; color:var(--muted); font-size:15px; line-height:2; }.project--featured p { color:rgba(255,255,255,.85); }.project--featured .text-link { color:#fff; }.project--featured .button--dark { color:var(--ink); background:#fff; }
 .project--sports h3 { font-size:clamp(27px,3vw,38px); }
+.qr-row { display:flex; gap:24px; margin-top:22px; }
+.qr-chip { text-align:center; }
+.qr-chip__badge { display:block; height:44px; width:auto; margin:0 auto 10px; }
+.qr-chip__code { display:block; width:72px; height:72px; margin:0 auto; padding:5px; border-radius:8px; background:#fff; }
 .project__arrow { position:absolute; right:30px; bottom:28px; display:grid; width:48px; height:48px; place-items:center; border:1px solid var(--line); border-radius:50%; font-size:19px; }.project__arrow:hover { color:#fff; background:var(--ink); }
 .project__arrow--disabled { color:var(--muted); }.project__arrow--disabled:hover { color:var(--muted); background:transparent; }
 .project__symbol { display:flex; gap:10px; align-items:center; height:145px; margin-bottom:30px; }.project__symbol span { display:grid; width:90px; height:90px; place-items:center; border-radius:20px; color:#fff; background:var(--blue); font-size:32px; font-weight:900; box-shadow:15px 18px 0 #dce1ff; }.project__symbol span:last-child { color:var(--ink); background:var(--lime); transform:translateY(22px); box-shadow:none; }
