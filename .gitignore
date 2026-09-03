@@ -1,3 +1,4 @@
 .playwright-cli/
 .serena/
 __pycache__/
+.DS_Store
