@@ -9,9 +9,13 @@
     python3 -m unittest discover -s scripts -p 'test_*.py' -v
 """
 
+import contextlib
 import datetime as dt
 import importlib.util
+import io
+import json
 import pathlib
+import tempfile
 import unittest
 
 # ファイル名にハイフンが入るため通常の import ができない。
@@ -255,27 +259,80 @@ class UsableCacheTests(unittest.TestCase):
 
 
 class WriteGateTests(unittest.TestCase):
-    """全地点が揃わない限り chillcast_data.json を書き換えないこと。"""
+    """全地点が揃わない限り chillcast_data.json を書き換えないこと。
 
-    def _run(self, **kwargs) -> tuple[int, bytes]:
+    ネットワークにもキャッシュにも触れない。取得は必ず成功する固定値へ
+    差し替えるので、「書かなかったのは gate のせい」と「取得に失敗した」を
+    切り分けられる。
+    """
+
+    def setUp(self):
+        today = dt.date.today()
+        start = build.fetch_start(today)
+        # 11 年分の合成気温。両半球とも 10 シーズンが揃う長さにする。
+        values = hours(start, today, 5.0)
+        self._patched = {
+            "probe_version": build.probe_version,
+            "fetch_hourly": build.fetch_hourly,
+        }
+        build.probe_version = lambda: "test"
+        build.fetch_hourly = lambda site, s, e, refresh: (values, True)
+        self.addCleanup(self._restore)
+
+    def _restore(self):
+        for name, original in self._patched.items():
+            setattr(build, name, original)
+
+    def _run(self, **kwargs) -> tuple[int, str]:
+        """build() を走らせ、DATA_PATH が 1 バイトも変わらないことを確かめる。"""
         before = build.DATA_PATH.read_bytes()
         stamp = build.DATA_PATH.stat().st_mtime_ns
-        code = build.build(**kwargs)
-        after = build.DATA_PATH.read_bytes()
+        stdout, stderr = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            code = build.build(**kwargs)
         self.assertEqual(stamp, build.DATA_PATH.stat().st_mtime_ns, "書き込みが起きています")
-        self.assertEqual(before, after)
-        return code, after
+        self.assertEqual(before, build.DATA_PATH.read_bytes())
+        return code, stdout.getvalue()
 
     def test_limit_does_not_rewrite_the_committed_file(self):
-        # --limit は動作確認用。3 地点だけ処理した結果で 150 地点の JSON を
-        # 置き換えないことを確かめる。probe_version は呼ばせない。
-        original = build.probe_version
-        build.probe_version = lambda: "test"
-        try:
-            code, _ = self._run(limit=3, refresh=False, allow_partial=False)
-        finally:
-            build.probe_version = original
+        code, out = self._run(limit=3, refresh=False, allow_partial=False)
         self.assertEqual(code, 1)
+        # 取得はすべて成功している。書かなかった理由が --limit だと分かる形にする。
+        self.assertIn("地点 3 / 3", out)
+        self.assertIn("失敗 0 件", out)
+
+    def test_limit_does_not_rewrite_even_with_allow_partial(self):
+        # --allow-partial との併用でも先頭 N 地点のファイルを書き出さない。
+        code, out = self._run(limit=3, refresh=False, allow_partial=True)
+        self.assertEqual(code, 1)
+        self.assertIn("失敗 0 件", out)
+
+    def test_partial_results_are_written_only_with_allow_partial(self):
+        """--limit を使わず一部の地点が落ちたときの対の挙動を確かめる。"""
+        sites = json.loads(build.SITES_PATH.read_text(encoding="utf-8"))
+        broken = build.fetch_hourly
+
+        def fail_one(site, start, end, refresh):
+            if site["slug"] == sites[0]["slug"]:
+                raise RuntimeError("テスト用の取得失敗")
+            return broken(site, start, end, refresh)
+
+        build.fetch_hourly = fail_one
+        with tempfile.TemporaryDirectory() as folder:
+            original_path = build.DATA_PATH
+            build.DATA_PATH = pathlib.Path(folder) / "out.json"
+            self.addCleanup(setattr, build, "DATA_PATH", original_path)
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(io.StringIO()):
+                code = build.build(None, False, False)
+            self.assertEqual(code, 1)
+            self.assertFalse(build.DATA_PATH.exists(), "揃っていないのに書き込んでいます")
+
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                code = build.build(None, False, True)
+            self.assertEqual(code, 0)
+            written = json.loads(build.DATA_PATH.read_text(encoding="utf-8"))
+            self.assertEqual(len(written["sites"]), len(sites) - 1)
 
 
 class ClassifyTests(unittest.TestCase):

@@ -7,6 +7,7 @@ title と description の重複を検査する。数値そのものではなく�
     python3 -m unittest discover -s _deploy-now -p 'test_*.py' -v
 """
 
+import json
 import pathlib
 import re
 import sys
@@ -136,10 +137,53 @@ class GeneratedPagesTests(unittest.TestCase):
                 with self.subTest(slug=site["slug"]):
                     self.assertLessEqual(float(km), chillcast_pages.NEARBY_MAX_KM)
 
-    def test_variety_json_payload_has_no_closing_script_tag(self):
+    def test_variety_json_payload_closes_exactly_once(self):
+        """埋め込んだ JSON の後に閉じタグが 1 つだけあること。
+
+        最初の `</script>` で切り出すと、注入された閉じタグが切り取り位置に
+        なってしまい、エスケープを外しても検出できない。出現回数で見る。
+        """
         index = self.html[chillcast_pages.CHILL_ROOT]
-        payload = index.split('id="chill-varieties">', 1)[1].split("</script>", 1)[0]
+        tail = index.split('id="chill-varieties">', 1)[1]
+        self.assertEqual(tail.count("</script>"), 1)
+
+
+class CalculatorPayloadTests(unittest.TestCase):
+    """品種名に閉じタグを仕込み、エスケープが実際に効くことを確かめる。"""
+
+    HOSTILE = 'ZZZ</script><img src=x onerror=alert(1)>'
+
+    def _payload(self, name: str) -> str:
+        sites = chillcast_pages.load_data()["sites"][:2]
+        varieties = [{"name": name, "species": "Apple", "chillHoursRequirement": 500}]
+        html = chillcast_pages._calculator(sites, varieties)
+        tail = html.split('id="chill-varieties">', 1)[1]
+        # 閉じタグが 1 つだけなら、その手前までが payload。
+        self.assertEqual(tail.count("</script>"), 1, "閉じタグが増えています")
+        return tail.split("</script>", 1)[0]
+
+    def test_closing_tag_in_a_variety_name_is_neutralised(self):
+        payload = self._payload(self.HOSTILE)
         self.assertNotIn("</", payload)
+        self.assertIn("<\\/script>", payload)
+
+    def test_escaped_payload_still_parses_as_json(self):
+        payload = self._payload(self.HOSTILE)
+        parsed = json.loads(payload)
+        self.assertEqual(parsed[0]["name"], self.HOSTILE)
+
+    def test_json_for_script_neutralises_closing_tags(self):
+        escaped = chillcast_pages.json_for_script([{"name": self.HOSTILE}])
+        self.assertNotIn("</", escaped)
+        self.assertEqual(json.loads(escaped)[0]["name"], self.HOSTILE)
+
+    def test_plain_json_dumps_would_emit_a_closing_tag(self):
+        """エスケープが効いていることの対。素の json.dumps では閉じタグが出る。
+
+        この対がないと、上のテストが空振りしていても気づけない。
+        """
+        raw = json.dumps([{"name": self.HOSTILE}], ensure_ascii=False)
+        self.assertIn("</script>", raw)
 
 
 class SlugifyTests(unittest.TestCase):

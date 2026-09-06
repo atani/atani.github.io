@@ -163,22 +163,38 @@ class PythonJavaScriptParityTests(unittest.TestCase):
                                                         "2026010101": -999.0}}}}
         self.assertEqual(build.extract_hourly(payload), {})
 
-    def test_javascript_rejects_a_contiguous_gap_like_python(self):
+    ACCUMULATE_SCRIPT = """
+    const calculator = require(process.argv[2]);
+    const input = require(process.argv[3]);
+    const bounds = calculator.seasonBounds("north", "chill", 2024);
+    process.stdout.write(JSON.stringify({
+      result: calculator.accumulate(input.values, bounds)
+    }));
+    """
+
+    def _season_with_leading_gap(self, gap_hours: int):
         start, end = build.season_bounds("north", "chill", 2024)
         values = synthetic_hourly(start, end, 0.0)
-        for key in sorted(values)[:build.MAX_GAP_HOURS]:
+        for key in sorted(values)[:gap_hours]:
             del values[key]
+        return values, start, end
+
+    def test_javascript_rejects_a_contiguous_gap_like_python(self):
+        values, start, end = self._season_with_leading_gap(build.MAX_GAP_HOURS)
         self.assertIsNone(build.accumulate(values, start, end))
-        script = """
-        const calculator = require(process.argv[2]);
-        const input = require(process.argv[3]);
-        const bounds = calculator.seasonBounds("north", "chill", 2024);
-        process.stdout.write(JSON.stringify({
-          result: calculator.accumulate(input.values, bounds)
-        }));
-        """
-        js = run_node(script, {"values": values})
+        js = run_node(self.ACCUMULATE_SCRIPT, {"values": values})
         self.assertIsNone(js["result"])
+
+    def test_javascript_accepts_a_gap_just_under_the_limit_like_python(self):
+        """上限ちょうど未満は両実装とも採用する。off-by-one を検出する対。"""
+        values, start, end = self._season_with_leading_gap(build.MAX_GAP_HOURS - 1)
+        mine = build.accumulate(values, start, end)
+        self.assertIsNotNone(mine)
+        js = run_node(self.ACCUMULATE_SCRIPT, {"values": values})
+        self.assertIsNotNone(js["result"])
+        self.assertAlmostEqual(mine["forty_five"], js["result"]["fortyFive"], places=9)
+        self.assertAlmostEqual(mine["utah"], js["result"]["utah"], places=9)
+        self.assertAlmostEqual(mine["dynamic"], js["result"]["dynamic"], places=9)
 
 
 if __name__ == "__main__":

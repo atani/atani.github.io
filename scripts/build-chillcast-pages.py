@@ -219,7 +219,8 @@ def fetch_hourly(site: dict, start: dt.date, end: dt.date,
     """(時刻キー YYYYMMDDHH -> 摂氏, キャッシュから読んだか)。欠測（<= -900）は落とす。"""
     path = cache_path(site)
     if not refresh:
-        cached = usable_cache(path, start, end)
+        # 第 3 引数は鮮度の基準日なので、取得範囲の末日ではなく今日を渡す。
+        cached = usable_cache(path, start, dt.date.today())
         if cached is not None:
             return cached["values"], True
 
@@ -342,7 +343,9 @@ def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
         try:
             check_slugs(site)
             values, cached = fetch_hourly(site, data_start, data_end, refresh)
-        except RuntimeError as error:
+        # ValueError は power_url() が非数値の緯度経度で投げる。1 行の壊れた
+        # データでビルド全体を落とさず、他の地点と同じ失敗集計へ載せる。
+        except (RuntimeError, ValueError) as error:
             failures.append(f"{label}: {error}")
             print(f"NG   {label}: {error}", file=sys.stderr)
             continue
@@ -417,20 +420,21 @@ def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
     for failure in failures:
         print(f"  失敗: {failure}")
 
-    # 1 地点でも欠けたまま書き込むと、コミット済みの地点が黙って消える。
-    # 部分的な結果を採るのは明示的に指示されたときだけにする。--limit は
-    # 動作確認用なので、そのままでは書き込みの対象にしない。
-    if len(results) != total and not allow_partial:
-        if limit:
-            print(f"--limit は先頭 {len(sites)} 地点しか処理しないので {DATA_PATH.name} は"
-                  "更新しません。部分的な結果を書き出すなら --allow-partial を付けてください。",
-                  file=sys.stderr)
-        else:
-            print(f"{total - len(results)} 地点が揃わなかったので {DATA_PATH.name} は更新しません。"
-                  "部分的な結果を採用するなら --allow-partial を付けてください。", file=sys.stderr)
+    # --limit は動作確認用で、処理するのは先頭 N 地点だけ。書き込むと
+    # コミット済みの地点が N 件へ切り詰められるので、--allow-partial を
+    # 付けたかどうかによらず書き込まない。
+    if limit:
+        print(f"--limit は先頭 {len(sites)} 地点しか処理しないので {DATA_PATH.name} は"
+              "更新しません。", file=sys.stderr)
         return 1
     if not results:
         print("有効な地点が 0 件のため書き込みません。", file=sys.stderr)
+        return 1
+    # 1 地点でも欠けたまま書き込むと、コミット済みの地点が黙って消える。
+    # 部分的な結果を採るのは明示的に指示されたときだけにする。
+    if len(results) != total and not allow_partial:
+        print(f"{total - len(results)} 地点が揃わなかったので {DATA_PATH.name} は更新しません。"
+              "部分的な結果を採用するなら --allow-partial を付けてください。", file=sys.stderr)
         return 1
 
     DATA_PATH.write_text(
@@ -450,10 +454,14 @@ def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh", action="store_true", help="キャッシュを無視して取り直す")
-    parser.add_argument("--limit", type=int, help="先頭 N 地点だけ処理する（動作確認用）")
+    parser.add_argument("--limit", type=int,
+                        help="先頭 N 地点だけ処理する（動作確認用。書き込みは行わない）")
     parser.add_argument("--allow-partial", action="store_true",
                         help="一部の地点が揃わなくても書き込む（既定は書き込まずに失敗）")
     args = parser.parse_args()
+    if args.limit and args.allow_partial:
+        parser.error("--limit と --allow-partial は同時に使えません。"
+                     "--limit は動作確認用で、先頭 N 地点だけのファイルを書き出さないためです。")
     sys.exit(build(args.limit, args.refresh, args.allow_partial))
 
 

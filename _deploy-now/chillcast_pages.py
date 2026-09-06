@@ -264,6 +264,15 @@ def haversine(a: dict, b: dict) -> float:
     return 2 * 6371.0 * math.asin(math.sqrt(h))
 
 
+def json_for_script(payload) -> str:
+    """`<script type="application/json">` へ入れられる形の JSON を返す。
+
+    閉じタグを無害化する。JSON では `<\\/` と `</` が同じ文字列を表すので、
+    `JSON.parse` 側は変更しなくてよい。
+    """
+    return json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
+
+
 def source_label(url: str) -> str:
     """出典 URL のホスト名を表示用のラベルにする。"""
     host = urllib.parse.urlsplit(url).netloc
@@ -613,12 +622,10 @@ def _calculator(sites: list[dict], varieties: list[dict]) -> str:
         f'{escape(site["name"])}, {escape(site["region"])} ({escape(site["country"])})</option>'
         for site in sorted(sites, key=lambda s: (s["country"], s["name"]))
     )
-    # script 要素へ入れるので閉じタグを無害化する。JSON では "<\\/" と "</" が同じ
-    # 文字列を表すため、JSON.parse 側は変更しなくてよい。
-    payload = json.dumps([
+    payload = json_for_script([
         {"name": v["name"], "species": v["species"], "requirement": v["chillHoursRequirement"]}
         for v in sorted(varieties, key=lambda v: -v["chillHoursRequirement"])
-    ], ensure_ascii=False).replace("</", "<\\/")
+    ])
     return f'''      <section id="calculator">
         <h2>Calculate chill for any point</h2>
         <p>This runs in your browser. It asks NASA POWER for ten years of hourly temperatures at the
