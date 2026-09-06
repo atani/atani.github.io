@@ -254,6 +254,30 @@ class UsableCacheTests(unittest.TestCase):
             self.assertIsNone(build.usable_cache(path, dt.date(2015, 9, 1), today))
 
 
+class WriteGateTests(unittest.TestCase):
+    """全地点が揃わない限り chillcast_data.json を書き換えないこと。"""
+
+    def _run(self, **kwargs) -> tuple[int, bytes]:
+        before = build.DATA_PATH.read_bytes()
+        stamp = build.DATA_PATH.stat().st_mtime_ns
+        code = build.build(**kwargs)
+        after = build.DATA_PATH.read_bytes()
+        self.assertEqual(stamp, build.DATA_PATH.stat().st_mtime_ns, "書き込みが起きています")
+        self.assertEqual(before, after)
+        return code, after
+
+    def test_limit_does_not_rewrite_the_committed_file(self):
+        # --limit は動作確認用。3 地点だけ処理した結果で 150 地点の JSON を
+        # 置き換えないことを確かめる。probe_version は呼ばせない。
+        original = build.probe_version
+        build.probe_version = lambda: "test"
+        try:
+            code, _ = self._run(limit=3, refresh=False, allow_partial=False)
+        finally:
+            build.probe_version = original
+        self.assertEqual(code, 1)
+
+
 class ClassifyTests(unittest.TestCase):
     """適合の境界。Swift VarietyFitTests.testFitThresholdsAgainstTypicalChill の移植。"""
 

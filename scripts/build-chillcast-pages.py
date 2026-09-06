@@ -325,6 +325,7 @@ def summarise(seasons: list[dict], key: str) -> dict:
 
 def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
     sites = json.loads(SITES_PATH.read_text(encoding="utf-8"))
+    total = len(sites)
     if limit:
         sites = sites[:limit]
     data_end = dt.date.today()
@@ -417,10 +418,16 @@ def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
         print(f"  失敗: {failure}")
 
     # 1 地点でも欠けたまま書き込むと、コミット済みの地点が黙って消える。
-    # 部分的な結果を採るのは明示的に指示されたときだけにする。
-    if len(results) != len(sites) and not allow_partial:
-        print(f"{len(sites) - len(results)} 地点が揃わなかったので {DATA_PATH.name} は更新しません。"
-              "部分的な結果を採用するなら --allow-partial を付けてください。", file=sys.stderr)
+    # 部分的な結果を採るのは明示的に指示されたときだけにする。--limit は
+    # 動作確認用なので、そのままでは書き込みの対象にしない。
+    if len(results) != total and not allow_partial:
+        if limit:
+            print(f"--limit は先頭 {len(sites)} 地点しか処理しないので {DATA_PATH.name} は"
+                  "更新しません。部分的な結果を書き出すなら --allow-partial を付けてください。",
+                  file=sys.stderr)
+        else:
+            print(f"{total - len(results)} 地点が揃わなかったので {DATA_PATH.name} は更新しません。"
+                  "部分的な結果を採用するなら --allow-partial を付けてください。", file=sys.stderr)
         return 1
     if not results:
         print("有効な地点が 0 件のため書き込みません。", file=sys.stderr)
