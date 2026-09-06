@@ -40,7 +40,6 @@ SEASON_COUNT = 10
 MIN_COVERAGE = 0.95
 REQUEST_INTERVAL = 0.3
 RETRIES = 3
-NEARBY_COUNT = 5
 
 # 積算期間。北半球は UC Davis / Dave Wilson の慣行に合わせて 11/1 開始。
 WINDOWS = {
@@ -164,6 +163,17 @@ def fetch_hourly(site: dict, end: dt.date, refresh: bool) -> dict[str, float]:
     return values
 
 
+def probe_version() -> str:
+    """NASA POWER の referencing 文へ入れる API バージョンを 1 リクエストで読む。"""
+    url = POWER_URL.format(lon=0, lat=0, start="20250101", end="20250102")
+    try:
+        with urllib.request.urlopen(url, timeout=60) as response:
+            payload = json.load(response)
+        return str(payload["header"]["api"]["version"]).lstrip("v")
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError) as error:
+        raise RuntimeError(f"NASA POWER のバージョン取得に失敗: {error}") from error
+
+
 def accumulate(values: dict[str, float], start: dt.date, end: dt.date) -> dict | None:
     """期間内の 3 モデルを 1 パスで積算する。欠測が多い季節は None を返す。"""
     expected = (end - start).days * 24 + 24
@@ -209,18 +219,14 @@ def summarise(seasons: list[dict], key: str) -> dict:
     }
 
 
-def haversine(a: dict, b: dict) -> float:
-    lat1, lon1, lat2, lon2 = map(math.radians, (a["lat"], a["lon"], b["lat"], b["lon"]))
-    h = math.sin((lat2 - lat1) / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2
-    return 2 * 6371.0 * math.asin(math.sqrt(h))
-
-
 def build(limit: int | None, refresh: bool) -> int:
     sites = json.loads(SITES_PATH.read_text(encoding="utf-8"))
     if limit:
         sites = sites[:limit]
     data_end = dt.date.today()
     started = time.monotonic()
+    power_version = probe_version()
+    print(f"NASA POWER Hourly API バージョン: {power_version}")
     results: list[dict] = []
     failures: list[str] = []
     frontier: dt.date | None = None
@@ -292,22 +298,13 @@ def build(limit: int | None, refresh: bool) -> int:
         })
         print(f"OK   {index:3d}/{len(sites)}  {label}")
 
-    for site in results:
-        others = sorted((other for other in results if other["slug"] != site["slug"]),
-                        key=lambda other: haversine(site, other))
-        site["nearby"] = [
-            {"slug": other["slug"], "country_slug": other["country_slug"],
-             "name": other["name"], "region": other["region"],
-             "km": round(haversine(site, other))}
-            for other in others[:NEARBY_COUNT]
-        ]
-
     elapsed = time.monotonic() - started
     DATA_PATH.write_text(
         json.dumps({
             "generated_on": dt.date.today().isoformat(),
             "data_through": frontier.isoformat() if frontier else "",
             "source": "NASA POWER hourly T2M (MERRA-2)",
+            "power_version": power_version,
             "sites": results,
         }, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",

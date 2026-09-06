@@ -557,6 +557,11 @@ def build(out: pathlib.Path, quiet: bool) -> None:
             sitemap_paths.append(path)
             log(f"page  public/{out_name}")
 
+    calculator = public / "assets" / "chillcast-calculator.js"
+    calculator.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "_deploy-now/chillcast-calculator.js", calculator)
+    log("asset public/assets/chillcast-calculator.js")
+
     chillcast_pages = build_chillcast_pages()
     for path, out_name, html in chillcast_pages:
         dest = public / out_name
