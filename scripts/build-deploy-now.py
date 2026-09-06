@@ -19,18 +19,21 @@ lolipop CLI は .gitignore を尊重してファイルを除外するため、�
 """
 
 import argparse
+import datetime
 import json
 import pathlib
 import shutil
 import subprocess
 import sys
 import tempfile
+from xml.sax.saxutils import escape as xml_escape
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DEFAULT_OUT = pathlib.Path(tempfile.gettempdir()) / "atani-deploy-now"
 
 sys.path.insert(0, str(ROOT / "_deploy-now"))
 from promo_apps import PROMO_APPS, render_promo_page
+from chillcast_pages import build_pages as build_chillcast_pages
 
 SITE = "https://atani.lolipop-now.app"
 PAGES = "https://atani.github.io"
@@ -51,6 +54,12 @@ PAGES_TO_COPY = {
     "_deploy-now/chillcast/privacy/index.html": ("/chillcast/privacy/", "chillcast/privacy/index.html"),
     "_deploy-now/match-notebook/privacy/index.html": ("/match-notebook/privacy/", "match-notebook/privacy/index.html"),
     "_deploy-now/match-notebook/en/privacy/index.html": ("/match-notebook/en/privacy/", "match-notebook/en/privacy/index.html"),
+}
+
+# HTML ではないので rewrite()（canonical の差し込み）を通さずそのまま置く。
+# sitemap にも載せない。
+FILES_TO_COPY = {
+    "_deploy-now/robots.txt": "robots.txt",
 }
 
 LOCALIZED_PAGES = {
@@ -435,6 +444,11 @@ NEXT_CONFIG = """const config = {
         { source: '/peyo/es/', destination: '/peyo/es/index.html' },
         { source: '/peyo/fr/', destination: '/peyo/fr/index.html' },
         { source: '/peyo/it/', destination: '/peyo/it/index.html' },
+        { source: '/chillcast/chill-hours/', destination: '/chillcast/chill-hours/index.html' },
+        { source: '/chillcast/chill-hours/:country/', destination: '/chillcast/chill-hours/:country/index.html' },
+        { source: '/chillcast/chill-hours/:country/:city/', destination: '/chillcast/chill-hours/:country/:city/index.html' },
+        { source: '/chillcast/varieties/', destination: '/chillcast/varieties/index.html' },
+        { source: '/chillcast/varieties/:species/:variety/', destination: '/chillcast/varieties/:species/:variety/index.html' },
 """ + "\n".join(PROMO_REWRITES) + """
       ],
     };
@@ -493,6 +507,20 @@ def render_localized_page(source: str, locale: str, page: dict) -> str:
     return html
 
 
+def render_sitemap(paths: list[str]) -> str:
+    """Deploy Now が配信するページだけを列挙する。GitHub Pages 側のパスは含めない。"""
+    today = datetime.date.today().isoformat()
+    entries = "".join(
+        f"  <url><loc>{xml_escape(SITE + path)}</loc><lastmod>{today}</lastmod></url>\n"
+        for path in sorted(dict.fromkeys(paths))
+    )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{entries}</urlset>\n"
+    )
+
+
 def build(out: pathlib.Path, quiet: bool) -> None:
     if out.exists():
         shutil.rmtree(out)
@@ -503,11 +531,21 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         if not quiet:
             print(message)
 
+    sitemap_paths: list[str] = []
+
     for src, (path, out_name) in PAGES_TO_COPY.items():
         dest = public / out_name
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(rewrite((ROOT / src).read_text(encoding="utf-8"), path), encoding="utf-8")
+        if path.endswith("/"):
+            sitemap_paths.append(path)
         log(f"page  public/{out_name}")
+
+    for src, out_name in FILES_TO_COPY.items():
+        dest = public / out_name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / src, dest)
+        log(f"file  public/{out_name}")
 
     peyo_source = (ROOT / "_deploy-now/peyo/index.html").read_text(encoding="utf-8")
     for locale, page in LOCALIZED_PAGES.items():
@@ -516,6 +554,7 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         dest.parent.mkdir(parents=True, exist_ok=True)
         html = render_localized_page(peyo_source, locale, page)
         dest.write_text(rewrite(html, path), encoding="utf-8")
+        sitemap_paths.append(path)
         log(f"page  public/peyo/{locale}/index.html")
 
     for slug, app in PROMO_APPS.items():
@@ -526,7 +565,24 @@ def build(out: pathlib.Path, quiet: bool) -> None:
             dest.parent.mkdir(parents=True, exist_ok=True)
             html = render_promo_page(slug, locale)
             dest.write_text(rewrite(html, path), encoding="utf-8")
+            sitemap_paths.append(path)
             log(f"page  public/{out_name}")
+
+    calculator = public / "assets" / "chillcast-calculator.js"
+    calculator.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "_deploy-now/chillcast-calculator.js", calculator)
+    log("asset public/assets/chillcast-calculator.js")
+
+    chillcast_pages = build_chillcast_pages()
+    for path, out_name, html in chillcast_pages:
+        dest = public / out_name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(rewrite(html, path), encoding="utf-8")
+        sitemap_paths.append(path)
+    log(f"page  public/chillcast/ 配下に {len(chillcast_pages)} ページ")
+
+    (public / "sitemap.xml").write_text(render_sitemap(sitemap_paths), encoding="utf-8")
+    log(f"page  public/sitemap.xml（{len(set(sitemap_paths))} URL）")
 
     for pattern in ASSETS:
         for src in sorted(ROOT.glob(pattern)):

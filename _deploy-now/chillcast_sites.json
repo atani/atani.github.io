@@ -1,0 +1,1502 @@
+[
+ {
+  "slug": "wenatchee",
+  "name": "Wenatchee",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 47.4235,
+  "lon": -120.3103
+ },
+ {
+  "slug": "yakima",
+  "name": "Yakima",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 46.6021,
+  "lon": -120.5059
+ },
+ {
+  "slug": "chelan",
+  "name": "Chelan",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 47.841,
+  "lon": -120.0165
+ },
+ {
+  "slug": "prosser",
+  "name": "Prosser",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 46.2068,
+  "lon": -119.7689
+ },
+ {
+  "slug": "walla-walla",
+  "name": "Walla Walla",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 46.0646,
+  "lon": -118.343
+ },
+ {
+  "slug": "mount-vernon",
+  "name": "Mount Vernon",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 48.4212,
+  "lon": -122.3341
+ },
+ {
+  "slug": "spokane",
+  "name": "Spokane",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 47.6597,
+  "lon": -117.4291
+ },
+ {
+  "slug": "seattle",
+  "name": "Seattle",
+  "region": "Washington",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 47.6062,
+  "lon": -122.3321
+ },
+ {
+  "slug": "hood-river",
+  "name": "Hood River",
+  "region": "Oregon",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 45.7054,
+  "lon": -121.5215
+ },
+ {
+  "slug": "the-dalles",
+  "name": "The Dalles",
+  "region": "Oregon",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 45.5946,
+  "lon": -121.1787
+ },
+ {
+  "slug": "medford",
+  "name": "Medford",
+  "region": "Oregon",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 42.3265,
+  "lon": -122.8756
+ },
+ {
+  "slug": "salem",
+  "name": "Salem",
+  "region": "Oregon",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 44.9429,
+  "lon": -123.0351
+ },
+ {
+  "slug": "portland",
+  "name": "Portland",
+  "region": "Oregon",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 45.5234,
+  "lon": -122.6762
+ },
+ {
+  "slug": "fresno",
+  "name": "Fresno",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 36.7477,
+  "lon": -119.7724
+ },
+ {
+  "slug": "bakersfield",
+  "name": "Bakersfield",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 35.3733,
+  "lon": -119.0187
+ },
+ {
+  "slug": "modesto",
+  "name": "Modesto",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 37.6391,
+  "lon": -120.9969
+ },
+ {
+  "slug": "stockton",
+  "name": "Stockton",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 37.9577,
+  "lon": -121.2908
+ },
+ {
+  "slug": "davis",
+  "name": "Davis",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 38.5449,
+  "lon": -121.7405
+ },
+ {
+  "slug": "sacramento",
+  "name": "Sacramento",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 38.5816,
+  "lon": -121.4944
+ },
+ {
+  "slug": "watsonville",
+  "name": "Watsonville",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 36.9102,
+  "lon": -121.7569
+ },
+ {
+  "slug": "paso-robles",
+  "name": "Paso Robles",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 35.6266,
+  "lon": -120.691
+ },
+ {
+  "slug": "hollister",
+  "name": "Hollister",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 36.8524,
+  "lon": -121.4016
+ },
+ {
+  "slug": "visalia",
+  "name": "Visalia",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 36.3302,
+  "lon": -119.2921
+ },
+ {
+  "slug": "chico",
+  "name": "Chico",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 39.7285,
+  "lon": -121.8375
+ },
+ {
+  "slug": "napa",
+  "name": "Napa",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 38.2971,
+  "lon": -122.2855
+ },
+ {
+  "slug": "riverside",
+  "name": "Riverside",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 33.9534,
+  "lon": -117.3962
+ },
+ {
+  "slug": "fallbrook",
+  "name": "Fallbrook",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 33.3764,
+  "lon": -117.2511
+ },
+ {
+  "slug": "los-angeles",
+  "name": "Los Angeles",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 34.0522,
+  "lon": -118.2437
+ },
+ {
+  "slug": "san-diego",
+  "name": "San Diego",
+  "region": "California",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 32.7157,
+  "lon": -117.1647
+ },
+ {
+  "slug": "traverse-city",
+  "name": "Traverse City",
+  "region": "Michigan",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 44.7631,
+  "lon": -85.6206
+ },
+ {
+  "slug": "grand-rapids",
+  "name": "Grand Rapids",
+  "region": "Michigan",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 42.9634,
+  "lon": -85.6681
+ },
+ {
+  "slug": "benton-harbor",
+  "name": "Benton Harbor",
+  "region": "Michigan",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 42.1167,
+  "lon": -86.4542
+ },
+ {
+  "slug": "geneva",
+  "name": "Geneva",
+  "region": "New York",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 42.869,
+  "lon": -76.9777
+ },
+ {
+  "slug": "rochester",
+  "name": "Rochester",
+  "region": "New York",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 43.1548,
+  "lon": -77.6156
+ },
+ {
+  "slug": "biglerville",
+  "name": "Biglerville",
+  "region": "Pennsylvania",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 39.9304,
+  "lon": -77.248
+ },
+ {
+  "slug": "erie",
+  "name": "Erie",
+  "region": "Pennsylvania",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 42.1292,
+  "lon": -80.0851
+ },
+ {
+  "slug": "hammonton",
+  "name": "Hammonton",
+  "region": "New Jersey",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 39.6365,
+  "lon": -74.8024
+ },
+ {
+  "slug": "cornelia",
+  "name": "Cornelia",
+  "region": "Georgia",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 34.5115,
+  "lon": -83.5271
+ },
+ {
+  "slug": "fort-valley",
+  "name": "Fort Valley",
+  "region": "Georgia",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 32.5538,
+  "lon": -83.8874
+ },
+ {
+  "slug": "atlanta",
+  "name": "Atlanta",
+  "region": "Georgia",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 33.749,
+  "lon": -84.388
+ },
+ {
+  "slug": "edgefield",
+  "name": "Edgefield",
+  "region": "South Carolina",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 33.7896,
+  "lon": -81.9296
+ },
+ {
+  "slug": "spartanburg",
+  "name": "Spartanburg",
+  "region": "South Carolina",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 34.9496,
+  "lon": -81.9321
+ },
+ {
+  "slug": "hendersonville",
+  "name": "Hendersonville",
+  "region": "North Carolina",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 35.3187,
+  "lon": -82.4609
+ },
+ {
+  "slug": "winchester",
+  "name": "Winchester",
+  "region": "Virginia",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 39.1857,
+  "lon": -78.1633
+ },
+ {
+  "slug": "charlottesville",
+  "name": "Charlottesville",
+  "region": "Virginia",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 38.0293,
+  "lon": -78.4767
+ },
+ {
+  "slug": "fredericksburg",
+  "name": "Fredericksburg",
+  "region": "Texas",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 30.2752,
+  "lon": -98.872
+ },
+ {
+  "slug": "lubbock",
+  "name": "Lubbock",
+  "region": "Texas",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 33.5779,
+  "lon": -101.8552
+ },
+ {
+  "slug": "dallas",
+  "name": "Dallas",
+  "region": "Texas",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 32.7831,
+  "lon": -96.8067
+ },
+ {
+  "slug": "gainesville",
+  "name": "Gainesville",
+  "region": "Florida",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 29.6516,
+  "lon": -82.3248
+ },
+ {
+  "slug": "caldwell",
+  "name": "Caldwell",
+  "region": "Idaho",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 43.6629,
+  "lon": -116.6874
+ },
+ {
+  "slug": "boise",
+  "name": "Boise",
+  "region": "Idaho",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 43.6135,
+  "lon": -116.2035
+ },
+ {
+  "slug": "palisade",
+  "name": "Palisade",
+  "region": "Colorado",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 39.1103,
+  "lon": -108.3509
+ },
+ {
+  "slug": "salt-lake-city",
+  "name": "Salt Lake City",
+  "region": "Utah",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 40.7608,
+  "lon": -111.8911
+ },
+ {
+  "slug": "las-cruces",
+  "name": "Las Cruces",
+  "region": "New Mexico",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 32.3123,
+  "lon": -106.7783
+ },
+ {
+  "slug": "willcox",
+  "name": "Willcox",
+  "region": "Arizona",
+  "country": "United States",
+  "country_slug": "united-states",
+  "country_code": "US",
+  "lat": 32.2529,
+  "lon": -109.832
+ },
+ {
+  "slug": "kelowna",
+  "name": "Kelowna",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.8831,
+  "lon": -119.4857
+ },
+ {
+  "slug": "penticton",
+  "name": "Penticton",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.4806,
+  "lon": -119.5858
+ },
+ {
+  "slug": "vernon",
+  "name": "Vernon",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 50.2673,
+  "lon": -119.2734
+ },
+ {
+  "slug": "oliver",
+  "name": "Oliver",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.1831,
+  "lon": -119.5524
+ },
+ {
+  "slug": "osoyoos",
+  "name": "Osoyoos",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.0331,
+  "lon": -119.4524
+ },
+ {
+  "slug": "summerland",
+  "name": "Summerland",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.5998,
+  "lon": -119.6691
+ },
+ {
+  "slug": "creston",
+  "name": "Creston",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.0999,
+  "lon": -116.5021
+ },
+ {
+  "slug": "abbotsford",
+  "name": "Abbotsford",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.058,
+  "lon": -122.2526
+ },
+ {
+  "slug": "vancouver",
+  "name": "Vancouver",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 49.2497,
+  "lon": -123.1193
+ },
+ {
+  "slug": "victoria",
+  "name": "Victoria",
+  "region": "British Columbia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 48.4359,
+  "lon": -123.3516
+ },
+ {
+  "slug": "st-catharines",
+  "name": "St. Catharines",
+  "region": "Ontario",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 43.1713,
+  "lon": -79.2427
+ },
+ {
+  "slug": "niagara-on-the-lake",
+  "name": "Niagara-on-the-Lake",
+  "region": "Ontario",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 43.2565,
+  "lon": -79.0853
+ },
+ {
+  "slug": "simcoe",
+  "name": "Simcoe",
+  "region": "Ontario",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 42.8334,
+  "lon": -80.2997
+ },
+ {
+  "slug": "toronto",
+  "name": "Toronto",
+  "region": "Ontario",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 43.7064,
+  "lon": -79.3986
+ },
+ {
+  "slug": "kentville",
+  "name": "Kentville",
+  "region": "Nova Scotia",
+  "country": "Canada",
+  "country_slug": "canada",
+  "country_code": "CA",
+  "lat": 45.0771,
+  "lon": -64.496
+ },
+ {
+  "slug": "shepparton",
+  "name": "Shepparton",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -36.3805,
+  "lon": 145.3987
+ },
+ {
+  "slug": "mildura",
+  "name": "Mildura",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.1855,
+  "lon": 142.1625
+ },
+ {
+  "slug": "cobram",
+  "name": "Cobram",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -35.9207,
+  "lon": 145.6407
+ },
+ {
+  "slug": "bacchus-marsh",
+  "name": "Bacchus Marsh",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -37.6727,
+  "lon": 144.4383
+ },
+ {
+  "slug": "healesville",
+  "name": "Healesville",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -37.654,
+  "lon": 145.5172
+ },
+ {
+  "slug": "melbourne",
+  "name": "Melbourne",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -37.814,
+  "lon": 144.9633
+ },
+ {
+  "slug": "ararat",
+  "name": "Ararat",
+  "region": "Victoria",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -37.2854,
+  "lon": 142.9273
+ },
+ {
+  "slug": "orange",
+  "name": "Orange",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -33.284,
+  "lon": 149.1002
+ },
+ {
+  "slug": "batlow",
+  "name": "Batlow",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -35.5199,
+  "lon": 148.1473
+ },
+ {
+  "slug": "young",
+  "name": "Young",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.3135,
+  "lon": 148.3011
+ },
+ {
+  "slug": "bathurst",
+  "name": "Bathurst",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -33.4166,
+  "lon": 149.5806
+ },
+ {
+  "slug": "griffith",
+  "name": "Griffith",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.2885,
+  "lon": 146.0509
+ },
+ {
+  "slug": "sydney",
+  "name": "Sydney",
+  "region": "New South Wales",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -33.8678,
+  "lon": 151.2073
+ },
+ {
+  "slug": "adelaide",
+  "name": "Adelaide",
+  "region": "South Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.9287,
+  "lon": 138.5986
+ },
+ {
+  "slug": "renmark",
+  "name": "Renmark",
+  "region": "South Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.177,
+  "lon": 140.747
+ },
+ {
+  "slug": "loxton",
+  "name": "Loxton",
+  "region": "South Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.4502,
+  "lon": 140.5691
+ },
+ {
+  "slug": "clare",
+  "name": "Clare",
+  "region": "South Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -33.8332,
+  "lon": 138.6106
+ },
+ {
+  "slug": "hobart",
+  "name": "Hobart",
+  "region": "Tasmania",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -42.8794,
+  "lon": 147.3294
+ },
+ {
+  "slug": "launceston",
+  "name": "Launceston",
+  "region": "Tasmania",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -41.4388,
+  "lon": 147.1347
+ },
+ {
+  "slug": "huonville",
+  "name": "Huonville",
+  "region": "Tasmania",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -43.0312,
+  "lon": 147.0481
+ },
+ {
+  "slug": "manjimup",
+  "name": "Manjimup",
+  "region": "Western Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -34.2412,
+  "lon": 116.1456
+ },
+ {
+  "slug": "donnybrook",
+  "name": "Donnybrook",
+  "region": "Western Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -33.5713,
+  "lon": 115.8245
+ },
+ {
+  "slug": "perth",
+  "name": "Perth",
+  "region": "Western Australia",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -31.9522,
+  "lon": 115.8614
+ },
+ {
+  "slug": "stanthorpe",
+  "name": "Stanthorpe",
+  "region": "Queensland",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -28.6543,
+  "lon": 151.9339
+ },
+ {
+  "slug": "toowoomba",
+  "name": "Toowoomba",
+  "region": "Queensland",
+  "country": "Australia",
+  "country_slug": "australia",
+  "country_code": "AU",
+  "lat": -27.5606,
+  "lon": 151.9539
+ },
+ {
+  "slug": "hastings",
+  "name": "Hastings",
+  "region": "Hawke's Bay Region",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -39.6381,
+  "lon": 176.8492
+ },
+ {
+  "slug": "napier",
+  "name": "Napier",
+  "region": "Hawke's Bay Region",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -39.4926,
+  "lon": 176.9123
+ },
+ {
+  "slug": "havelock-north",
+  "name": "Havelock North",
+  "region": "Hawke's Bay Region",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -39.6667,
+  "lon": 176.8833
+ },
+ {
+  "slug": "blenheim",
+  "name": "Blenheim",
+  "region": "Marlborough",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -41.516,
+  "lon": 173.9528
+ },
+ {
+  "slug": "nelson",
+  "name": "Nelson",
+  "region": "Nelson Region",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -41.2708,
+  "lon": 173.284
+ },
+ {
+  "slug": "motueka",
+  "name": "Motueka",
+  "region": "Tasman District",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -41.1333,
+  "lon": 173.0167
+ },
+ {
+  "slug": "cromwell",
+  "name": "Cromwell",
+  "region": "Otago",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -45.0384,
+  "lon": 169.2001
+ },
+ {
+  "slug": "alexandra",
+  "name": "Alexandra",
+  "region": "Otago",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -45.2484,
+  "lon": 169.3701
+ },
+ {
+  "slug": "gisborne",
+  "name": "Gisborne",
+  "region": "Gisborne",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -38.6533,
+  "lon": 178.0042
+ },
+ {
+  "slug": "christchurch",
+  "name": "Christchurch",
+  "region": "Canterbury",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -43.5333,
+  "lon": 172.6333
+ },
+ {
+  "slug": "auckland",
+  "name": "Auckland",
+  "region": "Auckland",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -36.8485,
+  "lon": 174.7635
+ },
+ {
+  "slug": "wellington",
+  "name": "Wellington",
+  "region": "Wellington Region",
+  "country": "New Zealand",
+  "country_slug": "new-zealand",
+  "country_code": "NZ",
+  "lat": -41.2866,
+  "lon": 174.7756
+ },
+ {
+  "slug": "ceres",
+  "name": "Ceres",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.3689,
+  "lon": 19.3109
+ },
+ {
+  "slug": "grabouw",
+  "name": "Grabouw",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -34.1515,
+  "lon": 19.0151
+ },
+ {
+  "slug": "villiersdorp",
+  "name": "Villiersdorp",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.9912,
+  "lon": 19.2922
+ },
+ {
+  "slug": "wolseley",
+  "name": "Wolseley",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.414,
+  "lon": 19.2005
+ },
+ {
+  "slug": "worcester",
+  "name": "Worcester",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.6465,
+  "lon": 19.4485
+ },
+ {
+  "slug": "stellenbosch",
+  "name": "Stellenbosch",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.9346,
+  "lon": 18.8668
+ },
+ {
+  "slug": "paarl",
+  "name": "Paarl",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.7338,
+  "lon": 18.9752
+ },
+ {
+  "slug": "robertson",
+  "name": "Robertson",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.8034,
+  "lon": 19.8854
+ },
+ {
+  "slug": "cape-town",
+  "name": "Cape Town",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -33.9258,
+  "lon": 18.4232
+ },
+ {
+  "slug": "caledon",
+  "name": "Caledon",
+  "region": "Western Cape",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -34.23,
+  "lon": 19.4265
+ },
+ {
+  "slug": "bethlehem",
+  "name": "Bethlehem",
+  "region": "Free State",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -28.2308,
+  "lon": 28.3071
+ },
+ {
+  "slug": "ficksburg",
+  "name": "Ficksburg",
+  "region": "Free State",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -28.872,
+  "lon": 27.8751
+ },
+ {
+  "slug": "tzaneen",
+  "name": "Tzaneen",
+  "region": "Limpopo",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -23.8332,
+  "lon": 30.1635
+ },
+ {
+  "slug": "polokwane",
+  "name": "Polokwane",
+  "region": "Limpopo",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -23.9045,
+  "lon": 29.4688
+ },
+ {
+  "slug": "johannesburg",
+  "name": "Johannesburg",
+  "region": "Gauteng",
+  "country": "South Africa",
+  "country_slug": "south-africa",
+  "country_code": "ZA",
+  "lat": -26.2023,
+  "lon": 28.0436
+ },
+ {
+  "slug": "lleida",
+  "name": "Lleida",
+  "region": "Catalonia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 41.6167,
+  "lon": 0.6222
+ },
+ {
+  "slug": "zaragoza",
+  "name": "Zaragoza",
+  "region": "Aragon",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 41.6561,
+  "lon": -0.8773
+ },
+ {
+  "slug": "calatayud",
+  "name": "Calatayud",
+  "region": "Aragon",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 41.3535,
+  "lon": -1.6432
+ },
+ {
+  "slug": "murcia",
+  "name": "Murcia",
+  "region": "Murcia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 37.987,
+  "lon": -1.13
+ },
+ {
+  "slug": "cieza",
+  "name": "Cieza",
+  "region": "Murcia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 38.24,
+  "lon": -1.4199
+ },
+ {
+  "slug": "sevilla",
+  "name": "Sevilla",
+  "region": "Andalusia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 37.3828,
+  "lon": -5.9732
+ },
+ {
+  "slug": "huelva",
+  "name": "Huelva",
+  "region": "Andalusia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 37.2664,
+  "lon": -6.94
+ },
+ {
+  "slug": "valencia",
+  "name": "Valencia",
+  "region": "Valencia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 39.4739,
+  "lon": -0.3797
+ },
+ {
+  "slug": "badajoz",
+  "name": "Badajoz",
+  "region": "Extremadura",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 38.8779,
+  "lon": -6.9706
+ },
+ {
+  "slug": "logrono",
+  "name": "Logroño",
+  "region": "La Rioja",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 42.4661,
+  "lon": -2.4512
+ },
+ {
+  "slug": "girona",
+  "name": "Girona",
+  "region": "Catalonia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 41.9831,
+  "lon": 2.8249
+ },
+ {
+  "slug": "albacete",
+  "name": "Albacete",
+  "region": "Castille-La Mancha",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 38.9942,
+  "lon": -1.8564
+ },
+ {
+  "slug": "madrid",
+  "name": "Madrid",
+  "region": "Madrid",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 40.4165,
+  "lon": -3.7026
+ },
+ {
+  "slug": "granada",
+  "name": "Granada",
+  "region": "Andalusia",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 37.1882,
+  "lon": -3.6067
+ },
+ {
+  "slug": "leon",
+  "name": "León",
+  "region": "Castille and León",
+  "country": "Spain",
+  "country_slug": "spain",
+  "country_code": "ES",
+  "lat": 42.6,
+  "lon": -5.5703
+ },
+ {
+  "slug": "isparta",
+  "name": "Isparta",
+  "region": "Isparta",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.7644,
+  "lon": 30.5522
+ },
+ {
+  "slug": "egirdir",
+  "name": "Eğirdir",
+  "region": "Isparta",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.8746,
+  "lon": 30.8504
+ },
+ {
+  "slug": "nigde",
+  "name": "Niğde",
+  "region": "Niğde Province",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.9658,
+  "lon": 34.6793
+ },
+ {
+  "slug": "karaman",
+  "name": "Karaman",
+  "region": "Karaman",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.1811,
+  "lon": 33.215
+ },
+ {
+  "slug": "amasya",
+  "name": "Amasya",
+  "region": "Amasya",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 40.6533,
+  "lon": 35.8331
+ },
+ {
+  "slug": "malatya",
+  "name": "Malatya",
+  "region": "Malatya",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 38.3502,
+  "lon": 38.3167
+ },
+ {
+  "slug": "bursa",
+  "name": "Bursa",
+  "region": "Bursa Province",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 40.1956,
+  "lon": 29.0601
+ },
+ {
+  "slug": "inegol",
+  "name": "İnegol",
+  "region": "Bursa Province",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 40.0781,
+  "lon": 29.5133
+ },
+ {
+  "slug": "konya",
+  "name": "Konya",
+  "region": "Konya",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.8713,
+  "lon": 32.4846
+ },
+ {
+  "slug": "denizli",
+  "name": "Denizli",
+  "region": "Denizli",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 37.7742,
+  "lon": 29.0875
+ },
+ {
+  "slug": "ankara",
+  "name": "Ankara",
+  "region": "Ankara",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 39.9199,
+  "lon": 32.8543
+ },
+ {
+  "slug": "antalya",
+  "name": "Antalya",
+  "region": "Antalya",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 36.9081,
+  "lon": 30.6956
+ },
+ {
+  "slug": "erzincan",
+  "name": "Erzincan",
+  "region": "Erzincan",
+  "country": "Turkey",
+  "country_slug": "turkey",
+  "country_code": "TR",
+  "lat": 39.7392,
+  "lon": 39.4901
+ }
+]

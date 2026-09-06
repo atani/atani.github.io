@@ -195,6 +195,7 @@ PROMO_APPS = {
                 "proof_items": ["Real App Store screenshots", "Transparent regional data source", "No auto-renewal"],
                 "cta": "View on the App Store",
                 "footer": "Check your season’s chill",
+                "extra_link": ("/chillcast/chill-hours/", "Chill hours by location"),
             },
             "es": {
                 "lang": "es",
@@ -546,6 +547,12 @@ def render_promo_page(slug, locale):
         for code in app["locales"]
     )
     alternates += f'  <link rel="alternate" hreflang="x-default" href="https://atani.lolipop-now.app/{escape(slug)}/">\n'
+    # 一覧ページなど、そのロケールにだけ足したいリンク。無いロケールでは何も出さない。
+    extra_link = copy.get("extra_link")
+    extra_link_html = (
+        f'<a class="promo-text-link" href="{escape(extra_link[0])}">{escape(extra_link[1])} <span>→</span></a>'
+        if extra_link else ""
+    )
     og_image = f'https://atani.lolipop-now.app/assets/{app.get("og_image", app["icon"])}'
     title = f'{app["name"]} — {copy["headline"].replace("<br>", " ").replace("<em>", "").replace("</em>", "")}'
     description = copy["lead"]
@@ -577,7 +584,7 @@ def render_promo_page(slug, locale):
         <p class="promo-kicker">{escape(copy["kicker"])}</p>
         <h1>{copy["headline"]}</h1>
         <p class="promo-lead">{escape(copy["lead"])}</p>
-        <div class="promo-actions"><a class="promo-button" href="{escape(store)}">{escape(copy["cta"])}</a><a class="promo-text-link" href="#features">{escape(copy.get("features_cta", "機能を見る" if locale == "ja" else "See the features"))} <span>↓</span></a></div>
+        <div class="promo-actions"><a class="promo-button" href="{escape(store)}">{escape(copy["cta"])}</a><a class="promo-text-link" href="#features">{escape(copy.get("features_cta", "機能を見る" if locale == "ja" else "See the features"))} <span>↓</span></a>{extra_link_html}</div>
         <p class="promo-meta">{escape(copy["meta"])}</p>
       </div>
       <div class="promo-hero__visual"><div class="promo-device"><img src="/assets/{escape(hero)}" alt="{escape(copy["hero_alt"])}"></div></div>
