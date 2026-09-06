@@ -1,0 +1,22 @@
+[
+  { "id": "apple-dorsett", "name": "Dorsett Golden", "species": "Apple", "chillHoursRequirement": 100 },
+  { "id": "apple-anna", "name": "Anna", "species": "Apple", "chillHoursRequirement": 200 },
+  { "id": "apple-fuji", "name": "Fuji", "species": "Apple", "chillHoursRequirement": 400 },
+  { "id": "apple-gala", "name": "Gala", "species": "Apple", "chillHoursRequirement": 500 },
+  { "id": "apple-honeycrisp", "name": "Honeycrisp", "species": "Apple", "chillHoursRequirement": 800 },
+  { "id": "peach-florida-prince", "name": "Florida Prince", "species": "Peach", "chillHoursRequirement": 150 },
+  { "id": "peach-tropic-beauty", "name": "TropicBeauty", "species": "Peach", "chillHoursRequirement": 150 },
+  { "id": "peach-redhaven", "name": "Redhaven", "species": "Peach", "chillHoursRequirement": 800 },
+  { "id": "peach-elberta", "name": "Elberta", "species": "Peach", "chillHoursRequirement": 800 },
+  { "id": "cherry-bing", "name": "Bing", "species": "Cherry", "chillHoursRequirement": 700 },
+  { "id": "cherry-montmorency", "name": "Montmorency", "species": "Cherry", "chillHoursRequirement": 700 },
+  { "id": "pear-hosui", "name": "Hosui (Asian)", "species": "Pear", "chillHoursRequirement": 450 },
+  { "id": "pear-bartlett", "name": "Bartlett", "species": "Pear", "chillHoursRequirement": 600 },
+  { "id": "plum-santa-rosa", "name": "Santa Rosa", "species": "Plum", "chillHoursRequirement": 300 },
+  { "id": "apricot-blenheim", "name": "Blenheim", "species": "Apricot", "chillHoursRequirement": 400 },
+  { "id": "fig-brown-turkey", "name": "Brown Turkey", "species": "Fig", "chillHoursRequirement": 100 },
+  { "id": "pomegranate-wonderful", "name": "Wonderful", "species": "Pomegranate", "chillHoursRequirement": 150 },
+  { "id": "blueberry-southern", "name": "Southern Highbush", "species": "Blueberry", "chillHoursRequirement": 250 },
+  { "id": "blueberry-northern", "name": "Northern Highbush", "species": "Blueberry", "chillHoursRequirement": 800 },
+  { "id": "grape-flame", "name": "Flame Seedless", "species": "Grape", "chillHoursRequirement": 100 }
+]
