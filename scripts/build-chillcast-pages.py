@@ -9,6 +9,9 @@
 生の JSON は `_deploy-now/chillcast_cache/` に gzip で残す（.gitignore 済み）。
 `--refresh` を付けるとキャッシュを無視して取り直す。
 
+1 地点でも落ちたら `chillcast_data.json` は書き換えずに非 0 で終了する。部分的な
+結果を承知のうえで採用したいときだけ `--allow-partial` を付ける。
+
     python3 scripts/build-chillcast-pages.py
     python3 scripts/build-chillcast-pages.py --refresh
 """
@@ -19,9 +22,11 @@ import gzip
 import json
 import math
 import pathlib
+import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -29,11 +34,8 @@ SITES_PATH = ROOT / "_deploy-now/chillcast_sites.json"
 DATA_PATH = ROOT / "_deploy-now/chillcast_data.json"
 CACHE_DIR = ROOT / "_deploy-now/chillcast_cache"
 
-POWER_URL = (
-    "https://power.larc.nasa.gov/api/temporal/hourly/point"
-    "?parameters=T2M&community=AG&longitude={lon}&latitude={lat}"
-    "&start={start}&end={end}&format=JSON"
-)
+POWER_ENDPOINT = "https://power.larc.nasa.gov/api/temporal/hourly/point"
+SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 # 取得開始は今年から数えて決める。固定日にすると年を追うごとに取得量が増え続ける。
 # 直近 10 シーズンを揃えるのに必要なのは 11 年前の 9/1 まで（南半球の Dynamic は
 # 3/1 開始なので、これで両半球とも 10 シーズンが窓に収まる）。
@@ -41,8 +43,15 @@ FETCH_START_YEARS_BACK = 11
 FILL_THRESHOLD = -900.0
 SEASON_COUNT = 10
 MIN_COVERAGE = 0.95
+# 有効率が足りていても、これだけ続けて欠測しているシーズンは採用しない。
+# 端にまとまった欠測が「満杯のシーズン」として公開されるのを防ぐ。
+MAX_GAP_HOURS = 24
+# キャッシュは取得日からこの日数を過ぎたら使わない。地点ごとに違う年の窓で
+# 10 シーズンを組み立ててしまうと、ページ間で数字の意味が揃わなくなる。
+CACHE_MAX_AGE_DAYS = 31
 REQUEST_INTERVAL = 0.3
 RETRIES = 3
+REQUEST_TIMEOUT = 120
 
 # 積算期間。北半球は UC Davis / Dave Wilson の慣行に合わせて 11/1 開始。
 WINDOWS = {
@@ -128,28 +137,97 @@ def season_label(hemisphere: str, year: int) -> str:
     return str(year)
 
 
+def check_slugs(site: dict) -> None:
+    """slug はキャッシュのファイル名と公開 URL の両方になるので入口で弾く。"""
+    for key in ("country_slug", "slug"):
+        if not SLUG_RE.fullmatch(str(site.get(key, ""))):
+            raise RuntimeError(f"{key} が [a-z0-9-] ではありません: {site.get(key)!r}")
+
+
+def power_url(lat: float, lon: float, start: dt.date, end: dt.date) -> str:
+    """緯度経度は数値へ寄せたうえでクエリとしてエンコードする。"""
+    query = urllib.parse.urlencode({
+        "parameters": "T2M",
+        "community": "AG",
+        "longitude": float(lon),
+        "latitude": float(lat),
+        "start": start.strftime("%Y%m%d"),
+        "end": end.strftime("%Y%m%d"),
+        "format": "JSON",
+    })
+    return f"{POWER_ENDPOINT}?{query}"
+
+
 def cache_path(site: dict) -> pathlib.Path:
     return CACHE_DIR / f"{site['country_slug']}__{site['slug']}.json.gz"
 
 
-def fetch_hourly(site: dict, start: dt.date, end: dt.date, refresh: bool) -> dict[str, float]:
-    """時刻キー YYYYMMDDHH -> 摂氏。欠測（<= -900）は落とす。"""
-    path = cache_path(site)
-    if path.exists() and not refresh:
-        with gzip.open(path, "rt", encoding="utf-8") as handle:
-            cached = json.load(handle)
-        # 取得開始が必要な範囲より後ろのキャッシュは使えないので取り直す
-        if cached.get("start", "9999-12-31") <= start.isoformat():
-            return cached["values"]
+def usable_celsius(value) -> float | None:
+    """有限の数値で埋め値より大きいものだけ返す。
 
-    url = POWER_URL.format(
-        lon=site["lon"], lat=site["lat"],
-        start=start.strftime("%Y%m%d"), end=end.strftime("%Y%m%d"),
-    )
+    chillcast-calculator.js の `Number.isFinite(value) && value > FILL_THRESHOLD`
+    と同じ規則にする。数値にならない値は片方だけ例外にせず、両方で落とす。
+    """
+    try:
+        celsius = float(value)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(celsius) or celsius <= FILL_THRESHOLD:
+        return None
+    return celsius
+
+
+def extract_hourly(payload: dict) -> dict[str, float]:
+    """NASA POWER の応答から T2M を取り出す。想定外の形は RuntimeError にする。
+
+    POWER は不正な引数やサービス障害でも HTTP 200 のままエラー本文を返すことが
+    あるため、ここで正規化しないと呼び出し側の失敗集計をすり抜ける。
+    """
+    try:
+        raw = payload["properties"]["parameter"]["T2M"]
+        items = raw.items()
+    except (KeyError, TypeError, AttributeError) as error:
+        note = payload.get("messages") if isinstance(payload, dict) else None
+        raise RuntimeError(f"NASA POWER が想定外の応答を返しました: {note or error}") from error
+    values = {}
+    for key, value in items:
+        celsius = usable_celsius(value)
+        if celsius is not None:
+            values[str(key)] = celsius
+    return values
+
+
+def usable_cache(path: pathlib.Path, start: dt.date, today: dt.date) -> dict | None:
+    """必要な範囲を含み、かつ取得から日が経ちすぎていないキャッシュだけ返す。"""
+    if not path.exists():
+        return None
+    with gzip.open(path, "rt", encoding="utf-8") as handle:
+        cached = json.load(handle)
+    if cached.get("start", "9999-12-31") > start.isoformat():
+        return None
+    try:
+        fetched_at = dt.date.fromisoformat(cached.get("fetched_at", ""))
+    except ValueError:
+        return None
+    if (today - fetched_at).days > CACHE_MAX_AGE_DAYS:
+        return None
+    return cached
+
+
+def fetch_hourly(site: dict, start: dt.date, end: dt.date,
+                 refresh: bool) -> tuple[dict[str, float], bool]:
+    """(時刻キー YYYYMMDDHH -> 摂氏, キャッシュから読んだか)。欠測（<= -900）は落とす。"""
+    path = cache_path(site)
+    if not refresh:
+        cached = usable_cache(path, start, end)
+        if cached is not None:
+            return cached["values"], True
+
+    url = power_url(site["lat"], site["lon"], start, end)
     last_error: Exception | None = None
     for attempt in range(1, RETRIES + 1):
         try:
-            with urllib.request.urlopen(url, timeout=120) as response:
+            with urllib.request.urlopen(url, timeout=REQUEST_TIMEOUT) as response:
                 payload = json.load(response)
             break
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as error:
@@ -160,14 +238,13 @@ def fetch_hourly(site: dict, start: dt.date, end: dt.date, refresh: bool) -> dic
     else:  # pragma: no cover - break で必ず抜ける
         raise RuntimeError(f"NASA POWER の取得に失敗: {last_error}")
 
-    raw = payload["properties"]["parameter"]["T2M"]
-    values = {key: float(value) for key, value in raw.items() if float(value) > FILL_THRESHOLD}
+    values = extract_hourly(payload)
     path.parent.mkdir(parents=True, exist_ok=True)
     with gzip.open(path, "wt", encoding="utf-8") as handle:
         json.dump({"fetched_at": dt.date.today().isoformat(), "start": start.isoformat(),
                    "end": end.isoformat(), "lat": site["lat"], "lon": site["lon"],
                    "values": values}, handle)
-    return values
+    return values, False
 
 
 def fetch_start(today: dt.date) -> dt.date:
@@ -176,7 +253,7 @@ def fetch_start(today: dt.date) -> dt.date:
 
 def probe_version() -> str:
     """NASA POWER の referencing 文へ入れる API バージョンを 1 リクエストで読む。"""
-    url = POWER_URL.format(lon=0, lat=0, start="20250101", end="20250102")
+    url = power_url(0.0, 0.0, dt.date(2025, 1, 1), dt.date(2025, 1, 2))
     try:
         with urllib.request.urlopen(url, timeout=60) as response:
             payload = json.load(response)
@@ -186,29 +263,40 @@ def probe_version() -> str:
 
 
 def accumulate(values: dict[str, float], start: dt.date, end: dt.date) -> dict | None:
-    """期間内の 3 モデルを 1 パスで積算する。欠測が多い季節は None を返す。"""
+    """期間内の 3 モデルを 1 パスで積算する。
+
+    採用の条件は 2 つ。シーズン内の有効率が MIN_COVERAGE 以上であること、
+    MAX_GAP_HOURS 以上続く欠測が無いこと。どちらかを満たさないと None を返す。
+    有効率だけで判定すると、端に固まった数日の欠測が満杯のシーズンとして
+    公開されてしまう。
+    """
     expected = (end - start).days * 24 + 24
     forty_five = 0.0
     utah = 0.0
     dynamic = DynamicState()
     good = 0
+    gap = 0
+    longest_gap = 0
     day = start
     while day <= end:
         prefix = day.strftime("%Y%m%d")
         for hour in range(24):
             celsius = values.get(f"{prefix}{hour:02d}")
             if celsius is None:
+                gap += 1
+                longest_gap = max(longest_gap, gap)
                 continue
+            gap = 0
             good += 1
             if 0.0 <= celsius <= 7.2:
                 forty_five += 1.0
             utah += utah_unit(celsius)
             dynamic.step(celsius)
         day += dt.timedelta(days=1)
-    if good < expected * MIN_COVERAGE:
+    if good < expected * MIN_COVERAGE or longest_gap >= MAX_GAP_HOURS:
         return None
     return {"forty_five": forty_five, "utah": utah, "dynamic": dynamic.portions,
-            "coverage": good / expected}
+            "coverage": good / expected, "longest_gap": longest_gap}
 
 
 def complete_years(hemisphere: str, data_start: dt.date, data_end: dt.date) -> list[int]:
@@ -222,6 +310,11 @@ def complete_years(hemisphere: str, data_start: dt.date, data_end: dt.date) -> l
 
 
 def summarise(seasons: list[dict], key: str) -> dict:
+    """生のシーズン値を平均してから 1 桁に丸める。
+
+    先に各シーズンを丸めてから平均すると、同じ入力でも計算機（JavaScript）と
+    0.1 ずれることがある。丸めは平均を取った後の 1 回だけにする。
+    """
     values = [season[key] for season in seasons]
     return {
         "mean": round(sum(values) / len(values), 1),
@@ -230,7 +323,7 @@ def summarise(seasons: list[dict], key: str) -> dict:
     }
 
 
-def build(limit: int | None, refresh: bool) -> int:
+def build(limit: int | None, refresh: bool, allow_partial: bool = False) -> int:
     sites = json.loads(SITES_PATH.read_text(encoding="utf-8"))
     if limit:
         sites = sites[:limit]
@@ -246,8 +339,8 @@ def build(limit: int | None, refresh: bool) -> int:
     for index, site in enumerate(sites, 1):
         label = f"{site['name']}, {site['region']}"
         try:
-            cached = cache_path(site).exists() and not refresh
-            values = fetch_hourly(site, data_start, data_end, refresh)
+            check_slugs(site)
+            values, cached = fetch_hourly(site, data_start, data_end, refresh)
         except RuntimeError as error:
             failures.append(f"{label}: {error}")
             print(f"NG   {label}: {error}", file=sys.stderr)
@@ -281,13 +374,14 @@ def build(limit: int | None, refresh: bool) -> int:
                 break
             seasons.append({
                 "label": season_label(hemisphere, year),
-                "forty_five": round(chill["forty_five"], 1),
-                "utah": round(chill["utah"], 1),
-                "dynamic": round(dynamic["dynamic"], 1),
+                "forty_five": chill["forty_five"],
+                "utah": chill["utah"],
+                "dynamic": dynamic["dynamic"],
+                "coverage": min(chill["coverage"], dynamic["coverage"]),
             })
         if broken:
-            failures.append(f"{label}: {broken} シーズンの欠測が多い")
-            print(f"NG   {label}: {broken} シーズンの欠測が多い", file=sys.stderr)
+            failures.append(f"{label}: {broken} シーズンの欠測が基準を超えている")
+            print(f"NG   {label}: {broken} シーズンの欠測が基準を超えている", file=sys.stderr)
             continue
 
         results.append({
@@ -301,7 +395,14 @@ def build(limit: int | None, refresh: bool) -> int:
             "hemisphere": hemisphere,
             "chill_window": WINDOW_LABELS[hemisphere]["chill"],
             "dynamic_window": WINDOW_LABELS[hemisphere]["dynamic"],
-            "seasons": seasons,
+            # 表示用は 1 桁に丸め、平均は生の値から取る（summarise の docstring を参照）
+            "seasons": [{
+                "label": season["label"],
+                "forty_five": round(season["forty_five"], 1),
+                "utah": round(season["utah"], 1),
+                "dynamic": round(season["dynamic"], 1),
+                "coverage": round(season["coverage"], 4),
+            } for season in seasons],
             "stats": {
                 "forty_five": summarise(seasons, "forty_five"),
                 "utah": summarise(seasons, "utah"),
@@ -311,6 +412,20 @@ def build(limit: int | None, refresh: bool) -> int:
         print(f"OK   {index:3d}/{len(sites)}  {label}")
 
     elapsed = time.monotonic() - started
+    print(f"\n地点 {len(results)} / {len(sites)}、失敗 {len(failures)} 件、所要 {elapsed:.1f} 秒")
+    for failure in failures:
+        print(f"  失敗: {failure}")
+
+    # 1 地点でも欠けたまま書き込むと、コミット済みの地点が黙って消える。
+    # 部分的な結果を採るのは明示的に指示されたときだけにする。
+    if len(results) != len(sites) and not allow_partial:
+        print(f"{len(sites) - len(results)} 地点が揃わなかったので {DATA_PATH.name} は更新しません。"
+              "部分的な結果を採用するなら --allow-partial を付けてください。", file=sys.stderr)
+        return 1
+    if not results:
+        print("有効な地点が 0 件のため書き込みません。", file=sys.stderr)
+        return 1
+
     DATA_PATH.write_text(
         json.dumps({
             "generated_on": dt.date.today().isoformat(),
@@ -321,19 +436,18 @@ def build(limit: int | None, refresh: bool) -> int:
         }, ensure_ascii=False, indent=1) + "\n",
         encoding="utf-8",
     )
-    print(f"\n地点 {len(results)} / {len(sites)}、失敗 {len(failures)} 件、所要 {elapsed:.1f} 秒")
     print(f"出力: {DATA_PATH}")
-    for failure in failures:
-        print(f"  失敗: {failure}")
-    return 0 if results else 1
+    return 0
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh", action="store_true", help="キャッシュを無視して取り直す")
     parser.add_argument("--limit", type=int, help="先頭 N 地点だけ処理する（動作確認用）")
+    parser.add_argument("--allow-partial", action="store_true",
+                        help="一部の地点が揃わなくても書き込む（既定は書き込まずに失敗）")
     args = parser.parse_args()
-    sys.exit(build(args.limit, args.refresh))
+    sys.exit(build(args.limit, args.refresh, args.allow_partial))
 
 
 if __name__ == "__main__":

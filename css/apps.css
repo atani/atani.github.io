@@ -96,7 +96,7 @@ a { color: inherit; }
 .privacy-card .promo-button { margin-top: 6px; color: white; }
 .chill-form { display: grid; gap: 18px; margin: 18px 0 0; }
 .chill-field { padding: 16px; border: 1px solid var(--line); border-radius: 14px; }
-.chill-field label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 700; }
+.chill-field label, .chill-field__label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 700; }
 .chill-field select, .chill-field input { width: 100%; max-width: 420px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); font: inherit; font-size: 14px; }
 .chill-coords { display: flex; flex-wrap: wrap; gap: 10px; max-width: 420px; }
 .chill-coords input { flex: 1 1 160px; }

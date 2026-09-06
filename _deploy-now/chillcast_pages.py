@@ -15,6 +15,7 @@ import math
 import pathlib
 import re
 import unicodedata
+import urllib.parse
 from html import escape
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -30,23 +31,26 @@ NEARBY_COUNT = 5
 TOP_FITS = 3
 
 # 初回に公開する 30 地点。果樹産地を優先し、国ごとの配分は設計レビューの指示による。
-PUBLISHED_SLUGS = {
-    # United States (12)
-    "wenatchee", "yakima", "hood-river", "fresno", "modesto", "watsonville",
-    "traverse-city", "geneva", "biglerville", "fort-valley", "fredericksburg", "edgefield",
-    # Canada (2)
-    "kelowna", "niagara-on-the-lake",
-    # Australia (6)
-    "shepparton", "batlow", "orange", "stanthorpe", "manjimup", "huonville",
-    # New Zealand (2)
-    "hastings", "cromwell",
-    # South Africa (2)
-    "ceres", "grabouw",
-    # Spain (3)
-    "lleida", "calatayud", "cieza",
-    # Turkey (3)
-    "isparta", "egirdir", "amasya",
+# URL は country_slug/slug で組み立てるので、判定も同じ組で行う。裸の slug で
+# 判定すると、別の国に同名の地点が増えたときページの無い側にもリンクが出る。
+PUBLISHED_SITES = {
+    ("united-states", "wenatchee"), ("united-states", "yakima"),
+    ("united-states", "hood-river"), ("united-states", "fresno"),
+    ("united-states", "modesto"), ("united-states", "watsonville"),
+    ("united-states", "traverse-city"), ("united-states", "geneva"),
+    ("united-states", "biglerville"), ("united-states", "fort-valley"),
+    ("united-states", "fredericksburg"), ("united-states", "edgefield"),
+    ("canada", "kelowna"), ("canada", "niagara-on-the-lake"),
+    ("australia", "shepparton"), ("australia", "batlow"), ("australia", "orange"),
+    ("australia", "stanthorpe"), ("australia", "manjimup"), ("australia", "huonville"),
+    ("new-zealand", "hastings"), ("new-zealand", "cromwell"),
+    ("south-africa", "ceres"), ("south-africa", "grabouw"),
+    ("spain", "lleida"), ("spain", "calatayud"), ("spain", "cieza"),
+    ("turkey", "isparta"), ("turkey", "egirdir"), ("turkey", "amasya"),
 }
+
+# 「近く」と言える距離の上限。これを超える候補は近隣として出さない。
+NEARBY_MAX_KM = 500.0
 
 DISCLAIMER = (
     "Values are NASA POWER regional estimates (about 0.5° grid), not orchard "
@@ -60,24 +64,80 @@ POWER_CREDIT = (
 )
 
 # 地元の普及機関が公開している chill の資料・計算ツール。(国, 地域) で引き、
-# 地域が None の項目はその国全体に当てる。
+# 地域が None の項目はその国全体に当てる。URL とラベルはプレーンテキストで持ち、
+# 描画側で escape() する。公開する 30 地点はすべてどれかに当たること
+# （build_pages が起動時に確かめる）。
+#
+# 掲載しているのは URL を開いて chill の記述を確認できたものだけ。Michigan と
+# Oregon は州の普及機関（canr.msu.edu / extension.oregonstate.edu）が自動取得を
+# 遮断しており個別ページを確認できなかったため、全米の Cooperative Extension の
+# 窓口を当てている。
 EXTENSION_LINKS = {
     ("United States", "California"): (
         "https://fruitsandnuts.ucdavis.edu/about-chilling-hours-units-and-portions",
         "UC Davis Fruit & Nut Research and Information Center: chilling hours, units, and portions",
+    ),
+    ("United States", "Washington"): (
+        "https://s3.wp.wsu.edu/uploads/sites/2073/2014/03/The-Importance-of-Chilling-Temperatures.pdf",
+        "Washington State University: the importance of chilling temperatures for fruit trees",
+    ),
+    ("United States", "Oregon"): (
+        "https://ask.extension.org/",
+        "Ask Extension: put a chill question to your state's Cooperative Extension service",
+    ),
+    ("United States", "Michigan"): (
+        "https://ask.extension.org/",
+        "Ask Extension: put a chill question to your state's Cooperative Extension service",
+    ),
+    ("United States", "New York"): (
+        "https://www.nrcc.cornell.edu/industry/apple/apple.html",
+        "Cornell Northeast Regional Climate Center: accumulated chill and apple frost risk maps",
+    ),
+    ("United States", "Pennsylvania"): (
+        "https://extension.psu.edu/small-fruit-cold-hardiness-winter-injury-in-brambles",
+        "Penn State Extension: chilling requirements and winter injury in Pennsylvania",
+    ),
+    ("United States", "Georgia"): (
+        "https://site.extension.uga.edu/peaches/tag/chill-hours/",
+        "University of Georgia Extension peach blog: chill hours in Georgia",
+    ),
+    ("United States", "South Carolina"): (
+        "https://hgic.clemson.edu/factsheet/understanding-chill-hours-for-fruit-and-nut-trees-in-south-carolina/",
+        "Clemson Extension: understanding chill hours for fruit and nut trees",
     ),
     ("United States", "Texas"): (
         "https://travis-tx.tamu.edu/about-2/horticulture/edible-gardens-for-austin/"
         "fruits-and-nuts-for-austin/chill-hour-requirements-for-austin/",
         "Texas A&M AgriLife Extension: chill hour requirements",
     ),
-    ("United States", "South Carolina"): (
-        "https://hgic.clemson.edu/factsheet/understanding-chill-hours-for-fruit-and-nut-trees-in-south-carolina/",
-        "Clemson Extension: understanding chill hours for fruit and nut trees",
+    ("Canada", "British Columbia"): (
+        "https://www2.gov.bc.ca/gov/content/industry/agriculture-seafood/animals-and-crops/"
+        "crop-production/tree-fruits",
+        "British Columbia Ministry of Agriculture and Food: tree fruits",
+    ),
+    ("Canada", "Ontario"): (
+        "https://onfruit.ca/2022/04/28/cold-injury-tender-fruit/",
+        "OMAFRA ONfruit: chilling units, dormancy, and cold injury in tender fruit",
     ),
     ("Australia", None): (
         "https://grf-smartfarm.dpi.qld.gov.au/shiny/apps/chillcalculator/",
-        "Queensland DPI Chill &amp; Thermal Time Calculator, covering around 600 Australian locations",
+        "Queensland DPI Chill & Thermal Time Calculator, covering around 600 Australian locations",
+    ),
+    ("New Zealand", None): (
+        "https://www.summerfruitnz.co.nz/publications/news/winter-chill-round-up-2019",
+        "Summerfruit New Zealand: winter chill round-up, with Richardson chill units by district",
+    ),
+    ("South Africa", None): (
+        "https://www.hortgro.co.za/science-tech-hub/climate-information/",
+        "Hortgro: chilling units, temperature, and rainfall per deciduous fruit production region",
+    ),
+    ("Spain", None): (
+        "https://ivia.gva.es/es/-/el-frio-invernal-como-factor-limitante-de-la-produccion-de-frutales",
+        "IVIA (Generalitat Valenciana): el frío invernal como factor limitante de la producción de frutales",
+    ),
+    ("Turkey", None): (
+        "https://www.mgm.gov.tr/FILES/Haberler/2016/04.02.2016Bisip.pdf",
+        "Meteoroloji Genel Müdürlüğü: Bitki Soğuklama İsteği Hesaplama Programı (BİSİP)",
     ),
 }
 
@@ -95,12 +155,69 @@ FIT_LABELS = {
 
 ORDINALS = ["", "lowest", "second-lowest", "third-lowest", "fourth-lowest", "fifth-lowest"]
 
+# 国別索引にその国だけの段落を置く。定型の表だけのページにしないため。
+COUNTRY_NOTES = {
+    "United States": (
+        "The locations here run from the irrigated valleys of the Pacific Northwest, where apples and "
+        "sweet cherries dominate, through the Great Lakes tart cherry belt and the mid-Atlantic apple "
+        "country, down to the peach districts of the Southeast and the Texas Hill Country. That spread "
+        "is why a single national chill map is of little use: a variety that fruits reliably in "
+        "Wenatchee can sit dormant and blind in Fort Valley, and the other way round."
+    ),
+    "Canada": (
+        "Canadian tree fruit is concentrated in two narrow, lake-moderated corridors: the Okanagan "
+        "Valley in British Columbia and the Niagara Peninsula in Ontario. Both bank chill early and "
+        "hold it, so the constraint on variety choice is usually winter cold hardiness and spring "
+        "frost rather than a shortage of chill."
+    ),
+    "Australia": (
+        "Australian orchards sit in cool pockets a long way apart: the Goulburn Valley and the "
+        "Southern Highlands in the southeast, the Granite Belt in Queensland, the far southwest of "
+        "Western Australia, and Tasmania. Chill accumulates over the southern winter, so the season "
+        "labels here are single years rather than the split years used in the Northern Hemisphere."
+    ),
+    "New Zealand": (
+        "Hawke's Bay on the North Island and Central Otago in the South Island are the two districts "
+        "that carry most of New Zealand's pipfruit and summerfruit. Central Otago is continental and "
+        "cold for its latitude, Hawke's Bay is maritime and milder, and the gap between them is wide "
+        "enough to change which stonefruit varieties are worth planting."
+    ),
+    "South Africa": (
+        "Almost all South African pome and stone fruit grows in the Western Cape, in cold pockets such "
+        "as the Ceres basin and the Elgin valley that sit well above the surrounding country. Chill is "
+        "the binding constraint here rather than winter cold, which is why the local industry watches "
+        "chill units so closely."
+    ),
+    "Spain": (
+        "The Spanish locations are the Ebro basin around Lleida and Calatayud, where continental "
+        "winters give ample chill, and the Murcian districts such as Cieza, where mild winters push "
+        "growers toward low-chill stonefruit. The two ends of that range are several hundred hours "
+        "apart in an average winter."
+    ),
+    "Turkey": (
+        "Türkiye's fruit districts sit on the Anatolian plateau and around the inland lakes, at "
+        "altitudes that give cold, dry winters. Isparta and Eğirdir are apple country, Amasya lends "
+        "its name to an old apple variety, and chill is rarely the limiting factor at these elevations."
+    ),
+}
+
+
+SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+
 
 def slugify(value: str) -> str:
     text = value.replace("ı", "i").replace("İ", "i").replace("ğ", "g").replace("ş", "s")
     text = text.replace("ö", "o").replace("ü", "u").replace("ç", "c").replace("ñ", "n")
     text = "".join(ch for ch in unicodedata.normalize("NFKD", text) if not unicodedata.combining(ch))
     return re.sub(r"[^A-Za-z0-9]+", "-", text).strip("-").lower()
+
+
+def checked_slug(value: str) -> str:
+    """URL の部品にする前に slug を検証する。生の値を href へ流さない。"""
+    text = str(value)
+    if not SLUG_RE.fullmatch(text):
+        raise SystemExit(f"slug が [a-z0-9-] ではありません: {value!r}")
+    return text
 
 
 def load_data() -> dict:
@@ -110,24 +227,24 @@ def load_data() -> dict:
 def load_varieties() -> list[dict]:
     varieties = json.loads((HERE / "chillcast_varieties.json").read_text(encoding="utf-8"))
     for variety in varieties:
-        variety["species_slug"] = slugify(variety["species"])
-        variety["slug"] = slugify(variety["name"])
+        variety["species_slug"] = checked_slug(slugify(variety["species"]))
+        variety["slug"] = checked_slug(slugify(variety["name"]))
         variety["path"] = f"{VARIETY_ROOT}{variety['species_slug']}/{variety['slug']}/"
     return varieties
 
 
 def is_published(site: dict) -> bool:
-    return site["slug"] in PUBLISHED_SLUGS
+    return (site["country_slug"], site["slug"]) in PUBLISHED_SITES
 
 
 def site_path(site: dict) -> str:
-    return f"{CHILL_ROOT}{site['country_slug']}/{site['slug']}/"
+    return f"{CHILL_ROOT}{checked_slug(site['country_slug'])}/{checked_slug(site['slug'])}/"
 
 
 def site_link(site: dict) -> str:
     """ページのある地点だけリンクにする。無い地点は名前だけ出す。"""
     if is_published(site):
-        return f'<a href="{site_path(site)}">{escape(site["name"])}</a>'
+        return f'<a href="{escape(site_path(site))}">{escape(site["name"])}</a>'
     return escape(site["name"])
 
 
@@ -145,6 +262,12 @@ def haversine(a: dict, b: dict) -> float:
     h = (math.sin((lat2 - lat1) / 2) ** 2
          + math.cos(lat1) * math.cos(lat2) * math.sin((lon2 - lon1) / 2) ** 2)
     return 2 * 6371.0 * math.asin(math.sqrt(h))
+
+
+def source_label(url: str) -> str:
+    """出典 URL のホスト名を表示用のラベルにする。"""
+    host = urllib.parse.urlsplit(url).netloc
+    return host[4:] if host.startswith("www.") else host or url
 
 
 def extension_link(site: dict) -> tuple[str, str] | None:
@@ -318,19 +441,34 @@ def render_site_page(site: dict, varieties: list[dict], published: list[dict], m
             f"{mean_hours:.0f} chill hours here.</p>"
         )
 
-    others = sorted((other for other in published if other["slug"] != site["slug"]),
-                    key=lambda other: haversine(site, other))[:NEARBY_COUNT]
-    nearby = "".join(
-        f'<li><a href="{site_path(other)}">{escape(other["name"])}, {escape(other["region"])}</a>'
-        f" — {haversine(site, other):.0f} km</li>"
-        for other in others
-    )
+    # 「近く」と呼べる範囲だけを出す。候補が 30 地点しかないので上限を付けないと
+    # 地点の少ない国では大陸を跨いだ地点が並ぶ。
+    others = [other for other in sorted(published, key=lambda other: haversine(site, other))
+              if not (other["country_slug"], other["slug"]) == (site["country_slug"], site["slug"])
+              and haversine(site, other) <= NEARBY_MAX_KM][:NEARBY_COUNT]
+    nearby_block = ""
+    if others:
+        nearby = "".join(
+            f'<li><a href="{escape(site_path(other))}">{escape(other["name"])}, {escape(other["region"])}</a>'
+            f" — {haversine(site, other):.0f} km</li>"
+            for other in others
+        )
+        nearby_block = (
+            f"<section><h2>Nearby locations</h2><ul>{nearby}</ul>"
+            f'<p><a href="{CHILL_ROOT}">All chill-hour locations</a></p></section>'
+        )
+    else:
+        nearby_block = (
+            f"<section><h2>Other locations</h2><p>No other page here sits within "
+            f'{NEARBY_MAX_KM:.0f} km of {escape(site["name"])}. '
+            f'<a href="{CHILL_ROOT}">All chill-hour locations</a>.</p></section>'
+        )
 
     link = extension_link(site)
     extension_block = (
         f'<section><h2>Station data for {escape(site["region"])}</h2>'
-        f"<p>NASA POWER is a grid estimate. For measured station data and a local chill tool, see "
-        f'<a href="{link[0]}">{link[1]}</a>.</p></section>'
+        f"<p>NASA POWER is a grid estimate. For measured station data and local chill guidance, see "
+        f'<a href="{escape(link[0])}">{escape(link[1])}</a>.</p></section>'
         if link else ""
     )
 
@@ -359,11 +497,7 @@ def render_site_page(site: dict, varieties: list[dict], published: list[dict], m
         <p><a class="promo-button" href="{STORE}">See all varieties that fit in the ChillCast app</a></p>
       </section>
       {extension_block}
-      <section>
-        <h2>Nearby locations</h2>
-        <ul>{nearby}</ul>
-        <p><a href="{CHILL_ROOT}">All chill-hour locations</a></p>
-      </section>
+      {nearby_block}
       {_cta(f"ChillCast tracks this season's chill for {place} on your iPhone and compares it with the ten-season average above.")}
       <section>
         <h2>Generated</h2>
@@ -386,6 +520,12 @@ def render_variety_page(variety: dict, sites: list[dict], varieties: list[dict],
     description = (
         f"{name} needs about {requirement} chill hours. See which of {len(sites)} fruit-growing "
         f"locations reach that in an average winter, based on NASA POWER data."
+    )
+
+    source = variety.get("source", "")
+    source_cell = (
+        f'<a href="{escape(source)}" rel="nofollow">{escape(source_label(source))}</a>'
+        if source else "—"
     )
 
     grouped: dict[str, dict[str, list[dict]]] = {}
@@ -439,9 +579,10 @@ def render_variety_page(variety: dict, sites: list[dict], varieties: list[dict],
          average winter and {marginal_total} are marginal.</p>
       <section>
         <h2>Chill requirement</h2>
-        {_table(["Variety", "Species", "Requirement"],
-                [[escape(name), escape(species), f"{requirement} hours (45°F Hours model)"]])}
-        <p class="chill-note">Requirements are the representative 45°F-hours figures bundled with ChillCast.
+        {_table(["Variety", "Species", "Requirement", "Source"],
+                [[escape(name), escape(species), f"{requirement} hours (45°F Hours model)", source_cell]])}
+        <p class="chill-note">Requirements are the representative 45°F-hours figures bundled with ChillCast,
+           each taken from the published source linked above.
            Nurseries publish slightly different numbers for the same variety, so treat this as a mid-range value.</p>
       </section>
       <section>
@@ -472,10 +613,12 @@ def _calculator(sites: list[dict], varieties: list[dict]) -> str:
         f'{escape(site["name"])}, {escape(site["region"])} ({escape(site["country"])})</option>'
         for site in sorted(sites, key=lambda s: (s["country"], s["name"]))
     )
+    # script 要素へ入れるので閉じタグを無害化する。JSON では "<\\/" と "</" が同じ
+    # 文字列を表すため、JSON.parse 側は変更しなくてよい。
     payload = json.dumps([
         {"name": v["name"], "species": v["species"], "requirement": v["chillHoursRequirement"]}
         for v in sorted(varieties, key=lambda v: -v["chillHoursRequirement"])
-    ], ensure_ascii=False)
+    ], ensure_ascii=False).replace("</", "<\\/")
     return f'''      <section id="calculator">
         <h2>Calculate chill for any point</h2>
         <p>This runs in your browser. It asks NASA POWER for ten years of hourly temperatures at the
@@ -494,10 +637,10 @@ def _calculator(sites: list[dict], varieties: list[dict]) -> str:
             <button type="button" class="promo-button" id="chill-geo-go">Use my location</button>
           </div>
           <div class="chill-field">
-            <label for="chill-lat">Or enter coordinates</label>
-            <div class="chill-coords">
-              <input id="chill-lat" type="number" step="0.01" min="-90" max="90" placeholder="Latitude, e.g. 36.75" inputmode="decimal">
-              <input id="chill-lon" type="number" step="0.01" min="-180" max="180" placeholder="Longitude, e.g. -119.77" inputmode="decimal">
+            <span class="chill-field__label" id="chill-coords-label">Or enter coordinates</span>
+            <div class="chill-coords" role="group" aria-labelledby="chill-coords-label">
+              <input id="chill-lat" aria-label="Latitude" type="number" step="0.01" min="-90" max="90" placeholder="Latitude, e.g. 36.75" inputmode="decimal">
+              <input id="chill-lon" aria-label="Longitude" type="number" step="0.01" min="-180" max="180" placeholder="Longitude, e.g. -119.77" inputmode="decimal">
             </div>
             <button type="button" class="promo-button" id="chill-manual-go">Calculate</button>
           </div>
@@ -577,10 +720,28 @@ def render_country_index(country: str, country_slug: str, sites: list[dict], met
          f"{site['stats']['dynamic']['mean']:.1f}"]
         for site in sorted(sites, key=lambda s: s["name"])
     ]
+    coldest = max(sites, key=lambda s: s["stats"]["forty_five"]["mean"])
+    mildest = min(sites, key=lambda s: s["stats"]["forty_five"]["mean"])
+    window = sites[0]["chill_window"]
+    spread = (
+        f"Across these locations the ten-season average runs from "
+        f"{mildest['stats']['forty_five']['mean']:.0f} chill hours at {escape(mildest['name'])}, "
+        f"{escape(mildest['region'])}, to {coldest['stats']['forty_five']['mean']:.0f} at "
+        f"{escape(coldest['name'])}, {escape(coldest['region'])}. "
+        f"45°F Hours and Utah are counted over {escape(window)}."
+        if len(sites) > 1 else
+        f"45°F Hours and Utah are counted over {escape(window)}."
+    )
+
     body = f'''      <h1>Chill hours in {escape(country)}</h1>
       <p>Ten-season averages for {len(sites)} locations in {escape(country)}, from NASA POWER hourly
          temperatures. {len(published)} of them have a full page with the season-by-season table and
          the fruit trees and berries that suit them.</p>
+      <section>
+        <h2>Where fruit grows in {escape(country)}</h2>
+        <p>{escape(COUNTRY_NOTES[country])}</p>
+        <p>{spread}</p>
+      </section>
       <section>
         <h2>Locations</h2>
         {_table(["Location", "Region", "45°F Hours", "Utah units", "Chill portions"], rows)}
@@ -643,9 +804,20 @@ def build_pages() -> list[tuple[str, str, str]]:
     meta = {"generated_on": data["generated_on"], "power_version": data["power_version"]}
     published = [site for site in sites if is_published(site)]
 
-    missing = PUBLISHED_SLUGS - {site["slug"] for site in sites}
+    missing = PUBLISHED_SITES - {(site["country_slug"], site["slug"]) for site in sites}
     if missing:
-        raise SystemExit(f"PUBLISHED_SLUGS に未知の slug があります: {sorted(missing)}")
+        raise SystemExit(f"PUBLISHED_SITES に未知の地点があります: {sorted(missing)}")
+
+    unknown_countries = {site["country"] for site in sites} - set(COUNTRY_NOTES)
+    if unknown_countries:
+        raise SystemExit(f"COUNTRY_NOTES に無い国があります: {sorted(unknown_countries)}")
+
+    # 普及機関のリンクは設計上「各ページに置く」項目なので、欠けたら落とす。
+    # if link else "" の分岐で節が黙って消えるのを防ぐ。
+    without_link = [f"{site['country']} / {site['region']}"
+                    for site in published if extension_link(site) is None]
+    if without_link:
+        raise SystemExit(f"EXTENSION_LINKS に無い地域があります: {sorted(set(without_link))}")
 
     pages: list[tuple[str, str, str]] = [
         (CHILL_ROOT, "chillcast/chill-hours/index.html", render_site_index(sites, varieties, meta)),

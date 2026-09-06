@@ -19,6 +19,10 @@
   var MIN_COVERAGE = 0.95;
   var TOP_FITS = 3;
   var STORE = "https://apps.apple.com/us/app/id6785241430";
+  // 11 年分の hourly は応答が大きい。返らないまま待たせ続けないよう打ち切る。
+  var FETCH_TIMEOUT_MS = 20000;
+  // シーズン内でこれだけ続けて欠測していたら、そのシーズンは採用しない。
+  var MAX_GAP_HOURS = 24;
 
   // 積算期間。北半球は UC Davis の慣行に合わせて 11/1 開始。
   var WINDOWS = {
@@ -104,23 +108,30 @@
     return String(year);
   }
 
+  // 採用の条件は 2 つ。有効率が MIN_COVERAGE 以上で、MAX_GAP_HOURS 以上続く
+  // 欠測が無いこと。build-chillcast-pages.py の accumulate と同じ規則。
   function accumulate(values, bounds) {
     var expected = Math.round((bounds.end - bounds.start) / 86400000) * 24 + 24;
-    var fortyFive = 0, utah = 0, good = 0;
+    var fortyFive = 0, utah = 0, good = 0, gap = 0, longestGap = 0;
     var dynamic = new DynamicState();
     for (var time = bounds.start; time <= bounds.end; time += 86400000) {
       var moment = new Date(time);
       var prefix = dayKey(moment.getUTCFullYear(), moment.getUTCMonth() + 1, moment.getUTCDate());
       for (var hour = 0; hour < 24; hour++) {
         var celsius = values[prefix + pad(hour, 2)];
-        if (celsius === undefined) continue;
+        if (celsius === undefined) {
+          gap++;
+          if (gap > longestGap) longestGap = gap;
+          continue;
+        }
+        gap = 0;
         good++;
         if (celsius >= 0.0 && celsius <= 7.2) fortyFive += 1;
         utah += utahUnit(celsius);
         dynamic.step(celsius);
       }
     }
-    if (good < expected * MIN_COVERAGE) return null;
+    if (good < expected * MIN_COVERAGE || longestGap >= MAX_GAP_HOURS) return null;
     return { fortyFive: fortyFive, utah: utah, dynamic: dynamic.portions };
   }
 
@@ -159,14 +170,22 @@
     return Date.UTC(Number(key.slice(0, 4)), Number(key.slice(4, 6)) - 1, Number(key.slice(6, 8)));
   }
 
-  function analyse(payload) {
-    var raw = payload.properties.parameter.T2M;
+  // NASA POWER は不正な引数やサービス障害でも HTTP 200 のままエラー本文を返す
+  // ことがある。生の TypeError を利用者に見せないよう、ここで形を確かめる。
+  function analyse(payload, requestedLatitude, requestedLongitude) {
+    var raw = payload && payload.properties && payload.properties.parameter
+      && payload.properties.parameter.T2M;
+    if (!raw || typeof raw !== "object") {
+      throw new Error("NASA POWER did not return temperatures for this point.");
+    }
     var values = {};
     var lastKey = null;
     for (var key in raw) {
       if (!Object.prototype.hasOwnProperty.call(raw, key)) continue;
       var value = Number(raw[key]);
-      if (value <= FILL_THRESHOLD) continue;
+      // 数値にならない値は Number() が NaN を返す。NaN は比較がすべて false に
+      // なるため、しきい値だけで弾くと積算へ流れ込む。有限判定を先に置く。
+      if (!(Number.isFinite(value) && value > FILL_THRESHOLD)) continue;
       values[key] = value;
       if (lastKey === null || key > lastKey) lastKey = key;
     }
@@ -176,7 +195,12 @@
     // 最終日は 23 時まで揃っているときだけ「完全な日」として扱う
     var dataEnd = lastKey.slice(8) === "23" ? lastDay : lastDay - 86400000;
     var dataStart = parseKey(fetchStartKey());
-    var latitude = payload.geometry.coordinates[1];
+    var grid = (payload.geometry && payload.geometry.coordinates) || null;
+    // 半球は「要求した緯度」で決める。応答の格子座標は赤道付近で符号が
+    // 変わりうるため、地点ページ（Python）と窓がずれる。
+    var latitude = Number.isFinite(Number(requestedLatitude))
+      ? Number(requestedLatitude)
+      : (grid ? grid[1] : 0);
     var hemisphere = latitude >= 0 ? "north" : "south";
 
     var years = completeYears(hemisphere, dataStart, dataEnd);
@@ -186,7 +210,9 @@
     for (var i = 0; i < years.length; i++) {
       var chill = accumulate(values, seasonBounds(hemisphere, "chill", years[i]));
       var dynamic = accumulate(values, seasonBounds(hemisphere, "dynamic", years[i]));
-      if (!chill || !dynamic) throw new Error("NASA POWER has gaps in the " + seasonLabel(hemisphere, years[i]) + " season here.");
+      if (!chill || !dynamic || !Number.isFinite(dynamic.dynamic)) {
+        throw new Error("NASA POWER has gaps in the " + seasonLabel(hemisphere, years[i]) + " season here.");
+      }
       seasons.push({
         label: seasonLabel(hemisphere, years[i]),
         fortyFive: chill.fortyFive,
@@ -204,13 +230,21 @@
         dynamic: summarise(seasons, "dynamic")
       },
       version: (payload.header && payload.header.api && payload.header.api.version) || "",
-      coordinates: payload.geometry.coordinates
+      coordinates: grid || [Number(requestedLongitude) || 0, latitude]
     };
   }
 
   // ---- DOM ----
 
   var form, output, status, varieties;
+  var controls = [];
+  var pending = null;
+
+  function setBusy(busy) {
+    for (var i = 0; i < controls.length; i++) {
+      if (controls[i]) controls[i].disabled = busy;
+    }
+  }
 
   function el(tag, className, text) {
     var node = document.createElement(tag);
@@ -335,27 +369,55 @@
     output.innerHTML = "";
     setStatus("Fetching ten years of hourly temperatures from NASA POWER. This usually takes a few seconds.", "busy");
 
-    var url = "https://power.larc.nasa.gov/api/temporal/hourly/point?parameters=T2M&community=AG" +
-      "&longitude=" + encodeURIComponent(longitude) +
-      "&latitude=" + encodeURIComponent(latitude) +
-      "&start=" + fetchStartKey() + "&end=" + today().key + "&format=JSON";
+    var query = new URLSearchParams({
+      parameters: "T2M",
+      community: "AG",
+      longitude: String(longitude),
+      latitude: String(latitude),
+      start: fetchStartKey(),
+      end: today().key,
+      format: "JSON"
+    });
+    var url = "https://power.larc.nasa.gov/api/temporal/hourly/point?" + query.toString();
 
-    fetch(url)
+    // 進行中の要求は打ち切り、ボタンも無効にする。連続して押したときに
+    // 先の応答が後の表示を上書きするのを防ぐ。
+    if (pending) pending.abort();
+    var controller = new AbortController();
+    pending = controller;
+    setBusy(true);
+    var timer = setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT_MS);
+    // 現在の要求なら true。差し替えられた古い要求は結果を捨てる。
+    var settle = function () {
+      clearTimeout(timer);
+      if (pending !== controller) return false;
+      pending = null;
+      setBusy(false);
+      return true;
+    };
+
+    fetch(url, { signal: controller.signal })
       .then(function (response) {
         if (!response.ok) throw new Error("NASA POWER replied with HTTP " + response.status + ".");
         return response.json();
       })
       .then(function (payload) {
-        var result = analyse(payload);
+        var result = analyse(payload, latitude, longitude);
+        if (!settle()) return;
         setStatus("");
         render(label, result);
         output.scrollIntoView({ behavior: "smooth", block: "start" });
       })
       .catch(function (error) {
+        var timedOut = error && error.name === "AbortError";
+        if (!settle()) return;
         output.innerHTML = "";
         setStatus(
-          "Could not calculate chill for this point. " + (error && error.message ? error.message : "") +
-          " NASA POWER may be busy or offline; try again in a minute, or open one of the location pages below.",
+          timedOut
+            ? "NASA POWER did not answer within " + Math.round(FETCH_TIMEOUT_MS / 1000) +
+              " seconds. Try again in a minute, or open one of the location pages below."
+            : "Could not calculate chill for this point. " + (error && error.message ? error.message : "") +
+              " NASA POWER may be busy or offline; try again in a minute, or open one of the location pages below.",
           "error"
         );
       });
@@ -373,6 +435,12 @@
     var select = document.getElementById("chill-site");
     var latField = document.getElementById("chill-lat");
     var lonField = document.getElementById("chill-lon");
+    controls = [
+      select, latField, lonField,
+      document.getElementById("chill-site-go"),
+      document.getElementById("chill-geo-go"),
+      document.getElementById("chill-manual-go")
+    ];
 
     form.addEventListener("submit", function (event) { event.preventDefault(); });
 
@@ -416,18 +484,25 @@
     });
   }
 
+  // Node から Python の計算と突き合わせるための口（scripts/test_js_python_parity.py）。
+  // export の有無で init() の呼び出しを止めない。ページに module を定義する別の
+  // スクリプトが入っても、計算機が黙って動かなくなることはない。
   if (typeof module !== "undefined" && module.exports) {
-    // Node から Python の計算と突き合わせるための口。ブラウザでは通らない。
     module.exports = {
       analyse: analyse,
       utahUnit: utahUnit,
       accumulate: accumulate,
+      summarise: summarise,
       seasonBounds: seasonBounds,
       completeYears: completeYears
     };
-  } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+  }
+
+  if (typeof document !== "undefined") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
   }
 })();

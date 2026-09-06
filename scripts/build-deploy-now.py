@@ -48,13 +48,18 @@ PAGES_ONLY_LINKS = {
 PAGES_TO_COPY = {
     "_deploy-now/index.html": ("/", "index.html"),
     "_deploy-now/app-ads.txt": ("/", "app-ads.txt"),
-    "_deploy-now/robots.txt": ("/robots.txt", "robots.txt"),
     "_deploy-now/support/index.html": ("/support/", "support/index.html"),
     "_deploy-now/peyo/index.html": ("/peyo/", "peyo/index.html"),
     "_deploy-now/sports-photo/index.html": ("/sports-photo/", "sports-photo/index.html"),
     "_deploy-now/chillcast/privacy/index.html": ("/chillcast/privacy/", "chillcast/privacy/index.html"),
     "_deploy-now/match-notebook/privacy/index.html": ("/match-notebook/privacy/", "match-notebook/privacy/index.html"),
     "_deploy-now/match-notebook/en/privacy/index.html": ("/match-notebook/en/privacy/", "match-notebook/en/privacy/index.html"),
+}
+
+# HTML ではないので rewrite()（canonical の差し込み）を通さずそのまま置く。
+# sitemap にも載せない。
+FILES_TO_COPY = {
+    "_deploy-now/robots.txt": "robots.txt",
 }
 
 LOCALIZED_PAGES = {
@@ -535,6 +540,12 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         if path.endswith("/"):
             sitemap_paths.append(path)
         log(f"page  public/{out_name}")
+
+    for src, out_name in FILES_TO_COPY.items():
+        dest = public / out_name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / src, dest)
+        log(f"file  public/{out_name}")
 
     peyo_source = (ROOT / "_deploy-now/peyo/index.html").read_text(encoding="utf-8")
     for locale, page in LOCALIZED_PAGES.items():
