@@ -11,7 +11,9 @@
 (function () {
   "use strict";
 
-  var FETCH_START = "20150901";
+  // 取得開始は今年から数えて決める。固定日にすると年を追うごとに取得量が増え続ける。
+  // 直近 10 シーズンを揃えるのに必要なのは 11 年前の 9/1 まで。
+  var FETCH_START_YEARS_BACK = 11;
   var FILL_THRESHOLD = -900;
   var SEASON_COUNT = 10;
   var MIN_COVERAGE = 0.95;
@@ -79,6 +81,10 @@
 
   function dayKey(year, month, day) {
     return String(year) + pad(month, 2) + pad(day, 2);
+  }
+
+  function fetchStartKey() {
+    return dayKey(new Date().getUTCFullYear() - FETCH_START_YEARS_BACK, 9, 1);
   }
 
   function seasonBounds(hemisphere, kind, year) {
@@ -169,7 +175,7 @@
     var lastDay = parseKey(lastKey);
     // 最終日は 23 時まで揃っているときだけ「完全な日」として扱う
     var dataEnd = lastKey.slice(8) === "23" ? lastDay : lastDay - 86400000;
-    var dataStart = parseKey(FETCH_START);
+    var dataStart = parseKey(fetchStartKey());
     var latitude = payload.geometry.coordinates[1];
     var hemisphere = latitude >= 0 ? "north" : "south";
 
@@ -332,7 +338,7 @@
     var url = "https://power.larc.nasa.gov/api/temporal/hourly/point?parameters=T2M&community=AG" +
       "&longitude=" + encodeURIComponent(longitude) +
       "&latitude=" + encodeURIComponent(latitude) +
-      "&start=" + FETCH_START + "&end=" + today().key + "&format=JSON";
+      "&start=" + fetchStartKey() + "&end=" + today().key + "&format=JSON";
 
     fetch(url)
       .then(function (response) {

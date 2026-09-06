@@ -219,12 +219,12 @@ def _crumbs(*parts) -> str:
     return " / ".join(links)
 
 
-def _table(headers: list[str], rows: list[list[str]], min_width: str = "") -> str:
+def _table(headers: list[str], rows: list[list[str]]) -> str:
+    """セルは組み立て済みの HTML として扱う。呼び出し側でエスケープしておく。"""
     head = "".join(f"<th>{escape(header)}</th>" for header in headers)
     body = "".join("<tr>" + "".join(f"<td>{cell}</td>" for cell in row) + "</tr>" for row in rows)
-    style = f' style="min-width:{min_width}"' if min_width else ""
     return (
-        f'<div class="chill-scroll"><table class="chill-table"{style}>'
+        '<div class="chill-scroll"><table class="chill-table">'
         f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>"
     )
 

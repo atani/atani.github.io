@@ -34,7 +34,10 @@ POWER_URL = (
     "?parameters=T2M&community=AG&longitude={lon}&latitude={lat}"
     "&start={start}&end={end}&format=JSON"
 )
-FETCH_START = dt.date(2015, 9, 1)
+# 取得開始は今年から数えて決める。固定日にすると年を追うごとに取得量が増え続ける。
+# 直近 10 シーズンを揃えるのに必要なのは 11 年前の 9/1 まで（南半球の Dynamic は
+# 3/1 開始なので、これで両半球とも 10 シーズンが窓に収まる）。
+FETCH_START_YEARS_BACK = 11
 FILL_THRESHOLD = -900.0
 SEASON_COUNT = 10
 MIN_COVERAGE = 0.95
@@ -129,16 +132,19 @@ def cache_path(site: dict) -> pathlib.Path:
     return CACHE_DIR / f"{site['country_slug']}__{site['slug']}.json.gz"
 
 
-def fetch_hourly(site: dict, end: dt.date, refresh: bool) -> dict[str, float]:
+def fetch_hourly(site: dict, start: dt.date, end: dt.date, refresh: bool) -> dict[str, float]:
     """時刻キー YYYYMMDDHH -> 摂氏。欠測（<= -900）は落とす。"""
     path = cache_path(site)
     if path.exists() and not refresh:
         with gzip.open(path, "rt", encoding="utf-8") as handle:
-            return json.load(handle)["values"]
+            cached = json.load(handle)
+        # 取得開始が必要な範囲より後ろのキャッシュは使えないので取り直す
+        if cached.get("start", "9999-12-31") <= start.isoformat():
+            return cached["values"]
 
     url = POWER_URL.format(
         lon=site["lon"], lat=site["lat"],
-        start=FETCH_START.strftime("%Y%m%d"), end=end.strftime("%Y%m%d"),
+        start=start.strftime("%Y%m%d"), end=end.strftime("%Y%m%d"),
     )
     last_error: Exception | None = None
     for attempt in range(1, RETRIES + 1):
@@ -158,9 +164,14 @@ def fetch_hourly(site: dict, end: dt.date, refresh: bool) -> dict[str, float]:
     values = {key: float(value) for key, value in raw.items() if float(value) > FILL_THRESHOLD}
     path.parent.mkdir(parents=True, exist_ok=True)
     with gzip.open(path, "wt", encoding="utf-8") as handle:
-        json.dump({"fetched_at": dt.date.today().isoformat(), "end": end.isoformat(),
-                   "lat": site["lat"], "lon": site["lon"], "values": values}, handle)
+        json.dump({"fetched_at": dt.date.today().isoformat(), "start": start.isoformat(),
+                   "end": end.isoformat(), "lat": site["lat"], "lon": site["lon"],
+                   "values": values}, handle)
     return values
+
+
+def fetch_start(today: dt.date) -> dt.date:
+    return dt.date(today.year - FETCH_START_YEARS_BACK, 9, 1)
 
 
 def probe_version() -> str:
@@ -224,6 +235,7 @@ def build(limit: int | None, refresh: bool) -> int:
     if limit:
         sites = sites[:limit]
     data_end = dt.date.today()
+    data_start = fetch_start(data_end)
     started = time.monotonic()
     power_version = probe_version()
     print(f"NASA POWER Hourly API バージョン: {power_version}")
@@ -235,7 +247,7 @@ def build(limit: int | None, refresh: bool) -> int:
         label = f"{site['name']}, {site['region']}"
         try:
             cached = cache_path(site).exists() and not refresh
-            values = fetch_hourly(site, data_end, refresh)
+            values = fetch_hourly(site, data_start, data_end, refresh)
         except RuntimeError as error:
             failures.append(f"{label}: {error}")
             print(f"NG   {label}: {error}", file=sys.stderr)
@@ -253,7 +265,7 @@ def build(limit: int | None, refresh: bool) -> int:
         available_end = last_day if last_key[8:] == "23" else last_day - dt.timedelta(days=1)
         frontier = min(frontier, available_end) if frontier else available_end
         hemisphere = "north" if site["lat"] >= 0 else "south"
-        years = complete_years(hemisphere, FETCH_START, available_end)
+        years = complete_years(hemisphere, data_start, available_end)
         if len(years) < SEASON_COUNT:
             failures.append(f"{label}: 完了シーズンが {len(years)} 件")
             print(f"NG   {label}: 完了シーズンが {len(years)} 件", file=sys.stderr)
