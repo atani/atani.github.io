@@ -397,7 +397,7 @@ LOCALIZED_PAGES = {
     },
 }
 
-ASSETS = ["assets/*.png", "assets/*.svg", "assets/peyo-*.jpg", "css/portfolio.css", "css/peyo.css", "css/sports-photo.css", "css/apps.css", "app-ads.txt"]
+ASSETS = ["assets/*.png", "assets/*.svg", "assets/peyo-*.jpg", "css/portfolio.css", "css/peyo.css", "css/sports-photo.css", "css/apps.css", "css/support-analytics.css", "js/support-analytics.mjs", "app-ads.txt"]
 
 PACKAGE_JSON = {
     "name": "atani-portfolio",
