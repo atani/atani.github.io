@@ -413,7 +413,7 @@ PACKAGE_JSON = {
     "private": True,
     "scripts": {"build": "next build"},
     "dependencies": {
-        "next": "16.3.0",
+        "next": "16.3.4",
         "react": "19.2.8",
         "react-dom": "19.2.8",
     },
