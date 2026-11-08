@@ -531,7 +531,7 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         if not quiet:
             print(message)
 
-    sitemap_paths: list[str] = []
+    sitemap_paths: list[str] = ["/anclas-port/"]
 
     for src, (path, out_name) in PAGES_TO_COPY.items():
         dest = public / out_name
@@ -598,6 +598,9 @@ def build(out: pathlib.Path, quiet: bool) -> None:
     (app / "layout.jsx").write_text(LAYOUT, encoding="utf-8")
     (app / "not-found.jsx").write_text(NOT_FOUND, encoding="utf-8")
     log("wrap  package.json / next.config.mjs / app")
+
+    shutil.copytree(ROOT / "_deploy-now/anclas-port", app / "anclas-port")
+    shutil.copytree(ROOT / "assets/anclas-port-landing", public / "assets/anclas-port-landing")
 
     # Deploy Now 側の install は npm ci なので、lockfile を同梱する
     subprocess.run(
