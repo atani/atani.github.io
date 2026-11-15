@@ -33,5 +33,5 @@
 .pattern-skip { position:absolute; top:0; left:24px; padding:12px; background:#fff; transform:translateY(-110%); }
 .pattern-skip:focus { transform:none; }
 @media (max-width:600px) { .pattern-header { align-items:flex-start; gap:12px; }.pattern-header nav { gap:12px; }.pattern-main { padding-top:32px; }.pattern-table th,.pattern-table td { padding:8px; }.pattern-main section { margin-top:48px; } }
-@media print { .pattern-header,.pattern-footer,.pattern-skip,.pattern-actions,.pattern-page .peyo-button--dark { color:#fff; }
-.pattern-page .peyo-button { display:none; }.pattern-main { max-width:none; padding:0; }.pattern-main details { display:none; }.pattern-page { background:#fff; }.pattern-main section { break-inside:avoid; } }
+@media print { .pattern-header,.pattern-footer,.pattern-skip,.pattern-actions,.pattern-page .peyo-button { display:none; }.pattern-main { max-width:none; padding:0; }.pattern-main details { display:none; }.pattern-page { background:#fff; }.pattern-main section { break-inside:avoid; } }
+

@@ -34,6 +34,7 @@ DEFAULT_OUT = pathlib.Path(tempfile.gettempdir()) / "atani-deploy-now"
 sys.path.insert(0, str(ROOT / "_deploy-now"))
 from promo_apps import PROMO_APPS, render_promo_page
 from chillcast_pages import build_pages as build_chillcast_pages
+from peyo_patterns import build_pages as build_peyo_pages, build_assets as build_peyo_assets
 
 SITE = "https://atani.lolipop-now.app"
 PAGES = "https://atani.github.io"
@@ -421,7 +422,7 @@ LOCALIZED_PAGES = {
     },
 }
 
-ASSETS = ["assets/*.png", "assets/*.svg", "assets/peyo-*.jpg", "css/portfolio.css", "css/peyo.css", "css/sports-photo.css", "css/apps.css", "css/support-analytics.css", "js/support-analytics.mjs", "app-ads.txt"]
+ASSETS = ["assets/*.png", "assets/*.svg", "assets/peyo-*.jpg", "css/portfolio.css", "css/peyo.css", "css/peyo-patterns.css", "css/sports-photo.css", "css/apps.css", "css/support-analytics.css", "js/support-analytics.mjs", "app-ads.txt"]
 
 PACKAGE_JSON = {
     "name": "atani-portfolio",
@@ -455,6 +456,8 @@ NEXT_CONFIG = """const config = {
         { source: '/match-notebook/privacy/', destination: '/match-notebook/privacy/index.html' },
         { source: '/match-notebook/en/privacy/', destination: '/match-notebook/en/privacy/index.html' },
         { source: '/peyo/en/', destination: '/peyo/en/index.html' },
+        { source: '/peyo/en/patterns/heart/', destination: '/peyo/en/patterns/heart/index.html' },
+        { source: '/peyo/patterns/heart/', destination: '/peyo/patterns/heart/index.html' },
         { source: '/peyo/de/', destination: '/peyo/de/index.html' },
         { source: '/peyo/es/', destination: '/peyo/es/index.html' },
         { source: '/peyo/fr/', destination: '/peyo/fr/index.html' },
@@ -584,6 +587,17 @@ def build(out: pathlib.Path, quiet: bool) -> None:
             sitemap_paths.append(path)
             log(f"page  public/{out_name}")
 
+    # Product-host copies share the canonical chart generator.
+    # Preserve its single canonical link rather than calling rewrite().
+    for _, out_name, html in build_peyo_pages():
+        dest = public / out_name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(html + "\n", encoding="utf-8")
+    for out_name, content in build_peyo_assets():
+        dest = public / out_name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(content + "\n", encoding="utf-8")
+
     calculator = public / "assets" / "chillcast-calculator.js"
     calculator.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(ROOT / "_deploy-now/chillcast-calculator.js", calculator)
@@ -638,4 +652,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
