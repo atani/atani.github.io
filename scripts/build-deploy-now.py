@@ -67,6 +67,9 @@ LOCALIZED_PAGES = {
         "lang": "en",
         "store": "https://apps.apple.com/us/app/id6791587493",
             "replacements": {
+            "無料のハート図案": "Free heart design chart",
+            "配色を試せる図案と色別の粒数を、登録なしでダウンロードできます。": "Download a heart chart and bead counts, with two colorways. No sign-up required.",
+            "無料図案を見る": "Get the free chart",
             "ページ内ナビゲーション": "On this page",
             "使い方": "How it works",
             "料金": "Pricing",
@@ -99,7 +102,7 @@ LOCALIZED_PAGES = {
             "作品名をつけて、図案とビーズ数を1枚に。自分用の記録にも、友だちに見せるときにも、そのまま使えます。": "Give your work a name and keep the pattern and bead count together. It is ready for your own records or for sharing with friends.",
             "Peyoを無料で試す": "Try Peyo for free",
             "下絵に重ねて描く。<br><em>Peyo Proで配色を試す。</em>": "Draw over a reference image.<br><em>Try new colors with Peyo Pro.</em>",
-            "作図、ビーズ数の集計、図案の保存は無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。": "Drawing, bead counts, and saving your patterns are free. Peyo Pro adds drawing over a reference image and bulk color replacement, and removes banner ads.",
+            "手描き、ビーズ数の集計、画像の書き出しは無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。図案の保存条件はアプリ内で確認できます。": "Drawing, bead counts, and image export are free. Peyo Pro adds drawing over reference images, replacing colors throughout a pattern, and no banner ads. Check pattern-saving options in the app.",
             "Peyo Proに含まれるもの": "What's included in Peyo Pro",
             "下絵を使って作図": "Draw over a reference image",
             "色をまとめて置き換え": "Replace a color throughout your pattern",
@@ -136,6 +139,9 @@ LOCALIZED_PAGES = {
         "lang": "de",
         "store": "https://apps.apple.com/de/app/id6791587493",
         "replacements": {
+            "無料のハート図案": "Kostenlose Herzvorlage",
+            "配色を試せる図案と色別の粒数を、登録なしでダウンロードできます。": "Lade eine Herzvorlage mit Perlenzahlen und zwei Farbvarianten herunter. Ohne Anmeldung. Die Vorlage ist auf Englisch.",
+            "無料図案を見る": "Vorlage ansehen (Englisch)",
             "ページ内ナビゲーション": "Auf dieser Seite",
             "使い方": "So funktioniert es",
             "料金": "Preise",
@@ -168,7 +174,7 @@ LOCALIZED_PAGES = {
             "作品名をつけて、図案とビーズ数を1枚に。自分用の記録にも、友だちに見せるときにも、そのまま使えます。": "Gib deinem Werk einen Namen und bewahre Muster und Perlenzahl zusammen auf – für dich selbst oder zum Teilen.",
             "Peyoを無料で試す": "Peyo kostenlos testen",
             "下絵に重ねて描く。<br><em>Peyo Proで配色を試す。</em>": "Zeichne mit einem Bild als Vorlage.<br><em>Probiere neue Farben mit Peyo Pro.</em>",
-            "作図、ビーズ数の集計、図案の保存は無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。": "Das Zeichnen, die Perlenzählung und das Speichern deiner Muster sind kostenlos. Mit Peyo Pro kannst du beim Zeichnen ein Referenzbild als Vorlage hinterlegen und eine Farbe im gesamten Muster ersetzen. Außerdem entfällt die Bannerwerbung.",
+            "手描き、ビーズ数の集計、画像の書き出しは無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。図案の保存条件はアプリ内で確認できます。": "Zeichnen, Perlenzählen und Bildexport sind kostenlos. Peyo Pro bietet Zeichnen mit Bildvorlage, das Ersetzen einer Farbe im ganzen Muster und keine Bannerwerbung. Speicheroptionen findest du in der App.",
             "Peyo Proに含まれるもの": "In Peyo Pro enthalten",
             "下絵を使って作図": "Mit einem Referenzbild als Vorlage zeichnen",
             "色をまとめて置き換え": "Eine Farbe im gesamten Muster ersetzen",
@@ -204,6 +210,9 @@ LOCALIZED_PAGES = {
         "lang": "es",
         "store": "https://apps.apple.com/es/app/id6791587493",
         "replacements": {
+            "無料のハート図案": "Patrón de corazón gratis",
+            "配色を試せる図案と色別の粒数を、登録なしでダウンロードできます。": "Descarga un patrón de corazón con cantidades por color y dos combinaciones. Sin registro. La guía está en inglés.",
+            "無料図案を見る": "Ver patrón (inglés)",
             "ページ内ナビゲーション": "En esta página",
             "使い方": "Cómo funciona",
             "料金": "Precio",
@@ -236,7 +245,7 @@ LOCALIZED_PAGES = {
             "作品名をつけて、図案とビーズ数を1枚に。自分用の記録にも、友だちに見せるときにも、そのまま使えます。": "Ponle nombre a tu diseño y guarda juntos el patrón y el recuento, listo para ti o para compartir.",
             "Peyoを無料で試す": "Prueba Peyo gratis",
             "下絵に重ねて描く。<br><em>Peyo Proで配色を試す。</em>": "Dibuja sobre una imagen de referencia.<br><em>Prueba nuevos colores con Peyo Pro.</em>",
-            "作図、ビーズ数の集計、図案の保存は無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。": "Dibujar, contar cuentas y guardar tus patrones es gratis. Con Peyo Pro puedes dibujar sobre una imagen de referencia y sustituir un color en todo el patrón. Además, se eliminan los banners publicitarios.",
+            "手描き、ビーズ数の集計、画像の書き出しは無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。図案の保存条件はアプリ内で確認できます。": "Dibujar, contar cuentas y exportar imágenes es gratis. Peyo Pro añade el dibujo sobre una imagen de referencia, la sustitución de colores en todo el patrón y elimina los anuncios de banner. Consulta las opciones de guardado en la app.",
             "Peyo Proに含まれるもの": "Qué incluye Peyo Pro",
             "下絵を使って作図": "Dibuja sobre una imagen de referencia",
             "色をまとめて置き換え": "Sustituye un color en todo el patrón",
@@ -272,6 +281,9 @@ LOCALIZED_PAGES = {
         "lang": "fr",
         "store": "https://apps.apple.com/fr/app/id6791587493",
         "replacements": {
+            "無料のハート図案": "Une grille de cœur gratuite",
+            "配色を試せる図案と色別の粒数を、登録なしでダウンロードできます。": "Téléchargez une grille de cœur, le nombre de perles et deux palettes. Sans inscription. Le guide est en anglais.",
+            "無料図案を見る": "Voir la grille (anglais)",
             "ページ内ナビゲーション": "Sur cette page",
             "使い方": "Fonctionnement",
             "料金": "Tarif",
@@ -304,7 +316,7 @@ LOCALIZED_PAGES = {
             "作品名をつけて、図案とビーズ数を1枚に。自分用の記録にも、友だちに見せるときにも、そのまま使えます。": "Donnez un nom à votre création et gardez le motif, le compte et les couleurs dans une carte de projet, pour vous ou pour la partager.",
             "Peyoを無料で試す": "Essayer Peyo gratuitement",
             "下絵に重ねて描く。<br><em>Peyo Proで配色を試す。</em>": "Dessinez par-dessus une image de référence.<br><em>Essayez de nouvelles couleurs avec Peyo Pro.</em>",
-            "作図、ビーズ数の集計、図案の保存は無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。": "Le dessin, le comptage des perles et l’enregistrement de vos motifs sont gratuits. Avec Peyo Pro, dessinez par-dessus une image de référence et remplacez une couleur dans tout le motif. Les bannières publicitaires sont également supprimées.",
+            "手描き、ビーズ数の集計、画像の書き出しは無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。図案の保存条件はアプリ内で確認できます。": "Le dessin, le comptage des perles et l’export d’images sont gratuits. Peyo Pro ajoute le dessin sur une image de référence, le remplacement des couleurs dans tout le motif et supprime les bannières publicitaires. Consultez les options d’enregistrement dans l’app.",
             "Peyo Proに含まれるもの": "Ce qui est inclus dans Peyo Pro",
             "下絵を使って作図": "Dessinez par-dessus une image de référence",
             "色をまとめて置き換え": "Remplacez une couleur dans tout le motif",
@@ -340,6 +352,9 @@ LOCALIZED_PAGES = {
         "lang": "it",
         "store": "https://apps.apple.com/it/app/id6791587493",
         "replacements": {
+            "無料のハート図案": "Schema a cuore gratuito",
+            "配色を試せる図案と色別の粒数を、登録なしでダウンロードできます。": "Scarica uno schema a cuore con quantità per colore e due palette. Senza registrazione. La guida è in inglese.",
+            "無料図案を見る": "Vedi lo schema (inglese)",
             "ページ内ナビゲーション": "In questa pagina",
             "使い方": "Come funziona",
             "料金": "Prezzo",
@@ -372,7 +387,7 @@ LOCALIZED_PAGES = {
             "作品名をつけて、図案とビーズ数を1枚に。自分用の記録にも、友だちに見せるときにも、そのまま使えます。": "Dai un nome al tuo lavoro e conserva insieme motivo e conteggio, per te o da condividere.",
             "Peyoを無料で試す": "Prova Peyo gratis",
             "下絵に重ねて描く。<br><em>Peyo Proで配色を試す。</em>": "Disegna sopra un’immagine di riferimento.<br><em>Prova nuovi colori con Peyo Pro.</em>",
-            "作図、ビーズ数の集計、図案の保存は無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。": "Disegnare, contare le perline e salvare i tuoi schemi è gratis. Con Peyo Pro puoi disegnare sopra un’immagine di riferimento e sostituire un colore in tutto lo schema. Inoltre, vengono rimossi i banner pubblicitari.",
+            "手描き、ビーズ数の集計、画像の書き出しは無料です。Peyo Proでは、下絵を使った作図と色の一括置換が使え、バナー広告も表示されません。図案の保存条件はアプリ内で確認できます。": "Disegno, conteggio delle perline ed esportazione delle immagini sono gratuiti. Peyo Pro aggiunge il disegno su un’immagine di riferimento, la sostituzione dei colori in tutto lo schema e rimuove i banner pubblicitari. Consulta le opzioni di salvataggio nell’app.",
             "Peyo Proに含まれるもの": "Cosa include Peyo Pro",
             "下絵を使って作図": "Disegna sopra un’immagine di riferimento",
             "色をまとめて置き換え": "Sostituisci un colore in tutto lo schema",
@@ -491,6 +506,7 @@ def render_localized_page(source: str, locale: str, page: dict) -> str:
         '<a href="/peyo/" lang="ja" aria-current="page">JA</a>',
         '<a href="/peyo/" lang="ja">JA</a>',
     )
+    html = html.replace('href="https://atani.github.io/peyo/patterns/heart/"', 'href="https://atani.github.io/peyo/en/patterns/heart/"')
     html = html.replace("/assets/peyo-ja-", f"/assets/peyo-{locale}-")
     html = html.replace("https://apps.apple.com/jp/app/id6791587493", page["store"])
     html = html.replace(f'content="{SITE}/peyo/"', f'content="{SITE}/peyo/{locale}/"', 1)
@@ -531,7 +547,7 @@ def build(out: pathlib.Path, quiet: bool) -> None:
         if not quiet:
             print(message)
 
-    sitemap_paths: list[str] = []
+    sitemap_paths: list[str] = ["/anclas-port/"]
 
     for src, (path, out_name) in PAGES_TO_COPY.items():
         dest = public / out_name
@@ -599,6 +615,9 @@ def build(out: pathlib.Path, quiet: bool) -> None:
     (app / "not-found.jsx").write_text(NOT_FOUND, encoding="utf-8")
     log("wrap  package.json / next.config.mjs / app")
 
+    shutil.copytree(ROOT / "_deploy-now/anclas-port", app / "anclas-port")
+    shutil.copytree(ROOT / "assets/anclas-port-landing", public / "assets/anclas-port-landing")
+
     # Deploy Now 側の install は npm ci なので、lockfile を同梱する
     subprocess.run(
         ["npm", "install", "--package-lock-only", "--no-audit", "--no-fund"],
@@ -619,3 +638,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
