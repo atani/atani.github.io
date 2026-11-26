@@ -52,6 +52,8 @@ PAGES_TO_COPY = {
     "_deploy-now/support/index.html": ("/support/", "support/index.html"),
     "_deploy-now/peyo/index.html": ("/peyo/", "peyo/index.html"),
     "_deploy-now/sports-photo/index.html": ("/sports-photo/", "sports-photo/index.html"),
+    "_deploy-now/sports-photo/guides/winter-gym-dusk/index.html": ("/sports-photo/guides/winter-gym-dusk/", "sports-photo/guides/winter-gym-dusk/index.html"),
+    "_deploy-now/sports-photo/guides/cloudy-sports-day/index.html": ("/sports-photo/guides/cloudy-sports-day/", "sports-photo/guides/cloudy-sports-day/index.html"),
     "_deploy-now/chillcast/privacy/index.html": ("/chillcast/privacy/", "chillcast/privacy/index.html"),
     "_deploy-now/match-notebook/privacy/index.html": ("/match-notebook/privacy/", "match-notebook/privacy/index.html"),
     "_deploy-now/match-notebook/en/privacy/index.html": ("/match-notebook/en/privacy/", "match-notebook/en/privacy/index.html"),
@@ -452,6 +454,8 @@ NEXT_CONFIG = """const config = {
         { source: '/support/', destination: '/support/index.html' },
         { source: '/peyo/', destination: '/peyo/index.html' },
         { source: '/sports-photo/', destination: '/sports-photo/index.html' },
+        { source: '/sports-photo/guides/winter-gym-dusk/', destination: '/sports-photo/guides/winter-gym-dusk/index.html' },
+        { source: '/sports-photo/guides/cloudy-sports-day/', destination: '/sports-photo/guides/cloudy-sports-day/index.html' },
         { source: '/chillcast/privacy/', destination: '/chillcast/privacy/index.html' },
         { source: '/match-notebook/privacy/', destination: '/match-notebook/privacy/index.html' },
         { source: '/match-notebook/en/privacy/', destination: '/match-notebook/en/privacy/index.html' },
@@ -499,6 +503,9 @@ def rewrite(html: str, path: str) -> str:
     html = html.replace(f'content="{PAGES}/"', f'content="{SITE}/"')
     html = html.replace(f'content="{PAGES}/support/"', f'content="{SITE}/support/"')
     html = html.replace(f'content="{PAGES}/assets/', f'content="{SITE}/assets/')
+    # ソースに canonical があるページはそれを正とし、二重に差し込まない
+    if 'rel="canonical"' in html:
+        return html
     canonical = f'  <link rel="canonical" href="{SITE}{path}">\n'
     return html.replace("</head>", canonical + "</head>", 1)
 
